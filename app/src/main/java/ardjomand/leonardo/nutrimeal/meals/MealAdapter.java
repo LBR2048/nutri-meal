@@ -19,10 +19,10 @@ import java.util.List;
  */
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
-    private final List<Meal> mMeals;
-    private final MealFragment.OnMealFragmentInteractionListener mListener;
+    private List<Meal> mMeals;
+    private final OnMealAdapterInteractionListener mListener;
 
-    public MealAdapter(List<Meal> meals, MealFragment.OnMealFragmentInteractionListener listener) {
+    public MealAdapter(List<Meal> meals, OnMealAdapterInteractionListener listener) {
         mMeals = meals;
         mListener = listener;
     }
@@ -83,5 +83,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         public String toString() {
             return super.toString() + " '" + mImageView.getText() + "'";
         }
+    }
+
+    public void replaceData(List<Meal> meals) {
+        mMeals = meals;
+        notifyDataSetChanged();
+    }
+
+    public interface OnMealAdapterInteractionListener {
+        void onMealClicked(Meal item);
     }
 }

@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ardjomand.leonardo.nutrimeal.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,9 +32,10 @@ import butterknife.Unbinder;
  * Activities containing this fragment MUST implement the {@link OnMealFragmentInteractionListener}
  * interface.
  */
-public class MealFragment extends Fragment {
+public class MealFragment extends Fragment implements
+        MealContract.View,
+        MealAdapter.OnMealAdapterInteractionListener {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     @BindView(R.id.button)
@@ -39,11 +43,11 @@ public class MealFragment extends Fragment {
     @BindView(R.id.list)
     RecyclerView recyclerView;
 
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
-
+    private MealPresenter presenter;
+    private MealAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,6 +73,8 @@ public class MealFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        presenter = new MealPresenter(this);
     }
 
     @Override
@@ -79,24 +85,31 @@ public class MealFragment extends Fragment {
 
         setTitle();
 
-        // Set the adapter
+        // Set layout manager
         Context context = view.getContext();
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new MealAdapter(DummyMeals.ITEMS, mListener));
 
+        // Set adapter
+        adapter = new MealAdapter(new ArrayList<Meal>(), this);
+        recyclerView.setAdapter(adapter);
+
+        // Set decoration
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        presenter.getMeals();
     }
 
     @Override
@@ -129,6 +142,26 @@ public class MealFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void showMeals(List<Meal> meals) {
+        adapter.replaceData(meals);
+    }
+
+    @Override
+    public void showEmptyMeals() {
+        Toast.makeText(getActivity(), "No meals available", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onMealClicked(Meal meal) {
+        presenter.addMealToCart(meal);
     }
 
     @OnClick(R.id.button)
