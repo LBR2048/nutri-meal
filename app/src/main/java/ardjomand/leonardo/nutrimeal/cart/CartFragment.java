@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.meals;
+package ardjomand.leonardo.nutrimeal.cart;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import ardjomand.leonardo.nutrimeal.R;
 import butterknife.BindView;
@@ -29,7 +28,7 @@ import butterknife.Unbinder;
  * Activities containing this fragment MUST implement the {@link OnMealFragmentInteractionListener}
  * interface.
  */
-public class MealFragment extends Fragment {
+public class CartFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -41,7 +40,7 @@ public class MealFragment extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnMealFragmentInteractionListener mListener;
+    private OnOrderedMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
 
 
@@ -49,13 +48,13 @@ public class MealFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MealFragment() {
+    public CartFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MealFragment newInstance(int columnCount) {
-        MealFragment fragment = new MealFragment();
+    public static CartFragment newInstance(int columnCount) {
+        CartFragment fragment = new CartFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -74,7 +73,7 @@ public class MealFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart_list, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         setTitle();
@@ -86,7 +85,7 @@ public class MealFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new MealAdapter(DummyMeals.ITEMS, mListener));
+        recyclerView.setAdapter(new SelectedMealAdapter(DummyCart.ITEMS, mListener));
 
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
@@ -102,8 +101,8 @@ public class MealFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnMealFragmentInteractionListener) {
-            mListener = (OnMealFragmentInteractionListener) context;
+        if (context instanceof OnOrderedMealFragmentInteractionListener) {
+            mListener = (OnOrderedMealFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnMealFragmentInteractionListener");
@@ -120,7 +119,7 @@ public class MealFragment extends Fragment {
         if (getActivity() instanceof AppCompatActivity) {
             ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (supportActionBar != null) {
-                supportActionBar.setTitle(R.string.meals_title);
+                supportActionBar.setTitle(R.string.cart_title);
             }
         }
     }
@@ -133,11 +132,11 @@ public class MealFragment extends Fragment {
 
     @OnClick(R.id.button)
     public void onViewClicked() {
-        mListener.onGoToCartClicked();
+        mListener.onPlaceOrderClicked();
     }
 
-    public interface OnMealFragmentInteractionListener {
-        void onMealClicked(Meal item);
-        void onGoToCartClicked();
+    public interface OnOrderedMealFragmentInteractionListener {
+        void onOrderedMealClicked(SelectedMeal item);
+        void onPlaceOrderClicked();
     }
 }

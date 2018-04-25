@@ -2,4 +2,6 @@
     <string name="app_name">NutriMeal</string>
     <string name="meals_title">Meals</string>
     <string name="go_to_cart_button">Go to cart</string>
+    <string name="cart_title">Cart</string>
+    <string name="place_order_button">Place order</string>
 </resources>

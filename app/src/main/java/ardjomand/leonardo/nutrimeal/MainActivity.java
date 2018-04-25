@@ -4,10 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import ardjomand.leonardo.nutrimeal.cart.CartFragment;
+import ardjomand.leonardo.nutrimeal.cart.SelectedMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealFragment;
 
-public class MainActivity extends AppCompatActivity implements MealFragment.OnMealFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements
+        MealFragment.OnMealFragmentInteractionListener,
+        CartFragment.OnOrderedMealFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +29,24 @@ public class MainActivity extends AppCompatActivity implements MealFragment.OnMe
     @Override
     public void onMealClicked(Meal item) {
         Toast.makeText(this, item.getName() + " clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGoToCartClicked() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, CartFragment.newInstance(1))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onOrderedMealClicked(SelectedMeal selectedMeal) {
+        Toast.makeText(this, "Edit " + selectedMeal.getName() + " quantity", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPlaceOrderClicked() {
+        Toast.makeText(this, "Place order", Toast.LENGTH_SHORT).show();
     }
 }
