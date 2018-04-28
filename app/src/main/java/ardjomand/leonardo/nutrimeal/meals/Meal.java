@@ -7,6 +7,10 @@ public class Meal {
     private long unitPrice;
     private boolean available;
 
+    @SuppressWarnings("unused")
+    public Meal() {
+    }
+
     public Meal(String name, String description, String imagePath, long unitPrice, boolean available) {
         this.name = name;
         this.description = description;

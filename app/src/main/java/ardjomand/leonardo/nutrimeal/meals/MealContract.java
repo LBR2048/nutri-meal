@@ -8,6 +8,8 @@ interface MealContract {
 
         void showMeals(List<Meal> meals);
 
+        void addMeal(Meal meal);
+
         void showEmptyMeals();
 
         void showError();

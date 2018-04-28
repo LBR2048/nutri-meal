@@ -1,0 +1,63 @@
+package ardjomand.leonardo.nutrimeal.data;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.meals.MealPresenter;
+
+public class MealRepositoryImpl implements MealRepository.Repository {
+
+    public static final String NODE_MEALS = "meals";
+
+    private MealPresenter presenter;
+    private DatabaseReference mealsRef;
+    private ChildEventListener mealsEventListener;
+
+    public MealRepositoryImpl(MealPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void subscribeForMealUpdates() {
+
+        mealsRef = FirebaseDatabase.getInstance().getReference().child(NODE_MEALS);
+
+        mealsEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                presenter.onMealAdded(dataSnapshot.getValue(Meal.class));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                presenter.onMealChanged(dataSnapshot.getValue(Meal.class));
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                presenter.onMealRemoved(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        mealsRef.addChildEventListener(mealsEventListener);
+    }
+
+    @Override
+    public void unsubscribeFromMealUpdates() {
+        mealsRef.removeEventListener(mealsEventListener);
+    }
+}
