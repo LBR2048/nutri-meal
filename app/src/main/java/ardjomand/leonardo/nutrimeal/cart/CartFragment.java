@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
 import butterknife.BindView;
@@ -25,10 +28,10 @@ import butterknife.Unbinder;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnMealFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnOrderedMealFragmentInteractionListener}
  * interface.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartContract.View {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -42,6 +45,8 @@ public class CartFragment extends Fragment {
     private int mColumnCount = 1;
     private OnOrderedMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
+    private CartPresenter presenter;
+    private SelectedMealAdapter adapter;
 
 
     /**
@@ -68,6 +73,8 @@ public class CartFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        presenter = new CartPresenter(this);
     }
 
     @Override
@@ -85,7 +92,8 @@ public class CartFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new SelectedMealAdapter(DummyCart.ITEMS, mListener));
+        adapter = new SelectedMealAdapter(new ArrayList<SelectedMeal>(), mListener);
+        recyclerView.setAdapter(adapter);
 
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
@@ -96,6 +104,8 @@ public class CartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        presenter.getSelectedMeals();
     }
 
     @Override
@@ -128,6 +138,21 @@ public class CartFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void addSelectedMeal(SelectedMeal selectedMeal) {
+        adapter.addData(selectedMeal);
+    }
+
+    @Override
+    public void showEmptyMeals() {
+        Toast.makeText(getActivity(), "No meals available in cart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.button)

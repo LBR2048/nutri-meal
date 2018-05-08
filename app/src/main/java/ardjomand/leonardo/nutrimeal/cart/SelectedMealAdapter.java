@@ -10,6 +10,7 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealFragment.OnMealFragmentInteractionListener;
 
 /**
@@ -19,7 +20,7 @@ import ardjomand.leonardo.nutrimeal.meals.MealFragment.OnMealFragmentInteraction
  */
 public class SelectedMealAdapter extends RecyclerView.Adapter<SelectedMealAdapter.ViewHolder> {
 
-    private final List<SelectedMeal> mValues;
+    private List<SelectedMeal> mValues;
     private final CartFragment.OnOrderedMealFragmentInteractionListener mListener;
 
     public SelectedMealAdapter(List<SelectedMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener) {
@@ -82,5 +83,15 @@ public class SelectedMealAdapter extends RecyclerView.Adapter<SelectedMealAdapte
         public String toString() {
             return super.toString() + " '" + mImageView.getText() + "'";
         }
+    }
+
+    public void replaceData(List<SelectedMeal> selectedMeals) {
+        mValues = selectedMeals;
+        notifyDataSetChanged();
+    }
+
+    public void addData(SelectedMeal selectedMeal) {
+        mValues.add(selectedMeal);
+        notifyItemInserted(mValues.size() - 1);
     }
 }
