@@ -112,13 +112,6 @@ public class MealsFragment extends Fragment implements
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter.subscribeToMealsUpdates();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnMealFragmentInteractionListener) {
@@ -130,10 +123,21 @@ public class MealsFragment extends Fragment implements
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        presenter.subscribeToMealsUpdates();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.unsubscribeFromMealsUpdates();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        presenter.unsubscribeFromMealsUpdates();
     }
 
     @Override

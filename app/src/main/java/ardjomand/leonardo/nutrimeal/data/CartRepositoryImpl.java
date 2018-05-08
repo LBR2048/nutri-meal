@@ -69,6 +69,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
     public void unsubscribeFromCartUpdates() {
         if (cartEventListener != null) {
             cartRef.removeEventListener(cartEventListener);
+            cartEventListener = null;
             Log.i(TAG, "Unsubscribing from cart updates");
         }
     }

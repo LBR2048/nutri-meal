@@ -76,6 +76,7 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
     public void unsubscribeFromOrdersUpdates() {
         if (ordersEventListener != null) {
             ordersRef.removeEventListener(ordersEventListener);
+            ordersEventListener = null;
             Log.i(TAG, "Unsubscribing from orders updates");
         }
     }

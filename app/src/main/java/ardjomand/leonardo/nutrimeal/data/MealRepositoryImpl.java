@@ -65,6 +65,7 @@ public class MealRepositoryImpl implements MealRepository.Repository {
     public void unsubscribeFromMealUpdates() {
         if (mealsEventListener != null) {
             mealsRef.removeEventListener(mealsEventListener);
+            mealsEventListener = null;
             Log.i(TAG, "Unsubscribing from meal updates");
         }
     }

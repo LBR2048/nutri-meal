@@ -108,13 +108,6 @@ public class OrdersFragment extends Fragment implements
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter.subscribeToOrdersUpdates();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         // TODO Orders fragment has no need to communicate user interaction to Activity
@@ -127,10 +120,21 @@ public class OrdersFragment extends Fragment implements
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        presenter.subscribeToOrdersUpdates();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.unsubscribeFromOrdersUpdates();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        presenter.unsubscribeFromOrdersUpdates();
     }
 
     @Override

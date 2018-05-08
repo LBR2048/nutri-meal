@@ -105,13 +105,6 @@ public class CartFragment extends Fragment implements CartContract.View {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter.subscribeToCartUpdates();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnOrderedMealFragmentInteractionListener) {
@@ -123,10 +116,21 @@ public class CartFragment extends Fragment implements CartContract.View {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        presenter.subscribeToCartUpdates();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.unsubscribeFromCartUpdates();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        presenter.unsubscribeFromCartUpdates();
     }
 
     @Override
