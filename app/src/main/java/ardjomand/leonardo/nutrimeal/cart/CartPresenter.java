@@ -4,7 +4,6 @@ import android.util.Log;
 
 import ardjomand.leonardo.nutrimeal.data.CartRepository;
 import ardjomand.leonardo.nutrimeal.data.CartRepositoryImpl;
-import ardjomand.leonardo.nutrimeal.data.MealRepository;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class CartPresenter implements CartContract.Presenter, CartRepository.Presenter {
@@ -31,13 +30,13 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     }
 
     @Override
-    public void onSelectedMealAdded(SelectedMeal selectedMeal) {
-        Log.i(TAG, "Selected meal " + selectedMeal.getName() + " added");
-        view.addSelectedMeal(selectedMeal);
+    public void onSelectedMealAdded(CartMeal cartMeal) {
+        Log.i(TAG, "Selected meal " + cartMeal.getName() + " added");
+        view.addSelectedMeal(cartMeal);
     }
 
     @Override
-    public void onSelectedMealChanged(SelectedMeal selectedMeal) {
+    public void onSelectedMealChanged(CartMeal cartMeal) {
 
     }
 

@@ -1,14 +1,12 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
-import java.util.List;
-
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 interface CartContract {
 
     interface View {
 
-        void addSelectedMeal(SelectedMeal meal);
+        void addSelectedMeal(CartMeal meal);
 
         void showEmptyMeals();
 

@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Cart {
     private long amount;
-    private List<SelectedMeal> selectedMeals = new ArrayList<>(); // TODO use Set or other List implementation
+    private List<CartMeal> cartMeals = new ArrayList<>(); // TODO use Set or other List implementation
 
     public Cart() {
     }
 
-    public void addOrderedMeal(SelectedMeal selectedMeal) {
-        selectedMeals.add(selectedMeal);
-        amount += selectedMeal.getTotalPrice();
+    public void addOrderedMeal(CartMeal cartMeal) {
+        cartMeals.add(cartMeal);
+        amount += cartMeal.getTotalPrice();
     }
 }

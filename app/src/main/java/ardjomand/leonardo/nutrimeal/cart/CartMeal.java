@@ -1,6 +1,6 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
-public class SelectedMeal { // TODO extend from Meal
+public class CartMeal { // TODO extend from Meal
     private String name;
     private String description;
     private String imagePath;
@@ -8,10 +8,10 @@ public class SelectedMeal { // TODO extend from Meal
     private int quantity;
     private long totalPrice;
 
-    public SelectedMeal() {
+    public CartMeal() {
     }
 
-    public SelectedMeal(String name, String description, String imagePath, long unitPrice, int quantity) {
+    public CartMeal(String name, String description, String imagePath, long unitPrice, int quantity) {
         this.name = name;
         this.description = description;
         this.imagePath = imagePath;

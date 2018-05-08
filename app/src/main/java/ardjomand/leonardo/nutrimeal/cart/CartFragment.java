@@ -47,7 +47,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     private OnOrderedMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
     private CartPresenter presenter;
-    private SelectedMealAdapter adapter;
+    private CartMealAdapter adapter;
     //endregion
 
     //region Constructors
@@ -95,7 +95,7 @@ public class CartFragment extends Fragment implements CartContract.View {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        adapter = new SelectedMealAdapter(new ArrayList<SelectedMeal>(), mListener);
+        adapter = new CartMealAdapter(new ArrayList<CartMeal>(), mListener);
         recyclerView.setAdapter(adapter);
 
         RecyclerView.ItemDecoration itemDecoration = new
@@ -137,8 +137,8 @@ public class CartFragment extends Fragment implements CartContract.View {
 
     //region Presenter callbacks
     @Override
-    public void addSelectedMeal(SelectedMeal selectedMeal) {
-        adapter.addData(selectedMeal);
+    public void addSelectedMeal(CartMeal cartMeal) {
+        adapter.addData(cartMeal);
     }
 
     @Override
@@ -167,7 +167,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     }
 
     public interface OnOrderedMealFragmentInteractionListener {
-        void onOrderedMealClicked(SelectedMeal item);
+        void onOrderedMealClicked(CartMeal item);
         void onPlaceOrderClicked();
     }
 }

@@ -1,6 +1,6 @@
 package ardjomand.leonardo.nutrimeal.data;
 
-import ardjomand.leonardo.nutrimeal.cart.SelectedMeal;
+import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 
 public interface CartRepository {
 
@@ -13,9 +13,9 @@ public interface CartRepository {
 
     interface Presenter {
 
-        void onSelectedMealAdded(SelectedMeal selectedMeal);
+        void onSelectedMealAdded(CartMeal cartMeal);
 
-        void onSelectedMealChanged(SelectedMeal selectedMeal);
+        void onSelectedMealChanged(CartMeal cartMeal);
 
         void onSelectedMealRemoved(String key);
     }

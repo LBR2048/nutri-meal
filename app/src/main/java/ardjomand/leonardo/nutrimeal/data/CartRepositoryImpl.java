@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
-import ardjomand.leonardo.nutrimeal.cart.SelectedMeal;
+import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 
 public class CartRepositoryImpl implements CartRepository.Repository {
 
@@ -33,12 +33,12 @@ public class CartRepositoryImpl implements CartRepository.Repository {
         cartEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                presenter.onSelectedMealAdded(dataSnapshot.getValue(SelectedMeal.class));
+                presenter.onSelectedMealAdded(dataSnapshot.getValue(CartMeal.class));
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                presenter.onSelectedMealChanged(dataSnapshot.getValue(SelectedMeal.class));
+                presenter.onSelectedMealChanged(dataSnapshot.getValue(CartMeal.class));
             }
 
             @Override

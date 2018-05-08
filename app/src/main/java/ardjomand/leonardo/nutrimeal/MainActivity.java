@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
-import ardjomand.leonardo.nutrimeal.cart.SelectedMeal;
+import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealFragment;
 
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onOrderedMealClicked(SelectedMeal selectedMeal) {
-        Toast.makeText(this, "Edit " + selectedMeal.getName() + " quantity", Toast.LENGTH_SHORT).show();
+    public void onOrderedMealClicked(CartMeal cartMeal) {
+        Toast.makeText(this, "Edit " + cartMeal.getName() + " quantity", Toast.LENGTH_SHORT).show();
     }
 
     @Override

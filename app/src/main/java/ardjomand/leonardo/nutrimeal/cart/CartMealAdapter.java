@@ -10,7 +10,6 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealFragment.OnMealFragmentInteractionListener;
 
 /**
@@ -18,12 +17,12 @@ import ardjomand.leonardo.nutrimeal.meals.MealFragment.OnMealFragmentInteraction
  * specified {@link OnMealFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class SelectedMealAdapter extends RecyclerView.Adapter<SelectedMealAdapter.ViewHolder> {
+public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHolder> {
 
-    private List<SelectedMeal> mValues;
+    private List<CartMeal> mValues;
     private final CartFragment.OnOrderedMealFragmentInteractionListener mListener;
 
-    public SelectedMealAdapter(List<SelectedMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener) {
+    public CartMealAdapter(List<CartMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -68,7 +67,7 @@ public class SelectedMealAdapter extends RecyclerView.Adapter<SelectedMealAdapte
         public final TextView mNameView;
         public final TextView mDescriptionView;
         public final TextView mPriceView;
-        public SelectedMeal mItem;
+        public CartMeal mItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -85,13 +84,13 @@ public class SelectedMealAdapter extends RecyclerView.Adapter<SelectedMealAdapte
         }
     }
 
-    public void replaceData(List<SelectedMeal> selectedMeals) {
-        mValues = selectedMeals;
+    public void replaceData(List<CartMeal> cartMeals) {
+        mValues = cartMeals;
         notifyDataSetChanged();
     }
 
-    public void addData(SelectedMeal selectedMeal) {
-        mValues.add(selectedMeal);
+    public void addData(CartMeal cartMeal) {
+        mValues.add(cartMeal);
         notifyItemInserted(mValues.size() - 1);
     }
 }
