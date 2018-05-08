@@ -25,13 +25,11 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
 
     @Override
     public void subscribeToCartUpdates() {
-        Log.i(TAG, "Subscribing to cart updates");
         repository.subscribeForCartUpdates();
     }
 
     @Override
     public void unsubscribeFromCartUpdates() {
-        Log.i(TAG, "Unsubscribing from cart updates");
         repository.unsubscribeFromCartUpdates();
     }
 

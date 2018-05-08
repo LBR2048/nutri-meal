@@ -1,5 +1,7 @@
 package ardjomand.leonardo.nutrimeal.data;
 
+import android.util.Log;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,6 +13,7 @@ import ardjomand.leonardo.nutrimeal.orders.OrdersPresenter;
 
 public class OrdersRepositoryImpl implements OrdersRepository.Repository {
 
+    public static final String TAG = OrdersRepositoryImpl.class.getSimpleName();
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     public static final String NODE_SELECTED_MEALS = "selected-meals";
 
@@ -26,49 +29,54 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
 
     public OrdersRepositoryImpl(OrdersPresenter presenter) {
         this.presenter = presenter;
-    }
-
-    @Override
-    public void subscribeForOrdersUpdates() {
 
         ordersRef = FirebaseDatabase.getInstance().getReference()
                 .child(NODE_CUSTOMER_ORDERS)
                 .child(customerId)
                 .child(orderId)
                 .child(OrdersRepositoryImpl.NODE_SELECTED_MEALS);
+    }
 
-        ordersEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                presenter.onOrderAdded(dataSnapshot.getValue(Order.class));
-            }
+    @Override
+    public void subscribeForOrdersUpdates() {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                presenter.onOrderChanged(dataSnapshot.getValue(Order.class));
-            }
+        if (ordersEventListener == null) {
+            ordersEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    presenter.onOrderAdded(dataSnapshot.getValue(Order.class));
+                }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                presenter.onOrderRemoved(dataSnapshot.getKey());
-            }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    presenter.onOrderChanged(dataSnapshot.getValue(Order.class));
+                }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    presenter.onOrderRemoved(dataSnapshot.getKey());
+                }
 
-            }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                }
 
-            }
-        };
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-        ordersRef.addChildEventListener(ordersEventListener);
+                }
+            };
+            ordersRef.addChildEventListener(ordersEventListener);
+            Log.i(TAG, "Subscribing to order updates");
+        }
     }
 
     @Override
     public void unsubscribeFromOrdersUpdates() {
-        ordersRef.removeEventListener(ordersEventListener);
+        if (ordersEventListener != null) {
+            ordersRef.removeEventListener(ordersEventListener);
+            Log.i(TAG, "Unsubscribing from orders updates");
+        }
     }
 }

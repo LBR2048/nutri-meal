@@ -19,13 +19,11 @@ public class OrdersPresenter implements OrdersContract.Presenter, OrdersReposito
 
     @Override
     public void subscribeToOrdersUpdates() {
-        Log.i(TAG, "Subscribing to order updates");
         repository.subscribeForOrdersUpdates();
     }
 
     @Override
     public void unsubscribeFromOrdersUpdates() {
-        Log.i(TAG, "Unsubscribing from order updates");
         repository.unsubscribeFromOrdersUpdates();
     }
 
