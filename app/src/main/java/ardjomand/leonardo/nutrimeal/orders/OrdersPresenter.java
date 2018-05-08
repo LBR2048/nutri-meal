@@ -2,6 +2,9 @@ package ardjomand.leonardo.nutrimeal.orders;
 
 import android.util.Log;
 
+import ardjomand.leonardo.nutrimeal.data.OrdersRepository;
+import ardjomand.leonardo.nutrimeal.data.OrdersRepositoryImpl;
+
 public class OrdersPresenter implements OrdersContract.Presenter, OrdersRepository.Presenter {
 
     public static final String TAG = OrdersPresenter.class.getSimpleName();

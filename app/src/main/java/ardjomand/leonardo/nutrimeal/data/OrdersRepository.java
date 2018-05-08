@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.data;
 
 import ardjomand.leonardo.nutrimeal.orders.Order;
 
