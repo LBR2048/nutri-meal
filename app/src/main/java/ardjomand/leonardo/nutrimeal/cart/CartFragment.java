@@ -33,22 +33,24 @@ import butterknife.Unbinder;
  */
 public class CartFragment extends Fragment implements CartContract.View {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
 
+    //region Views
     @BindView(R.id.button)
     Button button;
     @BindView(R.id.list)
     RecyclerView recyclerView;
+    //endregion
 
-    // TODO: Customize parameters
+    //region Member variables
     private int mColumnCount = 1;
     private OnOrderedMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
     private CartPresenter presenter;
     private SelectedMealAdapter adapter;
+    //endregion
 
-
+    //region Constructors
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -56,7 +58,6 @@ public class CartFragment extends Fragment implements CartContract.View {
     public CartFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static CartFragment newInstance(int columnCount) {
         CartFragment fragment = new CartFragment();
@@ -65,7 +66,9 @@ public class CartFragment extends Fragment implements CartContract.View {
         fragment.setArguments(args);
         return fragment;
     }
+    //endregion
 
+    //region Lifecycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,21 +128,14 @@ public class CartFragment extends Fragment implements CartContract.View {
         mListener = null;
     }
 
-    private void setTitle() {
-        if (getActivity() instanceof AppCompatActivity) {
-            ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-            if (supportActionBar != null) {
-                supportActionBar.setTitle(R.string.cart_title);
-            }
-        }
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+    //endregion
 
+    //region Presenter callbacks
     @Override
     public void addSelectedMeal(SelectedMeal selectedMeal) {
         adapter.addData(selectedMeal);
@@ -153,6 +149,16 @@ public class CartFragment extends Fragment implements CartContract.View {
     @Override
     public void showError() {
         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+    }
+    //endregion
+
+    private void setTitle() {
+        if (getActivity() instanceof AppCompatActivity) {
+            ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (supportActionBar != null) {
+                supportActionBar.setTitle(R.string.cart_title);
+            }
+        }
     }
 
     @OnClick(R.id.button)

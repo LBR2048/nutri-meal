@@ -38,17 +38,22 @@ public class MealFragment extends Fragment implements
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
+    //region Views
     @BindView(R.id.button)
     Button button;
     @BindView(R.id.list)
     RecyclerView recyclerView;
+    //endregion
 
+    //region Member variables
     private int mColumnCount = 1;
     private OnMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
     private MealPresenter presenter;
     private MealAdapter adapter;
+    //endregion
 
+    //region Constructors
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -56,7 +61,6 @@ public class MealFragment extends Fragment implements
     public MealFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static MealFragment newInstance(int columnCount) {
         MealFragment fragment = new MealFragment();
@@ -65,7 +69,9 @@ public class MealFragment extends Fragment implements
         fragment.setArguments(args);
         return fragment;
     }
+    //endregion
 
+    //region Lifecycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,21 +135,14 @@ public class MealFragment extends Fragment implements
         mListener = null;
     }
 
-    private void setTitle() {
-        if (getActivity() instanceof AppCompatActivity) {
-            ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-            if (supportActionBar != null) {
-                supportActionBar.setTitle(R.string.meals_title);
-            }
-        }
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+    //endregion
 
+    //region Presenter callbacks
     @Override
     public void showMeals(List<Meal> meals) {
         adapter.replaceData(meals);
@@ -163,15 +162,25 @@ public class MealFragment extends Fragment implements
     public void showError() {
         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
     }
+    //endregion
 
-    @Override
-    public void onMealClicked(Meal meal) {
-        presenter.addMealToCart(meal);
+    private void setTitle() {
+        if (getActivity() instanceof AppCompatActivity) {
+            ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (supportActionBar != null) {
+                supportActionBar.setTitle(R.string.meals_title);
+            }
+        }
     }
 
     @OnClick(R.id.button)
     public void onViewClicked() {
         mListener.onGoToCartClicked();
+    }
+
+    @Override
+    public void onMealClicked(Meal meal) {
+        presenter.addMealToCart(meal);
     }
 
     public interface OnMealFragmentInteractionListener {
