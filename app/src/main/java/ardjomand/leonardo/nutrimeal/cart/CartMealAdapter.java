@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.meals.MealFragment.OnMealFragmentInteractionListener;
+import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Cart} and makes a call to the
@@ -30,7 +30,7 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_cart, parent, false);
+                .inflate(R.layout.item_cart, parent, false);
         return new ViewHolder(view);
     }
 

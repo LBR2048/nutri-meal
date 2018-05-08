@@ -7,17 +7,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import ardjomand.leonardo.nutrimeal.meals.Meal;
-import ardjomand.leonardo.nutrimeal.meals.MealPresenter;
+import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class MealRepositoryImpl implements MealRepository.Repository {
 
     public static final String NODE_MEALS = "meals";
 
-    private MealPresenter presenter;
+    private MealsPresenter presenter;
     private DatabaseReference mealsRef;
     private ChildEventListener mealsEventListener;
 
-    public MealRepositoryImpl(MealPresenter presenter) {
+    public MealRepositoryImpl(MealsPresenter presenter) {
         this.presenter = presenter;
     }
 

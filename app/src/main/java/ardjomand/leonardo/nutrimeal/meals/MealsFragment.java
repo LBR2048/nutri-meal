@@ -32,8 +32,8 @@ import butterknife.Unbinder;
  * Activities containing this fragment MUST implement the {@link OnMealFragmentInteractionListener}
  * interface.
  */
-public class MealFragment extends Fragment implements
-        MealContract.View,
+public class MealsFragment extends Fragment implements
+        MealsContract.View,
         MealAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -49,7 +49,7 @@ public class MealFragment extends Fragment implements
     private int mColumnCount = 1;
     private OnMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private MealPresenter presenter;
+    private MealsPresenter presenter;
     private MealAdapter adapter;
     //endregion
 
@@ -58,12 +58,12 @@ public class MealFragment extends Fragment implements
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MealFragment() {
+    public MealsFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static MealFragment newInstance(int columnCount) {
-        MealFragment fragment = new MealFragment();
+    public static MealsFragment newInstance(int columnCount) {
+        MealsFragment fragment = new MealsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -80,13 +80,13 @@ public class MealFragment extends Fragment implements
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        presenter = new MealPresenter(this);
+        presenter = new MealsPresenter(this);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_meals, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         setTitle();

@@ -13,8 +13,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".meals.MealFragment"
-        tools:listitem="@layout/fragment_meal">
+        tools:context=".meals.MealsFragment"
+        tools:listitem="@layout/item_meal">
 
     </android.support.v7.widget.RecyclerView>
 

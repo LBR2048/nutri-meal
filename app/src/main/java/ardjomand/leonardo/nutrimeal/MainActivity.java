@@ -7,11 +7,11 @@ import android.widget.Toast;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
-import ardjomand.leonardo.nutrimeal.meals.MealFragment;
+import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
 import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
 
 public class MainActivity extends AppCompatActivity implements
-        MealFragment.OnMealFragmentInteractionListener,
+        MealsFragment.OnMealFragmentInteractionListener,
         CartFragment.OnOrderedMealFragmentInteractionListener {
 
     @Override
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container, MealFragment.newInstance(1))
+                    .add(R.id.fragment_container, MealsFragment.newInstance(1))
                     .commit();
         }
     }

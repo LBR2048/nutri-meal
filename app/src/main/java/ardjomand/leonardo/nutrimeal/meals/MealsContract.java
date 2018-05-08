@@ -2,7 +2,7 @@ package ardjomand.leonardo.nutrimeal.meals;
 
 import java.util.List;
 
-interface MealContract {
+interface MealsContract {
 
     interface View {
 

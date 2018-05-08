@@ -12,7 +12,7 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
-import ardjomand.leonardo.nutrimeal.meals.MealFragment.OnMealFragmentInteractionListener;
+import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Meal} and makes a call to the
@@ -32,7 +32,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_meal, parent, false);
+                .inflate(R.layout.item_meal, parent, false);
         return new ViewHolder(view);
     }
 
