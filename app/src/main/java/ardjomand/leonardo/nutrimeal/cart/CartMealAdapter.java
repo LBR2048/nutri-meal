@@ -93,4 +93,9 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         mValues.add(cartMeal);
         notifyItemInserted(mValues.size() - 1);
     }
+
+    public void clearData() {
+        mValues.clear();
+        notifyDataSetChanged();
+    }
 }

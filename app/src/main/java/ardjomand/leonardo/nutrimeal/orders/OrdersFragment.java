@@ -122,6 +122,7 @@ public class OrdersFragment extends Fragment implements
     @Override
     public void onStart() {
         super.onStart();
+        adapter.clearData();
         presenter.subscribeToOrdersUpdates();
     }
 

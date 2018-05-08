@@ -125,6 +125,7 @@ public class MealsFragment extends Fragment implements
     @Override
     public void onStart() {
         super.onStart();
+        adapter.clearData();
         presenter.subscribeToMealsUpdates();
     }
 

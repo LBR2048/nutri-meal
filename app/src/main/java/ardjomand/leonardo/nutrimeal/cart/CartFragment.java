@@ -118,6 +118,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     @Override
     public void onStart() {
         super.onStart();
+        adapter.clearData();
         presenter.subscribeToCartUpdates();
     }
 

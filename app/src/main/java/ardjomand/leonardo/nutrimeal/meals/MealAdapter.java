@@ -95,6 +95,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         notifyItemInserted(mMeals.size() - 1);
     }
 
+    public void clearData() {
+        mMeals.clear();
+        notifyDataSetChanged();
+    }
     public interface OnMealAdapterInteractionListener {
         void onMealClicked(Meal item);
     }

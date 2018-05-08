@@ -97,6 +97,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         notifyItemInserted(mItems.size() - 1);
     }
 
+    public void clearData() {
+        mItems.clear();
+        notifyDataSetChanged();
+    }
     public interface OnMealAdapterInteractionListener {
         void onOrderClicked(Order item);
     }
