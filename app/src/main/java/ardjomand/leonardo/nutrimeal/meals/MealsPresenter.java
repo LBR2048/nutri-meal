@@ -18,10 +18,16 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     }
 
     @Override
-    public void getMeals() {
-        Log.i(TAG, "Getting meals");
+    public void subscribeToMealsUpdates() {
+        Log.i(TAG, "Subscribing to meal updates");
         repository.subscribeForMealUpdates();
 //        view.showMeals(DummyMeals.ITEMS);
+    }
+
+    @Override
+    public void unsubscribeFromMealsUpdates() {
+        Log.i(TAG, "Unsubscribing from meal updates");
+        repository.unsubscribeFromMealUpdates();
     }
 
     @Override

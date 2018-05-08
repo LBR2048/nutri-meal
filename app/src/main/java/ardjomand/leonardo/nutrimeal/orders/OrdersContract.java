@@ -17,6 +17,8 @@ interface OrdersContract {
 
     interface Presenter {
 
-        void getOrders();
+        void subscribeToOrdersUpdates();
+
+        void unsubscribeFromOrdersUpdates();
     }
 }

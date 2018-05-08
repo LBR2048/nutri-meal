@@ -115,7 +115,7 @@ public class MealsFragment extends Fragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.getMeals();
+        presenter.subscribeToMealsUpdates();
     }
 
     @Override
@@ -133,6 +133,7 @@ public class MealsFragment extends Fragment implements
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        presenter.unsubscribeFromMealsUpdates();
     }
 
     @Override

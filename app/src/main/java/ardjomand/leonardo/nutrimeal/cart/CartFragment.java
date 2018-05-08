@@ -108,7 +108,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.getSelectedMeals();
+        presenter.subscribeToCartUpdates();
     }
 
     @Override
@@ -126,6 +126,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        presenter.unsubscribeFromCartUpdates();
     }
 
     @Override

@@ -15,7 +15,9 @@ interface CartContract {
 
     interface Presenter {
 
-        void getSelectedMeals();
+        void subscribeToCartUpdates();
+
+        void unsubscribeFromCartUpdates();
 
         void addMealToCart(Meal meal);
     }

@@ -111,7 +111,7 @@ public class OrdersFragment extends Fragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.getOrders();
+        presenter.subscribeToOrdersUpdates();
     }
 
     @Override
@@ -130,6 +130,7 @@ public class OrdersFragment extends Fragment implements
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        presenter.unsubscribeFromOrdersUpdates();
     }
 
     @Override
