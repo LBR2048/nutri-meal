@@ -8,6 +8,7 @@ import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealFragment;
+import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
 
 public class MainActivity extends AppCompatActivity implements
         MealFragment.OnMealFragmentInteractionListener,
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onPlaceOrderClicked() {
-        Toast.makeText(this, "Place order", Toast.LENGTH_SHORT).show();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, OrdersFragment.newInstance(1))
+                .addToBackStack(null)
+                .commit();
     }
 }

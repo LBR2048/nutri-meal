@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.cart;
+package ardjomand.leonardo.nutrimeal.orders;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.meals.Meal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,26 +29,26 @@ import butterknife.Unbinder;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnOrderedMealFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnOrdersFragmentInteractionListener}
  * interface.
  */
-public class CartFragment extends Fragment implements CartContract.View {
+public class OrdersFragment extends Fragment implements
+        OrdersContract.View,
+        OrdersAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     //region Views
-    @BindView(R.id.button)
-    Button button;
     @BindView(R.id.list)
     RecyclerView recyclerView;
     //endregion
 
     //region Member variables
     private int mColumnCount = 1;
-    private OnOrderedMealFragmentInteractionListener mListener;
+    private OnOrdersFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private CartPresenter presenter;
-    private CartMealAdapter adapter;
+    private OrdersPresenter presenter;
+    private OrdersAdapter adapter;
     //endregion
 
     //region Constructors
@@ -55,12 +56,12 @@ public class CartFragment extends Fragment implements CartContract.View {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CartFragment() {
+    public OrdersFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static CartFragment newInstance(int columnCount) {
-        CartFragment fragment = new CartFragment();
+    public static OrdersFragment newInstance(int columnCount) {
+        OrdersFragment fragment = new OrdersFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -77,30 +78,34 @@ public class CartFragment extends Fragment implements CartContract.View {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        presenter = new CartPresenter(this);
+        presenter = new OrdersPresenter(this);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cart_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_order_list, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         setTitle();
 
-        // Set the adapter
+        // Set layout manager
         Context context = view.getContext();
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        adapter = new CartMealAdapter(new ArrayList<CartMeal>(), mListener);
+
+        // Set adapter
+        adapter = new OrdersAdapter(new ArrayList<Order>(), this);
         recyclerView.setAdapter(adapter);
 
+        // Set decoration
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
+
         return view;
     }
 
@@ -108,18 +113,19 @@ public class CartFragment extends Fragment implements CartContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.getSelectedMeals();
+        presenter.getOrders();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnOrderedMealFragmentInteractionListener) {
-            mListener = (OnOrderedMealFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnOrdersFragmentInteractionListener");
-        }
+        // TODO Orders fragment has no need to communicate user interaction to Activity
+//        if (context instanceof OnOrdersFragmentInteractionListener) {
+//            mListener = (OnOrdersFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnOrdersFragmentInteractionListener");
+//        }
     }
 
     @Override
@@ -137,13 +143,13 @@ public class CartFragment extends Fragment implements CartContract.View {
 
     //region Presenter callbacks
     @Override
-    public void addSelectedMeal(CartMeal cartMeal) {
-        adapter.addData(cartMeal);
+    public void addOrder(Order order) {
+        adapter.addData(order);
     }
 
     @Override
-    public void showEmptyMeals() {
-        Toast.makeText(getActivity(), "No meals available in cart", Toast.LENGTH_SHORT).show();
+    public void showEmptyOrder() {
+        Toast.makeText(getActivity(), "Cart is empty", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -156,18 +162,18 @@ public class CartFragment extends Fragment implements CartContract.View {
         if (getActivity() instanceof AppCompatActivity) {
             ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (supportActionBar != null) {
-                supportActionBar.setTitle(R.string.cart_title);
+                supportActionBar.setTitle(R.string.meals_title);
             }
         }
     }
 
-    @OnClick(R.id.button)
-    public void onViewClicked() {
-        mListener.onPlaceOrderClicked();
+    @Override
+    public void onOrderClicked(Order order) {
+//        presenter.addMealToCart(meal);
     }
 
-    public interface OnOrderedMealFragmentInteractionListener {
-        void onOrderedMealClicked(CartMeal item);
-        void onPlaceOrderClicked();
+    public interface OnOrdersFragmentInteractionListener {
+        void onMealClicked(Meal item);
+        void onPlaceOrdersClicked();
     }
 }

@@ -125,7 +125,7 @@ public class MealFragment extends Fragment implements
             mListener = (OnMealFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnMealFragmentInteractionListener");
+                    + " must implement OnOrdersFragmentInteractionListener");
         }
     }
 
