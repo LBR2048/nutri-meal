@@ -4,6 +4,8 @@ import android.util.Log;
 
 import ardjomand.leonardo.nutrimeal.data.CartRepository;
 import ardjomand.leonardo.nutrimeal.data.CartRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractor;
+import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractorImpl;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class CartPresenter implements CartContract.Presenter, CartRepository.Presenter {
@@ -12,10 +14,12 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
 
     private CartContract.View view;
     private final CartRepository.Repository repository;
+    private final PlaceOrderInteractor.Interactor placeOrderInteractor;
 
     public CartPresenter(CartContract.View view) {
         this.view = view;
         repository = new CartRepositoryImpl(this);
+        placeOrderInteractor = new PlaceOrderInteractorImpl(this);
     }
 
     @Override
@@ -31,6 +35,11 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     @Override
     public void unsubscribeFromCartUpdates() {
         repository.unsubscribeFromCartUpdates();
+    }
+
+    @Override
+    public void placeOrder() {
+        placeOrderInteractor.placeOrder();
     }
 
     @Override

@@ -20,5 +20,7 @@ interface CartContract {
         void unsubscribeFromCartUpdates();
 
         void addMealToCart(Meal meal);
+
+        void placeOrder();
     }
 }

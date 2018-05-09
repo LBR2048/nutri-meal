@@ -169,6 +169,8 @@ public class CartFragment extends Fragment implements CartContract.View {
 
     @OnClick(R.id.button)
     public void onViewClicked() {
+        presenter.placeOrder();
+        // TODO only call next line if order was placed successfully
         mListener.onPlaceOrderClicked();
     }
 
