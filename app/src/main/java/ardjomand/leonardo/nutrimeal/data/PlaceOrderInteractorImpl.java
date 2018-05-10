@@ -8,7 +8,7 @@ import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor {
 
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    public static final String NODE_SELECTED_MEALS = "selected-meals";
+    public static final String NODE_MEALS = "meals";
 
     // TODO add current customer ID
     private final String customerId = "customer1";
@@ -26,7 +26,7 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
                 .child(NODE_CUSTOMER_ORDERS)
                 .child(customerId)
                 .child(orderId)
-                .child(OrdersRepositoryImpl.NODE_SELECTED_MEALS);
+                .child(OrdersRepositoryImpl.NODE_MEALS);
     }
 
     @Override

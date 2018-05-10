@@ -9,16 +9,16 @@ public class Order {
     private boolean delivered;
     private long amount;
     private long deliveryDate;
-    private List<CartMeal> cartMeals;
+    private List<CartMeal> meals;
 
     public Order() {
     }
 
-    public Order(boolean delivered, long amount, long deliveryDate, List<CartMeal> cartMeals) {
+    public Order(boolean delivered, long amount, long deliveryDate, List<CartMeal> meals) {
         this.delivered = delivered;
         this.amount = amount;
         this.deliveryDate = deliveryDate;
-        this.cartMeals = cartMeals;
+        this.meals = meals;
     }
 
     public boolean isDelivered() {
@@ -45,11 +45,11 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public List<CartMeal> getCartMeals() {
-        return cartMeals;
+    public List<CartMeal> getMeals() {
+        return meals;
     }
 
-    public void setCartMeals(List<CartMeal> cartMeals) {
-        this.cartMeals = cartMeals;
+    public void setMeals(List<CartMeal> meals) {
+        this.meals = meals;
     }
 }

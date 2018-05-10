@@ -15,7 +15,7 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
 
     public static final String TAG = OrdersRepositoryImpl.class.getSimpleName();
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    public static final String NODE_SELECTED_MEALS = "selected-meals";
+    public static final String NODE_MEALS = "meals";
 
     // TODO add current customer ID
     private final String customerId = "customer1";
@@ -34,7 +34,7 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
                 .child(NODE_CUSTOMER_ORDERS)
                 .child(customerId)
                 .child(orderId)
-                .child(OrdersRepositoryImpl.NODE_SELECTED_MEALS);
+                .child(OrdersRepositoryImpl.NODE_MEALS);
     }
 
     @Override

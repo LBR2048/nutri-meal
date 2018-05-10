@@ -14,7 +14,7 @@ import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 public class CartRepositoryImpl implements CartRepository.Repository {
 
     public static final String NODE_CUSTOMER_CART = "customer-cart";
-    public static final String NODE_SELECTED_MEALS = "selected-meals";
+    public static final String NODE_MEALS = "meals";
     public static final String TAG = CartRepositoryImpl.class.getSimpleName();
 
     // TODO add current customer ID
@@ -27,7 +27,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
     public CartRepositoryImpl(CartPresenter presenter) {
         this.presenter = presenter;
 
-        cartRef = FirebaseDatabase.getInstance().getReference().child(NODE_CUSTOMER_CART).child(customerId).child(NODE_SELECTED_MEALS);
+        cartRef = FirebaseDatabase.getInstance().getReference().child(NODE_CUSTOMER_CART).child(customerId).child(NODE_MEALS);
     }
 
     @Override
