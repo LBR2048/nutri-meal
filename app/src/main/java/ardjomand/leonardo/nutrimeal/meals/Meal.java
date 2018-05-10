@@ -1,6 +1,7 @@
 package ardjomand.leonardo.nutrimeal.meals;
 
 public class Meal {
+    private String key;
     private String name;
     private String description;
     private String imagePath;
@@ -17,6 +18,14 @@ public class Meal {
         this.imagePath = imagePath;
         this.unitPrice = unitPrice;
         this.available = available;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
