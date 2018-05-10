@@ -32,9 +32,7 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
 
         ordersRef = FirebaseDatabase.getInstance().getReference()
                 .child(NODE_CUSTOMER_ORDERS)
-                .child(customerId)
-                .child(orderId)
-                .child(OrdersRepositoryImpl.NODE_MEALS);
+                .child(customerId);
     }
 
     @Override

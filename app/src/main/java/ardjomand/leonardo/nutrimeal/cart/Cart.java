@@ -10,6 +10,22 @@ public class Cart {
     public Cart() {
     }
 
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public List<CartMeal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<CartMeal> meals) {
+        this.meals = meals;
+    }
+
     public void addOrderedMeal(CartMeal cartMeal) {
         meals.add(cartMeal);
         amount += cartMeal.getTotalPrice();

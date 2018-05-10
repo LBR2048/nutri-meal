@@ -3,7 +3,6 @@ package ardjomand.leonardo.nutrimeal.orders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -96,7 +95,7 @@ public class OrdersFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new OrdersAdapter(new ArrayList<Order>(), this);
+        adapter = new OrdersAdapter(new ArrayList<Order>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration
@@ -166,7 +165,7 @@ public class OrdersFragment extends Fragment implements
         if (getActivity() instanceof AppCompatActivity) {
             ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (supportActionBar != null) {
-                supportActionBar.setTitle(R.string.meals_title);
+                supportActionBar.setTitle(R.string.orders_title);
             }
         }
     }

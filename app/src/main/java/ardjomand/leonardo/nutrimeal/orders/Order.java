@@ -9,7 +9,7 @@ public class Order {
     private boolean delivered;
     private long amount;
     private long deliveryDate;
-    private List<CartMeal> meals;
+//    private List<CartMeal> meals;
 
     public Order() {
     }
@@ -18,7 +18,7 @@ public class Order {
         this.delivered = delivered;
         this.amount = amount;
         this.deliveryDate = deliveryDate;
-        this.meals = meals;
+//        this.meals = meals;
     }
 
     public boolean isDelivered() {
@@ -45,11 +45,11 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public List<CartMeal> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(List<CartMeal> meals) {
-        this.meals = meals;
-    }
+//    public List<CartMeal> getMeals() {
+//        return meals;
+//    }
+//
+//    public void setMeals(List<CartMeal> meals) {
+//        this.meals = meals;
+//    }
 }

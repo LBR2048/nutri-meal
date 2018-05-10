@@ -1,5 +1,6 @@
 package ardjomand.leonardo.nutrimeal.orders;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,10 +21,12 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  */
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
 
-    private List<Order> mItems;
     private final OnMealAdapterInteractionListener mListener;
+    private final Context mContext;
+    private List<Order> mItems;
 
-    public OrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener) {
+    public OrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener, Context context) {
+        mContext = context;
         mItems = orders;
         mListener = listener;
     }
@@ -32,20 +35,23 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_meal, parent, false);
+                .inflate(R.layout.item_order, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mItems.get(position);
-//        holder.mImageView.setText(mItems.get(position).getImagePath());
-//        holder.mNameView.setText(mItems.get(position).getName());
 
-//        holder.mDescriptionView.setText(mItems.get(position).getDescription());
+        // TODO show correct ID
+        holder.mIdView.setText("Order ID");
+
+        holder.mDeliveryStatus.setText(mItems.get(position).isDelivered()
+                ? mContext.getString(R.string.order_delivered)
+                : mContext.getString(R.string.order_not_delivered));
 
         NumberFormat format = NumberFormat.getCurrencyInstance();
-        holder.mPriceView.setText(format.format(mItems.get(position).getAmount()));
+        holder.mAmountView.setText(format.format(mItems.get(position).getAmount()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,29 +70,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         return mItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        final View mView;
-        final TextView mImageView;
-        final TextView mNameView;
-        final TextView mDescriptionView;
-        final TextView mPriceView;
-        Order mItem;
-
-        ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mImageView = view.findViewById(R.id.meal_imagePath);
-            mNameView = view.findViewById(R.id.meal_name);
-            mDescriptionView = view.findViewById(R.id.meal_description);
-            mPriceView = view.findViewById(R.id.meal_price);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mImageView.getText() + "'";
-        }
-    }
-
     public void replaceData(List<Order> orders) {
         mItems = orders;
         notifyDataSetChanged();
@@ -101,7 +84,29 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         mItems.clear();
         notifyDataSetChanged();
     }
+
     public interface OnMealAdapterInteractionListener {
         void onOrderClicked(Order item);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final TextView mIdView;
+        final TextView mDeliveryStatus;
+        final TextView mAmountView;
+        Order mItem;
+
+        ViewHolder(View view) {
+            super(view);
+            mView = view;
+            mIdView = view.findViewById(R.id.order_id);
+            mDeliveryStatus = view.findViewById(R.id.order_delivery_status);
+            mAmountView = view.findViewById(R.id.order_amount);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + mDeliveryStatus.getText() + "'";
+        }
     }
 }
