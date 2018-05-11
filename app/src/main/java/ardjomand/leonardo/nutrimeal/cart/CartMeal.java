@@ -40,6 +40,11 @@ public class CartMeal { // TODO extend from Meal
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+        this.totalPrice = unitPrice * quantity;
+    }
+
     public long getTotalPrice() {
         return totalPrice;
     }

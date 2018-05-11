@@ -33,12 +33,16 @@ public class MealRepositoryImpl implements MealRepository.Repository {
             mealsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    presenter.onMealAdded(dataSnapshot.getValue(Meal.class));
+                    Meal meal = dataSnapshot.getValue(Meal.class);
+                    meal.setKey(dataSnapshot.getKey());
+                    presenter.onMealAdded(meal);
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    presenter.onMealChanged(dataSnapshot.getValue(Meal.class));
+                    Meal meal = dataSnapshot.getValue(Meal.class);
+                    meal.setKey(dataSnapshot.getKey());
+                    presenter.onMealChanged(meal);
                 }
 
                 @Override

@@ -3,7 +3,6 @@ package ardjomand.leonardo.nutrimeal.meals;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -187,6 +186,8 @@ public class MealsFragment extends Fragment implements
     @Override
     public void onMealClicked(Meal meal) {
         presenter.addMealToCart(meal);
+        // TODO only show toast if meal was successfully added to cart
+        Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
     }
 
     public interface OnMealFragmentInteractionListener {
