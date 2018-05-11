@@ -7,4 +7,5 @@
     <string name="orders_title">Orders</string>
     <string name="order_delivered">Delivered</string>
     <string name="order_not_delivered">Not yet delivered</string>
+    <string name="cart_meal_price">%1$d x %2$s = %3$s</string>
 </resources>

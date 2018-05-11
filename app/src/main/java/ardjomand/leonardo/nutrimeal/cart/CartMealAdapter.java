@@ -1,5 +1,6 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,14 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  */
 public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHolder> {
 
-    private List<CartMeal> mValues;
+    private final Context mContext;
     private final CartFragment.OnOrderedMealFragmentInteractionListener mListener;
+    private List<CartMeal> mValues;
 
-    public CartMealAdapter(List<CartMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener) {
+    public CartMealAdapter(List<CartMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener, Context context) {
         mValues = items;
         mListener = listener;
+        mContext = context;
     }
 
     @Override
@@ -41,8 +44,11 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         holder.mNameView.setText(mValues.get(position).getName());
         holder.mDescriptionView.setText(mValues.get(position).getDescription());
 
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        holder.mPriceView.setText(format.format(mValues.get(position).getTotalPrice()));
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+        String formattedUnitPRice = currencyFormat.format(mValues.get(position).getUnitPrice());
+        String formattedTotalPrice = currencyFormat.format(mValues.get(position).getTotalPrice());
+        holder.mPriceView.setText(mContext.getString(R.string.cart_meal_price,
+                holder.mItem.getQuantity(), formattedUnitPRice, formattedTotalPrice));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +65,21 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void replaceData(List<CartMeal> cartMeals) {
+        mValues = cartMeals;
+        notifyDataSetChanged();
+    }
+
+    public void addData(CartMeal cartMeal) {
+        mValues.add(cartMeal);
+        notifyItemInserted(mValues.size() - 1);
+    }
+
+    public void clearData() {
+        mValues.clear();
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,20 +103,5 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         public String toString() {
             return super.toString() + " '" + mImageView.getText() + "'";
         }
-    }
-
-    public void replaceData(List<CartMeal> cartMeals) {
-        mValues = cartMeals;
-        notifyDataSetChanged();
-    }
-
-    public void addData(CartMeal cartMeal) {
-        mValues.add(cartMeal);
-        notifyItemInserted(mValues.size() - 1);
-    }
-
-    public void clearData() {
-        mValues.clear();
-        notifyDataSetChanged();
     }
 }
