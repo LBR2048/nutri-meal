@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NutriCompany</string>
+    <string name="meals_title">Meals [Company]</string>
+    <string name="go_to_cart_button">Go to cart</string>
+    <string name="cart_title">Cart</string>
+    <string name="place_order_button">Place order</string>
+    <string name="orders_title">Orders</string>
+    <string name="order_delivered">Delivered</string>
+    <string name="order_not_delivered">Not yet delivered</string>
+    <string name="cart_meal_price">%1$d x %2$s = %3$s</string>
+</resources>
