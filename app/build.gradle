@@ -16,6 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "dimension"
+    productFlavors {
+        customer {
+            dimension "dimension"
+            applicationId "ardjomand.leonardo.nutrimeal.customer"
+        }
+        company {
+            dimension "dimension"
+            applicationId "ardjomand.leonardo.nutrimeal.company"
+        }
+    }
 }
 
 ext {
