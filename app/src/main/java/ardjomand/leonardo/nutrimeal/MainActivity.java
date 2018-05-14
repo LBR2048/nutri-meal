@@ -1,11 +1,12 @@
 package ardjomand.leonardo.nutrimeal;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
 import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
@@ -28,8 +29,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onMealClicked(Meal item) {
-        Toast.makeText(this, item.getName() + " clicked", Toast.LENGTH_SHORT).show();
+    public void onEditMealClicked(Meal meal) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, EditMealFragment.newInstance(meal.getKey(), "b"))
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

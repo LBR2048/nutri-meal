@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import ardjomand.leonardo.nutrimeal.BuildConfig;
 import ardjomand.leonardo.nutrimeal.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -167,6 +168,12 @@ public class MealsFragment extends Fragment implements
     public void showError() {
         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void goToEditMeal(Meal meal) {
+        mListener.onEditMealClicked(meal);
+    }
+
     //endregion
 
     private void setTitle() {
@@ -185,13 +192,17 @@ public class MealsFragment extends Fragment implements
 
     @Override
     public void onMealClicked(Meal meal) {
-        presenter.addMealToCart(meal);
-        // TODO only show toast if meal was successfully added to cart
-        Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+        if (BuildConfig.FLAVOR.equals("company")) {
+            presenter.editMeal(meal);
+        } else {
+            presenter.addMealToCart(meal);
+            // TODO only show toast if meal was successfully added to cart
+            Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public interface OnMealFragmentInteractionListener {
-        void onMealClicked(Meal item);
+        void onEditMealClicked(Meal item);
         void onGoToCartClicked();
     }
 }

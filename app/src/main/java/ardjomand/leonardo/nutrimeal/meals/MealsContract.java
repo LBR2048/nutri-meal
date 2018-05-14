@@ -13,6 +13,8 @@ interface MealsContract {
         void showEmptyMeals();
 
         void showError();
+
+        void goToEditMeal(Meal meal);
     }
 
     interface Presenter {
@@ -22,5 +24,7 @@ interface MealsContract {
         void unsubscribeFromMealsUpdates();
 
         void addMealToCart(Meal meal);
+
+        void editMeal(Meal meal);
     }
 }

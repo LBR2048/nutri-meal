@@ -38,6 +38,11 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     }
 
     @Override
+    public void editMeal(Meal meal) {
+        view.goToEditMeal(meal);
+    }
+
+    @Override
     public void onMealAdded(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " added");
         view.addMeal(meal);
