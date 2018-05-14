@@ -1,6 +1,7 @@
 package ardjomand.leonardo.nutrimeal;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
 public class MainActivity extends AppCompatActivity implements
         MealsFragment.OnMealFragmentInteractionListener,
         CartFragment.OnOrderedMealFragmentInteractionListener {
+
+    public static final String EDIT_MEAL_FRAGMENT_TAG = "edit-meal-fragment-tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,20 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(EDIT_MEAL_FRAGMENT_TAG);
+        if (fragment.isVisible()) {
+            EditMealFragment editMealFragment = (EditMealFragment) fragment;
+            editMealFragment.updateMeal();
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     public void onEditMealClicked(Meal meal) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, EditMealFragment.newInstance(meal.getKey(), "b"))
+                .replace(R.id.fragment_container, EditMealFragment.newInstance(meal.getKey(), "b"), EDIT_MEAL_FRAGMENT_TAG)
                 .addToBackStack(null)
                 .commit();
     }

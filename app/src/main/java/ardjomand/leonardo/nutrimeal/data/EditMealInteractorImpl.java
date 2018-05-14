@@ -46,6 +46,8 @@ public class EditMealInteractorImpl implements EditMealInteractor.Interactor {
 
     @Override
     public void updateMeal(Meal meal) {
-
+        String key = meal.getKey();
+        meal.setKey(null);
+        mealsRef.child(key).setValue(meal);
     }
 }

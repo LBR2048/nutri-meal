@@ -2,6 +2,8 @@ package ardjomand.leonardo.nutrimeal.editmeal;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.text.NumberFormat;
 
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
@@ -28,8 +28,8 @@ import butterknife.Unbinder;
  */
 public class EditMealFragment extends Fragment implements EditMealContract.View {
 
+    public static final String STATE_KEY = "state-key";
     private static final String ARG_KEY = "arg-meal";
-
     //region Views
     @BindView(R.id.edit_meal_image)
     ImageView editMealImage;
@@ -42,8 +42,9 @@ public class EditMealFragment extends Fragment implements EditMealContract.View 
     Unbinder unbinder;
     //endregion
 
-    private String mKey;
     private EditMealPresenter editMealPresenter;
+    private Meal meal;
+    private String key;
 
 
     public EditMealFragment() {
@@ -72,13 +73,13 @@ public class EditMealFragment extends Fragment implements EditMealContract.View 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mKey = getArguments().getString(ARG_KEY);
+            key = getArguments().getString(ARG_KEY);
         }
 
         editMealPresenter = new EditMealPresenter(this);
 
         if (savedInstanceState == null) {
-            editMealPresenter.getMeal(mKey);
+            editMealPresenter.getMeal(key);
         }
     }
 
@@ -95,6 +96,22 @@ public class EditMealFragment extends Fragment implements EditMealContract.View 
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(STATE_KEY, key);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            key = savedInstanceState.getString(STATE_KEY);
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -104,11 +121,14 @@ public class EditMealFragment extends Fragment implements EditMealContract.View 
     //region Presenter callbacks
     @Override
     public void showMeal(Meal meal) {
+        key = meal.getKey();
         editMealName.setText(meal.getName());
         editMealDescription.setText(meal.getDescription());
 
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        editMealPrice.setText(format.format(meal.getUnitPrice()));
+        // TODO add $ as a label
+//        NumberFormat format = NumberFormat.getCurrencyInstance();
+//        editMealPrice.setText(format.format(meal.getUnitPrice()));
+        editMealPrice.setText(String.valueOf(meal.getUnitPrice()));
     }
 
     @Override
@@ -124,6 +144,13 @@ public class EditMealFragment extends Fragment implements EditMealContract.View 
                 supportActionBar.setTitle(R.string.edit_meal_title);
             }
         }
+    }
+
+    public void updateMeal() {
+        Meal updatedMeal = new Meal(key, editMealName.getText().toString(),
+                editMealDescription.getText().toString(), "",
+                Long.parseLong(editMealPrice.getText().toString()), true);
+        editMealPresenter.updateMeal(updatedMeal);
     }
 
     @OnClick(R.id.edit_meal_image)

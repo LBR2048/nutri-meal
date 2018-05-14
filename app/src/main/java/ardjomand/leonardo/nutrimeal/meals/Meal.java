@@ -12,6 +12,15 @@ public class Meal {
     public Meal() {
     }
 
+    public Meal(String key, String name, String description, String imagePath, long unitPrice, boolean available) {
+        this.key = key;
+        this.name = name;
+        this.description = description;
+        this.imagePath = imagePath;
+        this.unitPrice = unitPrice;
+        this.available = available;
+    }
+
     public Meal(String name, String description, String imagePath, long unitPrice, boolean available) {
         this.name = name;
         this.description = description;
