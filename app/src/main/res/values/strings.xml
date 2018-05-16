@@ -26,4 +26,5 @@
     <string name="account_company_hint">Company</string>
     <string name="account_repeat_password_hint">Repeat password</string>
     <string name="account_register_button">Register</string>
+    <string name="logout_menu_item">Logout</string>
 </resources>

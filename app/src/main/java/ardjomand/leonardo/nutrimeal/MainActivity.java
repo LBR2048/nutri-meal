@@ -1,10 +1,16 @@
 package ardjomand.leonardo.nutrimeal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import ardjomand.leonardo.nutrimeal.auth.AuthActivity;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
@@ -29,6 +35,24 @@ public class MainActivity extends AppCompatActivity implements
                     .add(R.id.fragment_container, MealsFragment.newInstance(1))
                     .commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_logout:
+                logout();
+                navigateToAuthActivity();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -71,5 +95,16 @@ public class MainActivity extends AppCompatActivity implements
                 .replace(R.id.fragment_container, OrdersFragment.newInstance(1))
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void logout() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signOut();
+    }
+
+    private void navigateToAuthActivity() {
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
