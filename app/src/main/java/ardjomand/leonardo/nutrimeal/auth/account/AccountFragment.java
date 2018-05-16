@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import ardjomand.leonardo.nutrimeal.BuildConfig;
 import ardjomand.leonardo.nutrimeal.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +32,6 @@ public class AccountFragment extends Fragment implements AccountContract.View{
     private static final String ARG_PARAM2 = "param2";
 
     //region Views
-    Unbinder unbinder;
     @BindView(R.id.signup_name_edit_text)
     TextInputEditText signupNameEditText;
     @BindView(R.id.signup_email_edit_text)
@@ -39,6 +40,9 @@ public class AccountFragment extends Fragment implements AccountContract.View{
     TextInputEditText signupPasswordEditText;
     @BindView(R.id.signup_password2_edit_text)
     TextInputEditText signupPassword2EditText;
+    @BindView(R.id.progress_bar_layout)
+    FrameLayout progressBarLayout;
+    Unbinder unbinder;
     //endregion
 
     // TODO: Rename and change types of parameters
@@ -121,11 +125,24 @@ public class AccountFragment extends Fragment implements AccountContract.View{
     public void onViewClicked() {
         Toast.makeText(getContext(), "Register", Toast.LENGTH_SHORT).show();
 
+        String type;
+        if (BuildConfig.FLAVOR.equals("company")) {
+            type = "company";
+        } else {
+            type = "customer";
+        }
+
         presenter.createAccount(
                 signupNameEditText.getText().toString(),
                 signupEmailEditText.getText().toString(),
                 signupPasswordEditText.getText().toString(),
-                signupPassword2EditText.getText().toString());
+                signupPassword2EditText.getText().toString(),
+                type);
+    }
+
+    @Override
+    public void showProgressBar(boolean visibility) {
+        progressBarLayout.setVisibility(visibility ? View.VISIBLE : View.GONE);
     }
 
     @Override

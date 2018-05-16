@@ -13,7 +13,8 @@ public interface AuthRepository {
             void onFailure(Exception e);
         }
 
-        void createAccount(CreateAccountCallback createAccountCallback, String password, User user);
+        void createAccount(CreateAccountCallback createAccountCallback, User user,
+                           String password, String type);
 
 
         interface LogInCallback {

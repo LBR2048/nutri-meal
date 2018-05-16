@@ -40,7 +40,7 @@ public class AuthActivity extends AppCompatActivity implements
     public void onCreateAccountClicked() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.auth_container_frame, AccountFragment.newInstance("a", "b"))
+                .replace(R.id.auth_container_frame, AccountFragment.newInstance("a", "b"))
                 .addToBackStack(null)
                 .commit();
     }

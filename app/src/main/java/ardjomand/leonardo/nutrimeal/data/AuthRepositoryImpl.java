@@ -30,7 +30,7 @@ public class AuthRepositoryImpl implements AuthRepository.Interactor {
     }
 
     @Override
-    public void createAccount(final CreateAccountCallback createAccountCallback, String password, User user) {
+    public void createAccount(final CreateAccountCallback createAccountCallback, final User user, String password, String type) {
         auth.createUserWithEmailAndPassword(user.getEmail(), password).
                 addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -38,8 +38,11 @@ public class AuthRepositoryImpl implements AuthRepository.Interactor {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser firebaseUser = auth.getCurrentUser();
+                            if (firebaseUser != null) {
+                                usersRef.child(firebaseUser.getUid()).setValue(user);
+                            }
                             createAccountCallback.onSuccess();
-                            FirebaseUser user = auth.getCurrentUser();
 //                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
