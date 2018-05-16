@@ -9,4 +9,21 @@
     <string name="order_not_delivered">Not yet delivered</string>
     <string name="cart_meal_price">%1$d x %2$s = %3$s</string>
     <string name="edit_meal_title">Edit meal</string>
+
+    <!-- Auth common -->
+    <string name="login_account_auth_email_hint">E-mail</string>
+    <string name="login_account_password_hint">Password</string>
+
+    <!-- Login -->
+    <string name="login_button">Login</string>
+    <string name="login_create_account">Create account</string>
+    <string name="login_forgot_password">I forgot my password</string>
+    <string name="login_facebook_button">Login with Facebook</string>
+    <string name="login_google_button">Login with Google+</string>
+
+    <!-- Account -->
+    <string name="account_name_hint">Name</string>
+    <string name="account_company_hint">Company</string>
+    <string name="account_repeat_password_hint">Repeat password</string>
+    <string name="account_register_button">Register</string>
 </resources>

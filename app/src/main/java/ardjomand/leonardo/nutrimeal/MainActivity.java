@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(EDIT_MEAL_FRAGMENT_TAG);
-        if (fragment.isVisible()) {
+        if (fragment != null && fragment.isVisible()) {
             EditMealFragment editMealFragment = (EditMealFragment) fragment;
             editMealFragment.updateMeal();
         }
