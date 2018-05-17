@@ -6,6 +6,7 @@ import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 
 public class Order {
 
+    private String key;
     private boolean delivered;
     private long amount;
     private long deliveryDate;
@@ -19,6 +20,14 @@ public class Order {
         this.amount = amount;
         this.deliveryDate = deliveryDate;
 //        this.meals = meals;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public boolean isDelivered() {

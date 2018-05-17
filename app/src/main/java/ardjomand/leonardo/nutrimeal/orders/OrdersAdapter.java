@@ -43,8 +43,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mItems.get(position);
 
-        // TODO show correct ID
-        holder.mIdView.setText("Order ID");
+        holder.mIdView.setText(mContext.getString(R.string.order_id, holder.mItem.getKey()));
 
         holder.mDeliveryStatus.setText(mItems.get(position).isDelivered()
                 ? mContext.getString(R.string.order_delivered)

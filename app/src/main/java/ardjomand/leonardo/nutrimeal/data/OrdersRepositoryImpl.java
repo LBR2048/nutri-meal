@@ -44,12 +44,16 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
             ordersEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    presenter.onOrderAdded(dataSnapshot.getValue(Order.class));
+                    Order order = dataSnapshot.getValue(Order.class);
+                    order.setKey(dataSnapshot.getKey());
+                    presenter.onOrderAdded(order);
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    presenter.onOrderChanged(dataSnapshot.getValue(Order.class));
+                    Order order = dataSnapshot.getValue(Order.class);
+                    order.setKey(dataSnapshot.getKey());
+                    presenter.onOrderChanged(order);
                 }
 
                 @Override
