@@ -53,7 +53,8 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
                 orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
                 orderRef.child("delivered").setValue(false);
 
-                // TODO delete cart contents
+                // Delete cart contents
+                customerCartRef.removeValue();
             }
 
             @Override
