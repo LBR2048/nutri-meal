@@ -2,6 +2,8 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,17 +19,18 @@ public class CartRepositoryImpl implements CartRepository.Repository {
     public static final String NODE_MEALS = "meals";
     public static final String TAG = CartRepositoryImpl.class.getSimpleName();
 
-    // TODO add current customer ID
-    private final String customerId = "customer1";
-
     private CartPresenter presenter;
-    private DatabaseReference cartRef;
+    private DatabaseReference customerCartRef;
     private ChildEventListener cartEventListener;
 
     public CartRepositoryImpl(CartPresenter presenter) {
         this.presenter = presenter;
 
-        cartRef = FirebaseDatabase.getInstance().getReference().child(NODE_CUSTOMER_CART).child(customerId).child(NODE_MEALS);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            customerCartRef = FirebaseDatabase.getInstance().getReference()
+                    .child(NODE_CUSTOMER_CART).child(firebaseUser.getUid()).child(NODE_MEALS);
+        }
     }
 
     @Override
@@ -60,7 +63,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
 
                 }
             };
-            cartRef.addChildEventListener(cartEventListener);
+            customerCartRef.addChildEventListener(cartEventListener);
             Log.i(TAG, "Subscribing to cart updates");
         }
     }
@@ -68,7 +71,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
     @Override
     public void unsubscribeFromCartUpdates() {
         if (cartEventListener != null) {
-            cartRef.removeEventListener(cartEventListener);
+            customerCartRef.removeEventListener(cartEventListener);
             cartEventListener = null;
             Log.i(TAG, "Unsubscribing from cart updates");
         }
