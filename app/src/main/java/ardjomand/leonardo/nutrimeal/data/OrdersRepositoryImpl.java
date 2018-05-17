@@ -2,6 +2,8 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,9 +19,6 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     public static final String NODE_MEALS = "meals";
 
-    // TODO add current customer ID
-    private final String customerId = "customer1";
-
     // TODO add current order ID
     private final String orderId = "order1";
 
@@ -30,9 +29,12 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
     public OrdersRepositoryImpl(OrdersPresenter presenter) {
         this.presenter = presenter;
 
-        ordersRef = FirebaseDatabase.getInstance().getReference()
-                .child(NODE_CUSTOMER_ORDERS)
-                .child(customerId);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            ordersRef = FirebaseDatabase.getInstance().getReference()
+                    .child(NODE_CUSTOMER_ORDERS)
+                    .child(firebaseUser.getUid());
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package ardjomand.leonardo.nutrimeal.data;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,12 +19,9 @@ public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
     public static final String NODE_AMOUNT = "amount";
     public static final String NODE_CUSTOMER_CART = "customer-cart";
 
-    // TODO add current customer ID
-    private final String customerId = "customer1";
-
     private final MealsPresenter mealsPresenter;
     private final DatabaseReference mealsRef;
-    private final DatabaseReference customerCartRef;
+    private DatabaseReference customerCartRef;
 
     public EditCartInteractorImpl(MealsPresenter presenter) {
         mealsPresenter = presenter;
@@ -30,9 +29,13 @@ public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
         mealsRef = FirebaseDatabase.getInstance().getReference()
                 .child(NODE_MEALS);
 
-        customerCartRef = FirebaseDatabase.getInstance().getReference()
-                .child(NODE_CUSTOMER_CART)
-                .child(customerId);
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            customerCartRef = FirebaseDatabase.getInstance().getReference()
+                    .child(NODE_CUSTOMER_CART)
+                    .child(firebaseUser.getUid());
+        }
     }
 
     @Override
