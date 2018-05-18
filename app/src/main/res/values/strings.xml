@@ -28,4 +28,7 @@
     <string name="account_register_button">Register</string>
     <string name="logout_menu_item">Logout</string>
     <string name="order_id">Order ID: %1$s</string>
+    <string name="edit_meal_description_hint">Description</string>
+    <string name="edit_meal_name_hint">Name</string>
+    <string name="edit_meal_price_hint">Price</string>
 </resources>

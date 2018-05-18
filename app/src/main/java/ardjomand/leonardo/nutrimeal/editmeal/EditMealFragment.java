@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -48,11 +48,11 @@ public class EditMealFragment extends Fragment implements
     @BindView(R.id.edit_meal_image)
     ImageView editMealImage;
     @BindView(R.id.edit_meal_name)
-    EditText editMealName;
+    TextInputEditText editMealName;
     @BindView(R.id.edit_meal_description)
-    EditText editMealDescription;
+    TextInputEditText editMealDescription;
     @BindView(R.id.edit_meal_price)
-    EditText editMealPrice;
+    TextInputEditText editMealPrice;
     Unbinder unbinder;
     //endregion
 
