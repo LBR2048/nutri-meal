@@ -142,12 +142,12 @@ public class CartFragment extends Fragment implements CartContract.View {
 
     //region Presenter callbacks
     @Override
-    public void addSelectedMeal(CartMeal cartMeal) {
+    public void addCartMeal(CartMeal cartMeal) {
         adapter.addData(cartMeal);
     }
 
     @Override
-    public void updateSelectedMeal(CartMeal cartMeal) {
+    public void updateCartMeal(CartMeal cartMeal) {
         adapter.updateData(cartMeal);
     }
 

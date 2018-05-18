@@ -45,12 +45,12 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     @Override
     public void onSelectedMealAdded(CartMeal cartMeal) {
         Log.i(TAG, "Selected meal " + cartMeal.getName() + " added");
-        view.addSelectedMeal(cartMeal);
+        view.addCartMeal(cartMeal);
     }
 
     @Override
     public void onSelectedMealChanged(CartMeal cartMeal) {
-        view.updateSelectedMeal(cartMeal);
+        view.updateCartMeal(cartMeal);
     }
 
     @Override
