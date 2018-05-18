@@ -100,7 +100,7 @@ public class MealsFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new MealAdapter(new ArrayList<Meal>(), this);
+        adapter = new MealAdapter(new ArrayList<Meal>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration
