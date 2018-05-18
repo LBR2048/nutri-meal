@@ -3,6 +3,7 @@ package ardjomand.leonardo.nutrimeal.meals;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,8 @@ public class MealsFragment extends Fragment implements
     Button button;
     @BindView(R.id.list)
     RecyclerView recyclerView;
+    @BindView(R.id.meals_add_fab)
+    FloatingActionButton addMeal;
     //endregion
 
     //region Member variables
@@ -185,9 +188,17 @@ public class MealsFragment extends Fragment implements
         }
     }
 
-    @OnClick(R.id.button)
-    public void onViewClicked() {
-        mListener.onGoToCartClicked();
+    @OnClick({R.id.button, R.id.meals_add_fab})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.button:
+                mListener.onGoToCartClicked();
+                break;
+
+            case R.id.meals_add_fab:
+                Toast.makeText(getContext(), "Add meal", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     @Override
