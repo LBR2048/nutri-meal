@@ -163,6 +163,11 @@ public class MealsFragment extends Fragment implements
     }
 
     @Override
+    public void updateMeal(Meal meal) {
+        adapter.updateData(meal);
+    }
+
+    @Override
     public void showEmptyMeals() {
         Toast.makeText(getActivity(), "No meals available", Toast.LENGTH_SHORT).show();
     }

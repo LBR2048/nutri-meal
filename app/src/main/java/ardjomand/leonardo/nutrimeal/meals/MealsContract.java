@@ -10,6 +10,8 @@ interface MealsContract {
 
         void addMeal(Meal meal);
 
+        void updateMeal(Meal meal);
+
         void showEmptyMeals();
 
         void showError();

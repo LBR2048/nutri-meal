@@ -93,6 +93,12 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         return mMeals.size();
     }
 
+    public void updateData(Meal meal) {
+        int index = getIndexForKey(meal.getKey());
+        mMeals.set(index, meal);
+        notifyItemChanged(index);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
         final ImageView mImageView;
@@ -133,5 +139,18 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
     public interface OnMealAdapterInteractionListener {
         void onMealClicked(Meal item);
+    }
+
+    // TODO move to Utils class using generic type
+    private int getIndexForKey(String key) {
+        int index = 0;
+        for (Meal meal : mMeals) {
+            if (meal.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
     }
 }

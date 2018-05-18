@@ -28,21 +28,24 @@ public class MealRepositoryImpl implements MealRepository.Repository {
 
     @Override
     public void subscribeForMealUpdates() {
-
         if (mealsEventListener == null) {
             mealsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                    meal.setKey(dataSnapshot.getKey());
-                    presenter.onMealAdded(meal);
+                    if (meal != null) {
+                        meal.setKey(dataSnapshot.getKey());
+                        presenter.onMealAdded(meal);
+                    }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                    meal.setKey(dataSnapshot.getKey());
-                    presenter.onMealChanged(meal);
+                    if (meal != null) {
+                        meal.setKey(dataSnapshot.getKey());
+                        presenter.onMealChanged(meal);
+                    }
                 }
 
                 @Override

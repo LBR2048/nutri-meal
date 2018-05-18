@@ -57,6 +57,7 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     @Override
     public void onMealChanged(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " changed");
+        view.updateMeal(meal);
     }
 
     @Override
