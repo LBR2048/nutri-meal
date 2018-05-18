@@ -151,6 +151,11 @@ public class OrdersFragment extends Fragment implements
     }
 
     @Override
+    public void updateOrder(Order order) {
+        adapter.updateData(order);
+    }
+
+    @Override
     public void showEmptyOrder() {
         Toast.makeText(getActivity(), "Cart is empty", Toast.LENGTH_SHORT).show();
     }

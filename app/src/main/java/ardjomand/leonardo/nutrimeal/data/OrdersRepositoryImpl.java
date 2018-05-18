@@ -45,15 +45,19 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Order order = dataSnapshot.getValue(Order.class);
-                    order.setKey(dataSnapshot.getKey());
-                    presenter.onOrderAdded(order);
+                    if (order != null) {
+                        order.setKey(dataSnapshot.getKey());
+                        presenter.onOrderAdded(order);
+                    }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     Order order = dataSnapshot.getValue(Order.class);
-                    order.setKey(dataSnapshot.getKey());
-                    presenter.onOrderChanged(order);
+                    if (order != null) {
+                        order.setKey(dataSnapshot.getKey());
+                        presenter.onOrderChanged(order);
+                    }
                 }
 
                 @Override

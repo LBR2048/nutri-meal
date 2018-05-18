@@ -35,7 +35,7 @@ public class OrdersPresenter implements OrdersContract.Presenter, OrdersReposito
 
     @Override
     public void onOrderChanged(Order order) {
-
+        view.updateOrder(order);
     }
 
     @Override

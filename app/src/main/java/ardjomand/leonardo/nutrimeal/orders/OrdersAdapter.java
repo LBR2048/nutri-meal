@@ -84,6 +84,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public void updateData(Order order) {
+        int index = getIndexForKey(order.getKey());
+        mItems.set(index, order);
+        notifyItemChanged(index);
+    }
+
     public interface OnMealAdapterInteractionListener {
         void onOrderClicked(Order item);
     }
@@ -107,5 +113,17 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         public String toString() {
             return super.toString() + " '" + mDeliveryStatus.getText() + "'";
         }
+    }
+
+    private int getIndexForKey(String key) {
+        int index = 0;
+        for (Order order : mItems) {
+            if (order.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
     }
 }
