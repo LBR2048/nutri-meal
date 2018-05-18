@@ -2,7 +2,6 @@ package ardjomand.leonardo.nutrimeal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,16 +52,6 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(EDIT_MEAL_FRAGMENT_TAG);
-        if (fragment != null && fragment.isVisible()) {
-            EditMealFragment editMealFragment = (EditMealFragment) fragment;
-            editMealFragment.updateMeal();
-        }
-        super.onBackPressed();
     }
 
     @Override

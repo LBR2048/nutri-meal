@@ -21,14 +21,6 @@ public class Meal {
         this.available = available;
     }
 
-    public Meal(String name, String description, String imagePath, long unitPrice, boolean available) {
-        this.name = name;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.unitPrice = unitPrice;
-        this.available = available;
-    }
-
     public String getKey() {
         return key;
     }

@@ -1,5 +1,7 @@
 package ardjomand.leonardo.nutrimeal.editmeal;
 
+import android.net.Uri;
+
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractor;
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractorImpl;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
@@ -19,8 +21,13 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     }
 
     @Override
-    public void getMeal(String key) {
-        interactor.getMeal(key);
+    public void subscribeForMealUpdates(String key) {
+        interactor.subscribeForMealUpdates(key);
+    }
+
+    @Override
+    public void unsubscribeFromMealUpdates() {
+        interactor.unsubscribeFromMealUpdates();
     }
 
     @Override
@@ -29,7 +36,15 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     }
 
     @Override
+    public void updateMealImage(String key, Uri imageUri) {
+        interactor.updateMealImage(key, imageUri);
+    }
+
+    @Override
     public void showMeal(Meal meal) {
-        view.showMeal(meal);
+        if (view != null) {
+            view.showMeal(meal);
+            view.showMealImage(meal.getImagePath());
+        }
     }
 }
