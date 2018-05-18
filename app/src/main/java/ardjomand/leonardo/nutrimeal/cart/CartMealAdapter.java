@@ -1,11 +1,20 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
 import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -20,6 +29,7 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  */
 public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHolder> {
 
+    public static final String TAG = CartMealAdapter.class.getSimpleName();
     private final Context mContext;
     private final CartFragment.OnOrderedMealFragmentInteractionListener mListener;
     private List<CartMeal> mValues;
@@ -40,7 +50,26 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mImageView.setText(mValues.get(position).getImagePath());
+
+        String imagePath = mValues.get(position).getImagePath();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            FirebaseStorage.getInstance().getReferenceFromUrl(imagePath).getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if (uri != null) {
+                                Glide.with(mContext).load(uri).into(holder.mImageView);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Log.e(TAG, exception.getMessage());
+                        }
+                    });
+        }
+
         holder.mNameView.setText(mValues.get(position).getName());
         holder.mDescriptionView.setText(mValues.get(position).getDescription());
 
@@ -84,7 +113,7 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mImageView;
+        public final ImageView mImageView;
         public final TextView mNameView;
         public final TextView mDescriptionView;
         public final TextView mPriceView;
@@ -93,7 +122,7 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mImageView = view.findViewById(R.id.meal_imagePath);
+            mImageView = view.findViewById(R.id.meal_image);
             mNameView = view.findViewById(R.id.meal_name);
             mDescriptionView = view.findViewById(R.id.meal_description);
             mPriceView = view.findViewById(R.id.meal_price);
@@ -101,7 +130,7 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mImageView.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + "'";
         }
     }
 }
