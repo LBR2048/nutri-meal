@@ -8,6 +8,8 @@ interface CartContract {
 
         void addSelectedMeal(CartMeal meal);
 
+        void updateSelectedMeal(CartMeal meal);
+
         void showEmptyMeals();
 
         void showError();

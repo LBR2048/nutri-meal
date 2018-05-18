@@ -35,17 +35,24 @@ public class CartRepositoryImpl implements CartRepository.Repository {
 
     @Override
     public void subscribeForCartUpdates() {
-
         if (cartEventListener == null) {
             cartEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    presenter.onSelectedMealAdded(dataSnapshot.getValue(CartMeal.class));
+                    CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
+                    if (cartMeal != null) {
+                        cartMeal.setKey(dataSnapshot.getKey());
+                        presenter.onSelectedMealAdded(cartMeal);
+                    }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    presenter.onSelectedMealChanged(dataSnapshot.getValue(CartMeal.class));
+                    CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
+                    if (cartMeal != null) {
+                        cartMeal.setKey(dataSnapshot.getKey());
+                        presenter.onSelectedMealChanged(cartMeal);
+                    }
                 }
 
                 @Override
@@ -60,7 +67,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    Log.e(TAG, databaseError.getMessage());
                 }
             };
             customerCartRef.addChildEventListener(cartEventListener);

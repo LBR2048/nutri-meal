@@ -54,7 +54,7 @@ public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
 
                 } else {
                     // If no, copy meal from menu to cart, set quantity to 1 and set total amount
-                    CartMeal cartMeal = new CartMeal(meal.getName(), meal.getDescription(),
+                    CartMeal cartMeal = new CartMeal(meal.getKey(), meal.getName(), meal.getDescription(),
                             meal.getImagePath(), meal.getUnitPrice(), 1);
                     customerCartRef.child(NODE_MEALS).child(meal.getKey()).setValue(cartMeal);
                     increaseAmount(meal.getUnitPrice());

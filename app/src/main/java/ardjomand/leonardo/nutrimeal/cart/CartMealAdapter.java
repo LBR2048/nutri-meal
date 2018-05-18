@@ -111,6 +111,12 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public void updateData(CartMeal cartMeal) {
+        int index = getIndexForKey(cartMeal.getKey());
+        mValues.set(index, cartMeal);
+        notifyItemChanged(index);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final ImageView mImageView;
@@ -132,5 +138,17 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         public String toString() {
             return super.toString() + " '" + mNameView.getText() + "'";
         }
+    }
+
+    private int getIndexForKey(String key) {
+        int index = 0;
+        for (CartMeal cartMeal : mValues) {
+            if (cartMeal.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
     }
 }

@@ -50,7 +50,7 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
 
     @Override
     public void onSelectedMealChanged(CartMeal cartMeal) {
-
+        view.updateSelectedMeal(cartMeal);
     }
 
     @Override

@@ -147,6 +147,11 @@ public class CartFragment extends Fragment implements CartContract.View {
     }
 
     @Override
+    public void updateSelectedMeal(CartMeal cartMeal) {
+        adapter.updateData(cartMeal);
+    }
+
+    @Override
     public void showEmptyMeals() {
         Toast.makeText(getActivity(), "No meals available in cart", Toast.LENGTH_SHORT).show();
     }
