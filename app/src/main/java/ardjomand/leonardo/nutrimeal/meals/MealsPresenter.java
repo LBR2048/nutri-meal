@@ -38,8 +38,14 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     }
 
     @Override
-    public void editMeal(Meal meal) {
-        view.goToEditMeal(meal);
+    public void editMeal(String key) {
+        view.goToEditMeal(key);
+    }
+
+    @Override
+    public void createNewMeal() {
+        String key = repository.createMeal();
+        view.goToEditMeal(key);
     }
 
     @Override

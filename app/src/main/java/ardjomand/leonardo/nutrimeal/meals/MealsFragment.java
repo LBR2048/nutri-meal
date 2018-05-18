@@ -173,8 +173,8 @@ public class MealsFragment extends Fragment implements
     }
 
     @Override
-    public void goToEditMeal(Meal meal) {
-        mListener.onEditMealClicked(meal);
+    public void goToEditMeal(String key) {
+        mListener.onEditMealClicked(key);
     }
 
     //endregion
@@ -196,7 +196,7 @@ public class MealsFragment extends Fragment implements
                 break;
 
             case R.id.meals_add_fab:
-                Toast.makeText(getContext(), "Add meal", Toast.LENGTH_SHORT).show();
+                presenter.createNewMeal();
                 break;
         }
     }
@@ -204,7 +204,7 @@ public class MealsFragment extends Fragment implements
     @Override
     public void onMealClicked(Meal meal) {
         if (BuildConfig.FLAVOR.equals("company")) {
-            presenter.editMeal(meal);
+            presenter.editMeal(meal.getKey());
         } else {
             presenter.addMealToCart(meal);
             // TODO only show toast if meal was successfully added to cart
@@ -213,7 +213,7 @@ public class MealsFragment extends Fragment implements
     }
 
     public interface OnMealFragmentInteractionListener {
-        void onEditMealClicked(Meal item);
+        void onEditMealClicked(String key);
         void onGoToCartClicked();
     }
 }

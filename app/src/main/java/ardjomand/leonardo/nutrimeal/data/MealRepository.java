@@ -9,6 +9,8 @@ public interface MealRepository {
         void subscribeForMealUpdates();
 
         void unsubscribeFromMealUpdates();
+
+        String createMeal();
     }
 
     interface Presenter {

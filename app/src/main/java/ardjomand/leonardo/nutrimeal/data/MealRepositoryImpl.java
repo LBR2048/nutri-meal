@@ -73,4 +73,10 @@ public class MealRepositoryImpl implements MealRepository.Repository {
             Log.i(TAG, "Unsubscribing from meal updates");
         }
     }
+
+    @Override
+    public String createMeal() {
+        DatabaseReference newMealRef = mealsRef.push();
+        return newMealRef.getKey();
+    }
 }

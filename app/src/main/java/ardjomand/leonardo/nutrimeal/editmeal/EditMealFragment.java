@@ -209,9 +209,18 @@ public class EditMealFragment extends Fragment implements
     }
 
     public void updateMeal() {
-        Meal updatedMeal = new Meal(key, editMealName.getText().toString(),
-                editMealDescription.getText().toString(), "",
-                Long.parseLong(editMealPrice.getText().toString()), true);
+        String name = editMealName.getText().toString();
+        String description = editMealDescription.getText().toString();
+        String unitPriceString = editMealPrice.getText().toString();
+
+        long unitPrice;
+        if (!unitPriceString.isEmpty()) {
+            unitPrice = Long.parseLong(unitPriceString);
+        } else {
+            unitPrice = 0;
+        }
+
+        Meal updatedMeal = new Meal(key, name, description, "", unitPrice, true);
         presenter.updateMeal(updatedMeal);
     }
 
@@ -220,10 +229,6 @@ public class EditMealFragment extends Fragment implements
         Toast.makeText(getContext(), "Image clicked", Toast.LENGTH_SHORT).show();
 
         pickPhotoFromGallery();
-
-        // TODO show image picker
-
-        // TODO on success, send image to firebase
     }
 
     @OnFocusChange({R.id.edit_meal_name, R.id.edit_meal_description, R.id.edit_meal_price})

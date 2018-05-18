@@ -13,7 +13,6 @@ import ardjomand.leonardo.nutrimeal.auth.AuthActivity;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
 import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
 
@@ -55,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onEditMealClicked(Meal meal) {
+    public void onEditMealClicked(String key) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, EditMealFragment.newInstance(meal.getKey(), "b"), EDIT_MEAL_FRAGMENT_TAG)
+                .replace(R.id.fragment_container, EditMealFragment.newInstance(key, "b"), EDIT_MEAL_FRAGMENT_TAG)
                 .addToBackStack(null)
                 .commit();
     }

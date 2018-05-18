@@ -40,8 +40,10 @@ public class EditMealInteractorImpl implements EditMealInteractor.Interactor {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                    meal.setKey(dataSnapshot.getKey());
-                    presenter.showMeal(meal);
+                    if (meal != null) {
+                        meal.setKey(dataSnapshot.getKey());
+                        presenter.showMeal(meal);
+                    }
                 }
 
                 @Override
