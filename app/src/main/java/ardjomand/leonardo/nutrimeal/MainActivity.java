@@ -72,6 +72,19 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onGoToOrdersClicked() {
+        if (BuildConfig.FLAVOR.equals("company")) {
+
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, OrdersFragment.newInstance(1))
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    @Override
     public void onOrderedMealClicked(CartMeal cartMeal) {
         Toast.makeText(this, "Edit " + cartMeal.getName() + " quantity", Toast.LENGTH_SHORT).show();
     }
