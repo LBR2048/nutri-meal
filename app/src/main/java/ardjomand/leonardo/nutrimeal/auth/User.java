@@ -2,6 +2,7 @@ package ardjomand.leonardo.nutrimeal.auth;
 
 public class User {
 
+    private String key;
     private String name;
     private String email;
     private String type;
@@ -14,6 +15,14 @@ public class User {
         this.name = name;
         this.email = email;
         this.type = type;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {

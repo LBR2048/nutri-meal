@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import ardjomand.leonardo.nutrimeal.auth.AuthActivity;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersFragment;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
 import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
@@ -74,7 +75,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onGoToOrdersClicked() {
         if (BuildConfig.FLAVOR.equals("company")) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, CompanyOrdersFragment.newInstance(1))
+                    .addToBackStack(null)
+                    .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
