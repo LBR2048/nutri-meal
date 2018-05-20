@@ -59,7 +59,14 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<String, CartMeal> pair : mealsMap.entrySet()) {
             CartMeal cartMeal = pair.getValue();
-            builder.append(cartMeal.getName());
+
+            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+            String formattedUnitPrice = currencyFormat.format(cartMeal.getUnitPrice());
+            String formattedTotalPrice = currencyFormat.format(cartMeal.getTotalPrice());
+            String cartMealText = mContext.getString(R.string.orders_cart_meal_price,
+                    cartMeal.getName(), cartMeal.getQuantity(), formattedUnitPrice, formattedTotalPrice);
+
+            builder.append(cartMealText);
             builder.append("\n");
         }
         holder.mMealsView.setText(builder.toString().trim());

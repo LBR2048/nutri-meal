@@ -74,10 +74,11 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         holder.mDescriptionView.setText(mValues.get(position).getDescription());
 
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
-        String formattedUnitPRice = currencyFormat.format(mValues.get(position).getUnitPrice());
+        String formattedUnitPrice = currencyFormat.format(mValues.get(position).getUnitPrice());
         String formattedTotalPrice = currencyFormat.format(mValues.get(position).getTotalPrice());
-        holder.mPriceView.setText(mContext.getString(R.string.cart_meal_price,
-                holder.mItem.getQuantity(), formattedUnitPRice, formattedTotalPrice));
+        String cartMealText = mContext.getString(R.string.cart_meal_price,
+                holder.mItem.getQuantity(), formattedUnitPrice, formattedTotalPrice);
+        holder.mPriceView.setText(cartMealText);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
