@@ -15,7 +15,7 @@ import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrdersFragment;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
-import ardjomand.leonardo.nutrimeal.users.UsersFragment;
+import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
 
 public class MainActivity extends AppCompatActivity implements
         MealsFragment.OnMealFragmentInteractionListener,
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements
         if (BuildConfig.FLAVOR.equals("company")) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, UsersFragment.newInstance(1))
+                    .replace(R.id.fragment_container, OrdersFragment.newInstance(1))
                     .addToBackStack(null)
                     .commit();
         } else {

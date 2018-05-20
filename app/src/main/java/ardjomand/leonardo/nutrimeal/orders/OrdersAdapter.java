@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.customerorders;
+package ardjomand.leonardo.nutrimeal.orders;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.customerorders.Order;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
@@ -19,13 +20,13 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  * {@link RecyclerView.Adapter} that can display a {@link Meal} and makes a call to the
  * specified {@link OnMealFragmentInteractionListener}.
  */
-public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAdapter.ViewHolder> {
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
 
     private final OnMealAdapterInteractionListener mListener;
     private final Context mContext;
     private List<Order> mItems;
 
-    public CustomerOrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener, Context context) {
+    public OrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener, Context context) {
         mContext = context;
         mItems = orders;
         mListener = listener;
@@ -35,7 +36,7 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_customer_order, parent, false);
+                .inflate(R.layout.item_order, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,6 +45,7 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
         holder.mItem = mItems.get(position);
 
         holder.mIdView.setText(mContext.getString(R.string.order_id, holder.mItem.getKey()));
+        holder.mCustomerView.setText(holder.mItem.getCustomerKey());
 
         holder.mDeliveryStatus.setText(mItems.get(position).isDelivered()
                 ? mContext.getString(R.string.order_delivered)
@@ -90,31 +92,6 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
         notifyItemChanged(index);
     }
 
-    public interface OnMealAdapterInteractionListener {
-        void onOrderClicked(Order item);
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        final View mView;
-        final TextView mIdView;
-        final TextView mDeliveryStatus;
-        final TextView mAmountView;
-        Order mItem;
-
-        ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = view.findViewById(R.id.order_id);
-            mDeliveryStatus = view.findViewById(R.id.order_delivery_status);
-            mAmountView = view.findViewById(R.id.order_amount);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mDeliveryStatus.getText() + "'";
-        }
-    }
-
     private int getIndexForKey(String key) {
         int index = 0;
         for (Order order : mItems) {
@@ -125,5 +102,32 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
             }
         }
         throw new IllegalArgumentException("Key not found");
+    }
+
+    public interface OnMealAdapterInteractionListener {
+        void onOrderClicked(Order item);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final TextView mIdView;
+        final TextView mCustomerView;
+        final TextView mDeliveryStatus;
+        final TextView mAmountView;
+        Order mItem;
+
+        ViewHolder(View view) {
+            super(view);
+            mView = view;
+            mIdView = view.findViewById(R.id.order_id);
+            mCustomerView = view.findViewById(R.id.order_customer);
+            mDeliveryStatus = view.findViewById(R.id.order_delivery_status);
+            mAmountView = view.findViewById(R.id.order_amount);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + mDeliveryStatus.getText() + "'";
+        }
     }
 }
