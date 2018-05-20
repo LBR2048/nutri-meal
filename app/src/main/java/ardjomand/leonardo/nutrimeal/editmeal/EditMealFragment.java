@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -159,7 +160,10 @@ public class EditMealFragment extends Fragment implements
                         @Override
                         public void onSuccess(Uri uri) {
                             if (uri != null) {
-                                Glide.with(getContext()).load(uri).into(editMealImage);
+                                Glide.with(getContext())
+                                        .load(uri)
+                                        .apply(RequestOptions.fitCenterTransform().fallback(R.mipmap.ic_launcher))
+                                        .into(editMealImage);
                             }
                         }
                     })

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,7 +59,10 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
                         @Override
                         public void onSuccess(Uri uri) {
                             if (uri != null) {
-                                Glide.with(mContext).load(uri).into(holder.mImageView);
+                                Glide.with(mContext)
+                                        .load(uri)
+                                        .apply(RequestOptions.fitCenterTransform().fallback(R.mipmap.ic_launcher))
+                                        .into(holder.mImageView);
                             }
                         }
                     })
