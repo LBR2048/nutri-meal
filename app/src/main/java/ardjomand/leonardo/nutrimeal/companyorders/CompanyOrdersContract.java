@@ -1,13 +1,13 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.companyorders;
 
 
-interface OrdersContract {
+interface CompanyOrdersContract {
 
     interface View {
 
-        void addOrder(Order order);
+        void addOrder(CompanyOrder companyOrder);
 
-        void updateOrder(Order order);
+        void updateOrder(CompanyOrder companyOrder);
 
         void showEmptyOrder();
 

@@ -10,23 +10,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.orders.Order;
-import ardjomand.leonardo.nutrimeal.orders.OrdersPresenter;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersPresenter;
 
-public class OrdersRepositoryImpl implements OrdersRepository.Repository {
+public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repository {
 
-    public static final String TAG = OrdersRepositoryImpl.class.getSimpleName();
+    public static final String TAG = CompanyOrdersRepositoryImpl.class.getSimpleName();
     public static final String NODE_ORDERS = "orders";
     public static final String NODE_MEALS = "meals";
 
     // TODO add current order ID
     private final String orderId = "order1";
 
-    private OrdersPresenter presenter;
+    private CompanyOrdersPresenter presenter;
     private DatabaseReference ordersRef;
     private ChildEventListener ordersEventListener;
 
-    public OrdersRepositoryImpl(OrdersPresenter presenter) {
+    public CompanyOrdersRepositoryImpl(CompanyOrdersPresenter presenter) {
         this.presenter = presenter;
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -43,19 +43,19 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
             ordersEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Order order = dataSnapshot.getValue(Order.class);
-                    if (order != null) {
-                        order.setKey(dataSnapshot.getKey());
-                        presenter.onOrderAdded(order);
+                    CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
+                    if (companyOrder != null) {
+                        companyOrder.setKey(dataSnapshot.getKey());
+                        presenter.onOrderAdded(companyOrder);
                     }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    Order order = dataSnapshot.getValue(Order.class);
-                    if (order != null) {
-                        order.setKey(dataSnapshot.getKey());
-                        presenter.onOrderChanged(order);
+                    CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
+                    if (companyOrder != null) {
+                        companyOrder.setKey(dataSnapshot.getKey());
+                        presenter.onOrderChanged(companyOrder);
                     }
                 }
 

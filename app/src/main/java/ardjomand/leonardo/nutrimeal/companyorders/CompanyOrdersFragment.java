@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.companyorders;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -29,9 +29,9 @@ import butterknife.Unbinder;
  * Activities containing this fragment MUST implement the {@link OnOrdersFragmentInteractionListener}
  * interface.
  */
-public class OrdersFragment extends Fragment implements
-        OrdersContract.View,
-        OrdersAdapter.OnMealAdapterInteractionListener {
+public class CompanyOrdersFragment extends Fragment implements
+        CompanyOrdersContract.View,
+        CompanyOrdersAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -44,8 +44,8 @@ public class OrdersFragment extends Fragment implements
     private int mColumnCount = 1;
     private OnOrdersFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private OrdersPresenter presenter;
-    private OrdersAdapter adapter;
+    private CompanyOrdersPresenter presenter;
+    private CompanyOrdersAdapter adapter;
     //endregion
 
     //region Constructors
@@ -53,12 +53,12 @@ public class OrdersFragment extends Fragment implements
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public OrdersFragment() {
+    public CompanyOrdersFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static OrdersFragment newInstance(int columnCount) {
-        OrdersFragment fragment = new OrdersFragment();
+    public static CompanyOrdersFragment newInstance(int columnCount) {
+        CompanyOrdersFragment fragment = new CompanyOrdersFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -75,7 +75,7 @@ public class OrdersFragment extends Fragment implements
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        presenter = new OrdersPresenter(this);
+        presenter = new CompanyOrdersPresenter(this);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class OrdersFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new OrdersAdapter(new ArrayList<Order>(), this, getContext());
+        adapter = new CompanyOrdersAdapter(new ArrayList<CompanyOrder>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration
@@ -146,13 +146,13 @@ public class OrdersFragment extends Fragment implements
 
     //region Presenter callbacks
     @Override
-    public void addOrder(Order order) {
-        adapter.addData(order);
+    public void addOrder(CompanyOrder companyOrder) {
+        adapter.addData(companyOrder);
     }
 
     @Override
-    public void updateOrder(Order order) {
-        adapter.updateData(order);
+    public void updateOrder(CompanyOrder companyOrder) {
+        adapter.updateData(companyOrder);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class OrdersFragment extends Fragment implements
     }
 
     @Override
-    public void onOrderClicked(Order order) {
+    public void onOrderClicked(CompanyOrder companyOrder) {
 //        presenter.addMealToCart(meal);
     }
 

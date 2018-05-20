@@ -1,8 +1,8 @@
 package ardjomand.leonardo.nutrimeal.data;
 
-import ardjomand.leonardo.nutrimeal.orders.Order;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
 
-public interface OrdersRepository {
+public interface CompanyOrdersRepository {
 
     interface Repository {
 
@@ -13,9 +13,9 @@ public interface OrdersRepository {
 
     interface Presenter {
 
-        void onOrderAdded(Order order);
+        void onOrderAdded(CompanyOrder companyOrder);
 
-        void onOrderChanged(Order order);
+        void onOrderChanged(CompanyOrder companyOrder);
 
         void onOrderRemoved(String key);
     }

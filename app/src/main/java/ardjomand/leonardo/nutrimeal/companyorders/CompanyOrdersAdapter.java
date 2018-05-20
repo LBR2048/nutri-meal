@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.companyorders;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -19,15 +19,15 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  * {@link RecyclerView.Adapter} that can display a {@link Meal} and makes a call to the
  * specified {@link OnMealFragmentInteractionListener}.
  */
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
+public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdapter.ViewHolder> {
 
     private final OnMealAdapterInteractionListener mListener;
     private final Context mContext;
-    private List<Order> mItems;
+    private List<CompanyOrder> mItems;
 
-    public OrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener, Context context) {
+    public CompanyOrdersAdapter(List<CompanyOrder> companyOrders, OnMealAdapterInteractionListener listener, Context context) {
         mContext = context;
-        mItems = orders;
+        mItems = companyOrders;
         mListener = listener;
     }
 
@@ -70,13 +70,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void replaceData(List<Order> orders) {
-        mItems = orders;
+    public void replaceData(List<CompanyOrder> companyOrders) {
+        mItems = companyOrders;
         notifyDataSetChanged();
     }
 
-    public void addData(Order order) {
-        mItems.add(order);
+    public void addData(CompanyOrder companyOrder) {
+        mItems.add(companyOrder);
         notifyItemInserted(mItems.size() - 1);
     }
 
@@ -85,16 +85,16 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
-    public void updateData(Order order) {
-        int index = getIndexForKey(order.getKey());
-        mItems.set(index, order);
+    public void updateData(CompanyOrder companyOrder) {
+        int index = getIndexForKey(companyOrder.getKey());
+        mItems.set(index, companyOrder);
         notifyItemChanged(index);
     }
 
     private int getIndexForKey(String key) {
         int index = 0;
-        for (Order order : mItems) {
-            if (order.getKey().equals(key)) {
+        for (CompanyOrder companyOrder : mItems) {
+            if (companyOrder.getKey().equals(key)) {
                 return index;
             } else {
                 index++;
@@ -104,7 +104,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     public interface OnMealAdapterInteractionListener {
-        void onOrderClicked(Order item);
+        void onOrderClicked(CompanyOrder item);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -113,7 +113,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         final TextView mCustomerView;
         final TextView mDeliveryStatus;
         final TextView mAmountView;
-        Order mItem;
+        CompanyOrder mItem;
 
         ViewHolder(View view) {
             super(view);

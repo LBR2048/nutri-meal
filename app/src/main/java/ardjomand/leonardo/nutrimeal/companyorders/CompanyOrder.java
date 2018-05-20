@@ -1,26 +1,24 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.companyorders;
 
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 
-public class Order {
+public class CompanyOrder {
 
     private String key;
     private boolean delivered;
     private long amount;
     private long deliveryDate;
     private String customerKey;
-//    private List<CartMeal> meals;
 
-    public Order() {
+    public CompanyOrder() {
     }
 
-    public Order(boolean delivered, long amount, long deliveryDate, List<CartMeal> meals) {
+    public CompanyOrder(boolean delivered, long amount, long deliveryDate, List<CartMeal> meals) {
         this.delivered = delivered;
         this.amount = amount;
         this.deliveryDate = deliveryDate;
-//        this.meals = meals;
     }
 
     public String getKey() {
@@ -62,11 +60,4 @@ public class Order {
     public void setCustomerKey(String customerKey) {
         this.customerKey = customerKey;
     }
-//    public List<CartMeal> getMeals() {
-//        return meals;
-//    }
-//
-//    public void setMeals(List<CartMeal> meals) {
-//        this.meals = meals;
-//    }
 }
