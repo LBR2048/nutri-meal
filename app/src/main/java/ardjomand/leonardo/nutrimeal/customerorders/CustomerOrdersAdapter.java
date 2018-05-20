@@ -23,11 +23,11 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
 
     private final OnMealAdapterInteractionListener mListener;
     private final Context mContext;
-    private List<Order> mItems;
+    private List<CustomerOrder> mItems;
 
-    public CustomerOrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener, Context context) {
+    public CustomerOrdersAdapter(List<CustomerOrder> customerOrders, OnMealAdapterInteractionListener listener, Context context) {
         mContext = context;
-        mItems = orders;
+        mItems = customerOrders;
         mListener = listener;
     }
 
@@ -69,13 +69,13 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
         return mItems.size();
     }
 
-    public void replaceData(List<Order> orders) {
-        mItems = orders;
+    public void replaceData(List<CustomerOrder> customerOrders) {
+        mItems = customerOrders;
         notifyDataSetChanged();
     }
 
-    public void addData(Order order) {
-        mItems.add(order);
+    public void addData(CustomerOrder customerOrder) {
+        mItems.add(customerOrder);
         notifyItemInserted(mItems.size() - 1);
     }
 
@@ -84,14 +84,26 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
         notifyDataSetChanged();
     }
 
-    public void updateData(Order order) {
-        int index = getIndexForKey(order.getKey());
-        mItems.set(index, order);
+    public void updateData(CustomerOrder customerOrder) {
+        int index = getIndexForKey(customerOrder.getKey());
+        mItems.set(index, customerOrder);
         notifyItemChanged(index);
     }
 
+    private int getIndexForKey(String key) {
+        int index = 0;
+        for (CustomerOrder customerOrder : mItems) {
+            if (customerOrder.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
+    }
+
     public interface OnMealAdapterInteractionListener {
-        void onOrderClicked(Order item);
+        void onOrderClicked(CustomerOrder item);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -99,7 +111,7 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
         final TextView mIdView;
         final TextView mDeliveryStatus;
         final TextView mAmountView;
-        Order mItem;
+        CustomerOrder mItem;
 
         ViewHolder(View view) {
             super(view);
@@ -113,17 +125,5 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
         public String toString() {
             return super.toString() + " '" + mDeliveryStatus.getText() + "'";
         }
-    }
-
-    private int getIndexForKey(String key) {
-        int index = 0;
-        for (Order order : mItems) {
-            if (order.getKey().equals(key)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        throw new IllegalArgumentException("Key not found");
     }
 }

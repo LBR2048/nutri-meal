@@ -10,8 +10,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrdersPresenter;
-import ardjomand.leonardo.nutrimeal.customerorders.Order;
 
 public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Repository {
 
@@ -44,19 +44,19 @@ public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Re
             ordersEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Order order = dataSnapshot.getValue(Order.class);
-                    if (order != null) {
-                        order.setKey(dataSnapshot.getKey());
-                        presenter.onOrderAdded(order);
+                    CustomerOrder customerOrder = dataSnapshot.getValue(CustomerOrder.class);
+                    if (customerOrder != null) {
+                        customerOrder.setKey(dataSnapshot.getKey());
+                        presenter.onOrderAdded(customerOrder);
                     }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    Order order = dataSnapshot.getValue(Order.class);
-                    if (order != null) {
-                        order.setKey(dataSnapshot.getKey());
-                        presenter.onOrderChanged(order);
+                    CustomerOrder customerOrder = dataSnapshot.getValue(CustomerOrder.class);
+                    if (customerOrder != null) {
+                        customerOrder.setKey(dataSnapshot.getKey());
+                        presenter.onOrderChanged(customerOrder);
                     }
                 }
 

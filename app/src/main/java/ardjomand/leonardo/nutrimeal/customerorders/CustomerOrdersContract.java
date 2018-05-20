@@ -4,9 +4,9 @@ interface CustomerOrdersContract {
 
     interface View {
 
-        void addOrder(Order order);
+        void addOrder(CustomerOrder customerOrder);
 
-        void updateOrder(Order order);
+        void updateOrder(CustomerOrder customerOrder);
 
         void showEmptyOrder();
 

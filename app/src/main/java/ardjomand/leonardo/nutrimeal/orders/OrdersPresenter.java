@@ -2,14 +2,13 @@ package ardjomand.leonardo.nutrimeal.orders;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.customerorders.Order;
-import ardjomand.leonardo.nutrimeal.data.CustomerOrdersRepository;
+import ardjomand.leonardo.nutrimeal.data.OrdersRepository;
 import ardjomand.leonardo.nutrimeal.data.OrdersRepositoryImpl;
 
-public class OrdersPresenter implements OrdersContract.Presenter, CustomerOrdersRepository.Presenter {
+public class OrdersPresenter implements OrdersContract.Presenter, OrdersRepository.Presenter {
 
     public static final String TAG = OrdersPresenter.class.getSimpleName();
-    private final CustomerOrdersRepository.Repository repository;
+    private final OrdersRepository.Repository repository;
     private OrdersContract.View view;
 
     public OrdersPresenter(OrdersContract.View view) {

@@ -95,7 +95,7 @@ public class CustomerOrdersFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new CustomerOrdersAdapter(new ArrayList<Order>(), this, getContext());
+        adapter = new CustomerOrdersAdapter(new ArrayList<CustomerOrder>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration
@@ -146,13 +146,13 @@ public class CustomerOrdersFragment extends Fragment implements
 
     //region Presenter callbacks
     @Override
-    public void addOrder(Order order) {
-        adapter.addData(order);
+    public void addOrder(CustomerOrder customerOrder) {
+        adapter.addData(customerOrder);
     }
 
     @Override
-    public void updateOrder(Order order) {
-        adapter.updateData(order);
+    public void updateOrder(CustomerOrder customerOrder) {
+        adapter.updateData(customerOrder);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class CustomerOrdersFragment extends Fragment implements
     }
 
     @Override
-    public void onOrderClicked(Order order) {
+    public void onOrderClicked(CustomerOrder customerOrder) {
 //        presenter.addMealToCart(meal);
     }
 

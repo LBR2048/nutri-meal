@@ -4,7 +4,7 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 
-public class Order {
+public class CustomerOrder {
 
     private String key;
     private boolean delivered;
@@ -13,10 +13,10 @@ public class Order {
     private String customerKey;
 //    private List<CartMeal> meals;
 
-    public Order() {
+    public CustomerOrder() {
     }
 
-    public Order(boolean delivered, long amount, long deliveryDate, List<CartMeal> meals) {
+    public CustomerOrder(boolean delivered, long amount, long deliveryDate, List<CartMeal> meals) {
         this.delivered = delivered;
         this.amount = amount;
         this.deliveryDate = deliveryDate;

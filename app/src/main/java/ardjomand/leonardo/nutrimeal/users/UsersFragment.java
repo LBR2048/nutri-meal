@@ -162,11 +162,11 @@ public class UsersFragment extends Fragment implements
     }
 
 //    @Override
-//    public void addOrder(Order order) {
+//    public void addOrder(CustomerOrder order) {
 //    }
 //
 //    @Override
-//    public void updateOrder(Order order) {
+//    public void updateOrder(CustomerOrder order) {
 //        adapter.updateData(order);
 //    }
 //

@@ -27,14 +27,14 @@ public class CustomerOrdersPresenter implements CustomerOrdersContract.Presenter
     }
 
     @Override
-    public void onOrderAdded(Order order) {
-        Log.i(TAG, "Order " + order.toString() + " added");
-        view.addOrder(order);
+    public void onOrderAdded(CustomerOrder customerOrder) {
+        Log.i(TAG, "CustomerOrder " + customerOrder.toString() + " added");
+        view.addOrder(customerOrder);
     }
 
     @Override
-    public void onOrderChanged(Order order) {
-        view.updateOrder(order);
+    public void onOrderChanged(CustomerOrder customerOrder) {
+        view.updateOrder(customerOrder);
     }
 
     @Override

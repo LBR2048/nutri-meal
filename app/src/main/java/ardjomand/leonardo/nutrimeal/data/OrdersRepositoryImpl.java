@@ -10,10 +10,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.customerorders.Order;
+import ardjomand.leonardo.nutrimeal.orders.Order;
 import ardjomand.leonardo.nutrimeal.orders.OrdersPresenter;
 
-public class OrdersRepositoryImpl implements CustomerOrdersRepository.Repository {
+public class OrdersRepositoryImpl implements OrdersRepository.Repository {
 
     public static final String TAG = OrdersRepositoryImpl.class.getSimpleName();
     public static final String NODE_ORDERS = "orders";

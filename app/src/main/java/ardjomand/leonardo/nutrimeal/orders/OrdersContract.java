@@ -1,6 +1,5 @@
 package ardjomand.leonardo.nutrimeal.orders;
 
-import ardjomand.leonardo.nutrimeal.customerorders.Order;
 
 interface OrdersContract {
 

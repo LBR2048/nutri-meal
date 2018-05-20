@@ -18,7 +18,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.customerorders.Order;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
