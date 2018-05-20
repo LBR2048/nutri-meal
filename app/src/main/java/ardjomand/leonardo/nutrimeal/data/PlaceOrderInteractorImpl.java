@@ -13,11 +13,13 @@ import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor {
 
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
+    public static final String NODE_ORDERS = "orders";
     public static final String NODE_MEALS = "meals";
     public static final String NODE_CUSTOMER_CART = "customer-cart";
 
     private final CartPresenter cartPresenter;
     private DatabaseReference customerOrdersRef;
+    private DatabaseReference ordersRef;
     private DatabaseReference customerCartRef;
 
     public PlaceOrderInteractorImpl(CartPresenter presenter) {
@@ -28,6 +30,9 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
             customerOrdersRef = FirebaseDatabase.getInstance().getReference()
                     .child(NODE_CUSTOMER_ORDERS)
                     .child(firebaseUser.getUid());
+
+            ordersRef = FirebaseDatabase.getInstance().getReference()
+                    .child(NODE_ORDERS);
 
             customerCartRef = FirebaseDatabase.getInstance().getReference()
                     .child(NODE_CUSTOMER_CART)
@@ -45,17 +50,8 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object value = dataSnapshot.getValue();
 
-                // Push order to Firebase
-                DatabaseReference orderRef = customerOrdersRef.push();
-                orderRef.setValue(value);
-
-                // Fill in missing properties
-                orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
-                orderRef.child("delivered").setValue(false);
-                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                if (firebaseUser != null) {
-                    orderRef.child("customerKey").setValue(firebaseUser.getUid());
-                }
+                placeOrderInCustomerOrders(value);
+                placeOrderInOrders(value);
 
                 // Delete cart contents
                 customerCartRef.removeValue();
@@ -68,6 +64,32 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
         };
 
         customerCartRef.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    private void placeOrderInCustomerOrders(Object value) {
+        DatabaseReference orderRef = customerOrdersRef.push();
+        orderRef.setValue(value);
+
+        // Fill in missing properties
+        orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
+        orderRef.child("delivered").setValue(false);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            orderRef.child("customerKey").setValue(firebaseUser.getUid());
+        }
+    }
+
+    private void placeOrderInOrders(Object value) {
+        DatabaseReference orderRef = ordersRef.push();
+        orderRef.setValue(value);
+
+        // Fill in missing properties
+        orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
+        orderRef.child("delivered").setValue(false);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            orderRef.child("customerKey").setValue(firebaseUser.getUid());
+        }
     }
 
 }
