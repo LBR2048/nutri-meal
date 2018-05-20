@@ -12,10 +12,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import ardjomand.leonardo.nutrimeal.auth.AuthActivity;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersFragment;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
 import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
+import ardjomand.leonardo.nutrimeal.users.UsersFragment;
 
 public class MainActivity extends AppCompatActivity implements
         MealsFragment.OnMealFragmentInteractionListener,
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements
         if (BuildConfig.FLAVOR.equals("company")) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, CompanyOrdersFragment.newInstance(1))
+                    .replace(R.id.fragment_container, UsersFragment.newInstance(1))
                     .addToBackStack(null)
                     .commit();
         } else {

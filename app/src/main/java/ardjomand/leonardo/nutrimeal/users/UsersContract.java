@@ -1,8 +1,8 @@
-package ardjomand.leonardo.nutrimeal.companyorders;
+package ardjomand.leonardo.nutrimeal.users;
 
 import ardjomand.leonardo.nutrimeal.auth.User;
 
-interface CompanyOrdersContract {
+interface UsersContract {
 
     interface View {
 

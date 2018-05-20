@@ -9,18 +9,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import ardjomand.leonardo.nutrimeal.auth.User;
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersPresenter;
+import ardjomand.leonardo.nutrimeal.users.UsersPresenter;
 
 public class UsersRepositoryImpl implements UsersRepository.Repository {
 
     public static final String TAG = UsersRepositoryImpl.class.getSimpleName();
     public static final String NODE_USERS = "users";
 
-    private CompanyOrdersPresenter presenter;
+    private UsersPresenter presenter;
     private DatabaseReference usersRef;
     private ChildEventListener usersEventListener;
 
-    public UsersRepositoryImpl(CompanyOrdersPresenter presenter) {
+    public UsersRepositoryImpl(UsersPresenter presenter) {
         this.presenter = presenter;
 
         usersRef = FirebaseDatabase.getInstance().getReference().child(NODE_USERS);

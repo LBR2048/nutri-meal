@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.companyorders;
+package ardjomand.leonardo.nutrimeal.users;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -30,9 +30,9 @@ import butterknife.Unbinder;
  * Activities containing this fragment MUST implement the {@link OnOrdersFragmentInteractionListener}
  * interface.
  */
-public class CompanyOrdersFragment extends Fragment implements
-        CompanyOrdersContract.View,
-        CompanyOrdersAdapter.OnMealAdapterInteractionListener {
+public class UsersFragment extends Fragment implements
+        UsersContract.View,
+        UsersAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -45,8 +45,8 @@ public class CompanyOrdersFragment extends Fragment implements
     private int mColumnCount = 1;
     private OnOrdersFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private CompanyOrdersPresenter presenter;
-    private CompanyOrdersAdapter adapter;
+    private UsersPresenter presenter;
+    private UsersAdapter adapter;
     //endregion
 
     //region Constructors
@@ -54,12 +54,12 @@ public class CompanyOrdersFragment extends Fragment implements
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CompanyOrdersFragment() {
+    public UsersFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static CompanyOrdersFragment newInstance(int columnCount) {
-        CompanyOrdersFragment fragment = new CompanyOrdersFragment();
+    public static UsersFragment newInstance(int columnCount) {
+        UsersFragment fragment = new UsersFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -76,7 +76,7 @@ public class CompanyOrdersFragment extends Fragment implements
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        presenter = new CompanyOrdersPresenter(this);
+        presenter = new UsersPresenter(this);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CompanyOrdersFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new CompanyOrdersAdapter(new ArrayList<User>(), this, getContext());
+        adapter = new UsersAdapter(new ArrayList<User>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration

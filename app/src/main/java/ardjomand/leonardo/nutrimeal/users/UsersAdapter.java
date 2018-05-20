@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.companyorders;
+package ardjomand.leonardo.nutrimeal.users;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -19,13 +19,13 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  * {@link RecyclerView.Adapter} that can display a {@link Meal} and makes a call to the
  * specified {@link OnMealFragmentInteractionListener}.
  */
-public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdapter.ViewHolder> {
+public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
     private final OnMealAdapterInteractionListener mListener;
     private final Context mContext;
     private List<User> mItems;
 
-    public CompanyOrdersAdapter(List<User> orders, OnMealAdapterInteractionListener listener, Context context) {
+    public UsersAdapter(List<User> orders, OnMealAdapterInteractionListener listener, Context context) {
         mContext = context;
         mItems = orders;
         mListener = listener;
