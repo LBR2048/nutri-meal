@@ -1,8 +1,8 @@
 package ardjomand.leonardo.nutrimeal.data;
 
-import ardjomand.leonardo.nutrimeal.orders.Order;
+import ardjomand.leonardo.nutrimeal.customerorders.Order;
 
-public interface OrdersRepository {
+public interface CustomerOrdersRepository {
 
     interface Repository {
 

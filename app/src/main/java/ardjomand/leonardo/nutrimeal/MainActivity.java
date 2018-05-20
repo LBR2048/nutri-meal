@@ -12,9 +12,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import ardjomand.leonardo.nutrimeal.auth.AuthActivity;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrdersFragment;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
-import ardjomand.leonardo.nutrimeal.orders.OrdersFragment;
 import ardjomand.leonardo.nutrimeal.users.UsersFragment;
 
 public class MainActivity extends AppCompatActivity implements
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, OrdersFragment.newInstance(1))
+                    .replace(R.id.fragment_container, CustomerOrdersFragment.newInstance(1))
                     .addToBackStack(null)
                     .commit();
         }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onPlaceOrderClicked() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, OrdersFragment.newInstance(1))
+                .replace(R.id.fragment_container, CustomerOrdersFragment.newInstance(1))
                 .addToBackStack(null)
                 .commit();
     }

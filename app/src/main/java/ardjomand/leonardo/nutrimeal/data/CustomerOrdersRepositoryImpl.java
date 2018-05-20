@@ -10,23 +10,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.orders.Order;
-import ardjomand.leonardo.nutrimeal.orders.OrdersPresenter;
+import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrdersPresenter;
+import ardjomand.leonardo.nutrimeal.customerorders.Order;
 
-public class OrdersRepositoryImpl implements OrdersRepository.Repository {
+public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Repository {
 
-    public static final String TAG = OrdersRepositoryImpl.class.getSimpleName();
+    public static final String TAG = CustomerOrdersRepositoryImpl.class.getSimpleName();
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     public static final String NODE_MEALS = "meals";
 
     // TODO add current order ID
     private final String orderId = "order1";
 
-    private OrdersPresenter presenter;
+    private CustomerOrdersPresenter presenter;
     private DatabaseReference ordersRef;
     private ChildEventListener ordersEventListener;
 
-    public OrdersRepositoryImpl(OrdersPresenter presenter) {
+    public CustomerOrdersRepositoryImpl(CustomerOrdersPresenter presenter) {
         this.presenter = presenter;
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

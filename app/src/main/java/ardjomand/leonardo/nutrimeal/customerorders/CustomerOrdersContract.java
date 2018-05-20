@@ -1,6 +1,6 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.customerorders;
 
-interface OrdersContract {
+interface CustomerOrdersContract {
 
     interface View {
 
