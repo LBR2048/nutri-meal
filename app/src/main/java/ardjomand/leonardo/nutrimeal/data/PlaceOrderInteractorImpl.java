@@ -52,6 +52,10 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
                 // Fill in missing properties
                 orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
                 orderRef.child("delivered").setValue(false);
+                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (firebaseUser != null) {
+                    orderRef.child("customerKey").setValue(firebaseUser.getUid());
+                }
 
                 // Delete cart contents
                 customerCartRef.removeValue();

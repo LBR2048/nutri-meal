@@ -10,6 +10,7 @@ public class Order {
     private boolean delivered;
     private long amount;
     private long deliveryDate;
+    private String customerKey;
 //    private List<CartMeal> meals;
 
     public Order() {
@@ -54,6 +55,13 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
+    public String getCustomerKey() {
+        return customerKey;
+    }
+
+    public void setCustomerKey(String customerKey) {
+        this.customerKey = customerKey;
+    }
 //    public List<CartMeal> getMeals() {
 //        return meals;
 //    }
