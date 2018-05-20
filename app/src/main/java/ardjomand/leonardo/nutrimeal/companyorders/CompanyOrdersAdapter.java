@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
@@ -35,7 +36,7 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_order, parent, false);
+                .inflate(R.layout.item_company_order, parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,6 +53,15 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
 
         NumberFormat format = NumberFormat.getCurrencyInstance();
         holder.mAmountView.setText(format.format(mItems.get(position).getAmount()));
+
+        Map<String, Meal> mealsMap = holder.mItem.getMeals();
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<String, Meal> pair : mealsMap.entrySet()) {
+            Meal meal = pair.getValue();
+            builder.append(meal.getName());
+            builder.append("\n");
+        }
+        holder.mMealsView.setText(builder.toString().trim());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +123,7 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
         final TextView mCustomerView;
         final TextView mDeliveryStatus;
         final TextView mAmountView;
+        final TextView mMealsView;
         CompanyOrder mItem;
 
         ViewHolder(View view) {
@@ -122,6 +133,7 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
             mCustomerView = view.findViewById(R.id.order_customer);
             mDeliveryStatus = view.findViewById(R.id.order_delivery_status);
             mAmountView = view.findViewById(R.id.order_amount);
+            mMealsView = view.findViewById(R.id.order_meals);
         }
 
         @Override
