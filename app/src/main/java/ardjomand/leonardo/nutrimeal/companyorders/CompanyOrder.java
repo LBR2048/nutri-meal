@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class CompanyOrder {
 
@@ -13,7 +12,7 @@ public class CompanyOrder {
     private long amount;
     private long deliveryDate;
     private String customerKey;
-    private Map<String, Meal> meals;
+    private Map<String, CartMeal> meals;
 
     public CompanyOrder() {
     }
@@ -64,11 +63,11 @@ public class CompanyOrder {
         this.customerKey = customerKey;
     }
 
-    public Map<String, Meal> getMeals() {
+    public Map<String, CartMeal> getMeals() {
         return meals;
     }
 
-    public void setMeals(Map<String, Meal> meals) {
+    public void setMeals(Map<String, CartMeal> meals) {
         this.meals = meals;
     }
 }

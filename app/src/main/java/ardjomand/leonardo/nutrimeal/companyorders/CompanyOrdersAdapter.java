@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
@@ -54,11 +55,11 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
         NumberFormat format = NumberFormat.getCurrencyInstance();
         holder.mAmountView.setText(format.format(mItems.get(position).getAmount()));
 
-        Map<String, Meal> mealsMap = holder.mItem.getMeals();
+        Map<String, CartMeal> mealsMap = holder.mItem.getMeals();
         StringBuilder builder = new StringBuilder();
-        for (Map.Entry<String, Meal> pair : mealsMap.entrySet()) {
-            Meal meal = pair.getValue();
-            builder.append(meal.getName());
+        for (Map.Entry<String, CartMeal> pair : mealsMap.entrySet()) {
+            CartMeal cartMeal = pair.getValue();
+            builder.append(cartMeal.getName());
             builder.append("\n");
         }
         holder.mMealsView.setText(builder.toString().trim());
