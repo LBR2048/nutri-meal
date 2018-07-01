@@ -49,10 +49,10 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
 
         holder.mCustomerView.setText(holder.mItem.getCustomerKey());
 
-        String formattedDeliveryStatus = Utils.formatDeliveryStatus(mContext, mItems.get(position).isDelivered());
+        String formattedDeliveryStatus = Utils.formatDeliveryStatus(mContext, holder.mItem.isDelivered());
         holder.mDeliveryStatus.setText(formattedDeliveryStatus);
 
-        String formattedAmount = Utils.formatAmount(mItems.get(position).getAmount());
+        String formattedAmount = Utils.formatAmount(holder.mItem.getAmount());
         holder.mAmountView.setText(formattedAmount);
 
         Map<String, CartMeal> mealsMap = holder.mItem.getMeals();
