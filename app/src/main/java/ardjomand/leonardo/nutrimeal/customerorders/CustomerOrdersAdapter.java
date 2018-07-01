@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.Utils;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
@@ -45,12 +45,11 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
 
         holder.mIdView.setText(mContext.getString(R.string.order_id, holder.mItem.getKey()));
 
-        holder.mDeliveryStatus.setText(mItems.get(position).isDelivered()
-                ? mContext.getString(R.string.order_delivered)
-                : mContext.getString(R.string.order_not_delivered));
+        String formattedDeliveryStatus = Utils.formatDeliveryStatus(mContext, mItems.get(position).isDelivered());
+        holder.mDeliveryStatus.setText(formattedDeliveryStatus);
 
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        holder.mAmountView.setText(format.format(mItems.get(position).getAmount()));
+        long formattedAmount = mItems.get(position).getAmount();
+        holder.mAmountView.setText(Utils.formatAmount(formattedAmount));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

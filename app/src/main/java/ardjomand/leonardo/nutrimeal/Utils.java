@@ -8,6 +8,7 @@ import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
 
 public class Utils {
 
@@ -66,6 +67,22 @@ public class Utils {
         builder.append("\n");
 
         builder.append(formatMeals(context, companyOrder.getMeals()));
+
+        return builder.toString();
+    }
+
+    @NonNull
+    public static String formatCustomerOrder(Context context, CustomerOrder customerOrder) {
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(formatOrderKey(context, customerOrder.getKey()));
+        builder.append("\n");
+
+        builder.append(formatDeliveryStatus(context, customerOrder.isDelivered()));
+        builder.append("\n");
+
+        builder.append(formatAmount(customerOrder.getAmount()));
 
         return builder.toString();
     }
