@@ -10,25 +10,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
-import ardjomand.leonardo.nutrimeal.data.CustomerWidgetRepository;
-import ardjomand.leonardo.nutrimeal.data.CustomerWidgetRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepository;
+import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepositoryImpl;
 
 /**
  * Created by unity on 09/01/18.
  */
 
-public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+public class CompanyOrdersRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final Context mContext;
     private final int mAppWidgetId;
-    private CustomerWidgetRepository repository;
+    private CompanyWidgetRepository repository;
 
-    private List<CustomerOrder> mCustomerOrders = new ArrayList<>();
+    private List<CompanyOrder> mCompanyOrders = new ArrayList<>();
     private RemoteViews views;
     private CountDownLatch mCountDownLatch;
 
-    public CustomerOrdersRemoteViewsFactory(Context context, Intent intent) {
+    public CompanyOrdersRemoteViewsFactory(Context context, Intent intent) {
         mContext = context;
         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
@@ -36,7 +36,7 @@ public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.Remo
 
     @Override
     public void onCreate() {
-        repository = new CustomerWidgetRepositoryImpl();
+        repository = new CompanyWidgetRepositoryImpl();
     }
 
     @Override
@@ -59,14 +59,14 @@ public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.Remo
 
     @Override
     public int getCount() {
-        return mCustomerOrders.size();
+        return mCompanyOrders.size();
     }
 
     @Override
     public RemoteViews getViewAt(int i) {
         views = new RemoteViews(mContext.getPackageName(),
                 android.R.layout.simple_list_item_1);
-        views.setTextViewText(android.R.id.text1, mCustomerOrders.get(i).getKey());
+        views.setTextViewText(android.R.id.text1, mCompanyOrders.get(i).getKey());
         return views;
     }
 
@@ -91,22 +91,22 @@ public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.Remo
     }
 
     private void loadData() {
-        repository.loadCustomerOrders(new CustomerWidgetRepository.LoadCustomersOrdersCallback() {
+        repository.loadCompanyOrders(new CompanyWidgetRepository.LoadCompanyOrdersCallback() {
             @Override
-            public void onComplete(List<CustomerOrder> customerOrders) {
-                mCustomerOrders = customerOrders;
+            public void onComplete(List<CompanyOrder> companyOrders) {
+                mCompanyOrders = companyOrders;
                 mCountDownLatch.countDown();
             }
         });
     }
 
     private void loadDummyData() {
-        CustomerOrder customerOrder = new CustomerOrder();
-        customerOrder.setKey("order 0");
-        CustomerOrder customerOrder1 = new CustomerOrder();
-        customerOrder1.setKey("order 1");
-        mCustomerOrders.add(customerOrder);
-        mCustomerOrders.add(customerOrder1);
+        CompanyOrder companyOrder = new CompanyOrder();
+        companyOrder.setKey("company order 0");
+        CompanyOrder companyOrder1 = new CompanyOrder();
+        companyOrder1.setKey("company order 1");
+        mCompanyOrders.add(companyOrder);
+        mCompanyOrders.add(companyOrder1);
     }
 
 }

@@ -15,7 +15,7 @@ import ardjomand.leonardo.nutrimeal.R;
 /**
  * Implementation of App Widget functionality.
  */
-public class CustomerOrdersWidget extends AppWidgetProvider {
+public class OrdersWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -26,7 +26,7 @@ public class CustomerOrdersWidget extends AppWidgetProvider {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.customer_orders_widget);
 
             // Set the ListWidgetService intent to act as the adapter for the ListView
-            Intent listWidgetIntent = new Intent(context, CustomerOrdersService.class);
+            Intent listWidgetIntent = new Intent(context, OrdersService.class);
             listWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
             listWidgetIntent.setData(Uri.parse(listWidgetIntent.toUri(Intent.URI_INTENT_SCHEME)));
 

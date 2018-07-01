@@ -19,7 +19,7 @@
         </activity>
 
         <!-- Widget -->
-        <receiver android:name=".widget.CustomerOrdersWidget">
+        <receiver android:name=".widget.OrdersWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -29,7 +29,7 @@
                 android:resource="@xml/orders_widget_info" />
         </receiver>
         <service
-            android:name=".widget.CustomerOrdersService"
+            android:name=".widget.OrdersService"
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
     </application>

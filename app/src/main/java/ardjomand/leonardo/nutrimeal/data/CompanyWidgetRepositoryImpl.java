@@ -12,12 +12,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
 
-public class WidgetRepositoryImpl implements WidgetRepository {
+public class CompanyWidgetRepositoryImpl implements CompanyWidgetRepository {
 
-    public static final String TAG = WidgetRepositoryImpl.class.getSimpleName();
-    public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
+    public static final String TAG = CompanyWidgetRepositoryImpl.class.getSimpleName();
+    public static final String NODE_ORDERS = "orders";
     public static final String NODE_MEALS = "meals";
 
     // TODO add current order ID
@@ -26,27 +26,26 @@ public class WidgetRepositoryImpl implements WidgetRepository {
     private DatabaseReference ordersRef;
     private ChildEventListener ordersEventListener;
 
-    public WidgetRepositoryImpl() {
+    public CompanyWidgetRepositoryImpl() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             ordersRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_CUSTOMER_ORDERS)
-                    .child(firebaseUser.getUid());
+                    .child(NODE_ORDERS);
         }
     }
 
     @Override
-    public void loadCustomerOrders(final LoadCustomersOrdersCallback loadCustomersOrdersCallback) {
+    public void loadCompanyOrders(final LoadCompanyOrdersCallback loadCompanyOrdersCallback) {
         ordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<CustomerOrder> customerOrders = new ArrayList<>();
+                List<CompanyOrder> companyOrders = new ArrayList<>();
                 for (DataSnapshot jobSnapshot: dataSnapshot.getChildren()) {
-                    CustomerOrder customerOrder = jobSnapshot.getValue(CustomerOrder.class);
-                    customerOrder.setKey(jobSnapshot.getKey());
-                    customerOrders.add(customerOrder);
+                    CompanyOrder companyOrder = jobSnapshot.getValue(CompanyOrder.class);
+                    companyOrder.setKey(jobSnapshot.getKey());
+                    companyOrders.add(companyOrder);
                 }
-                loadCustomersOrdersCallback.onComplete(customerOrders);
+                loadCompanyOrdersCallback.onComplete(companyOrders);
             }
 
             @Override

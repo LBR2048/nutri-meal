@@ -4,7 +4,7 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
 
-public interface WidgetRepository {
+public interface CustomerWidgetRepository {
 
     interface LoadCustomersOrdersCallback {
         void onComplete(List<CustomerOrder> customerOrders);
