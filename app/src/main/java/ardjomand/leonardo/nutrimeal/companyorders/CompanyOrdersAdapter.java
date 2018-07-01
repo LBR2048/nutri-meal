@@ -49,8 +49,8 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
 
         holder.mCustomerView.setText(holder.mItem.getCustomerKey());
 
-        String formatDeliveryStatus = Utils.formatDeliveryStatus(mContext, mItems.get(position).isDelivered());
-        holder.mDeliveryStatus.setText(formatDeliveryStatus);
+        String formattedDeliveryStatus = Utils.formatDeliveryStatus(mContext, mItems.get(position).isDelivered());
+        holder.mDeliveryStatus.setText(formattedDeliveryStatus);
 
         String formattedAmount = Utils.formatAmount(mItems.get(position).getAmount());
         holder.mAmountView.setText(formattedAmount);
