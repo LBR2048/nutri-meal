@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import ardjomand.leonardo.nutrimeal.Utils;
 import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
 import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepository;
 import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepositoryImpl;
@@ -64,9 +65,9 @@ public class CompanyOrdersRemoteViewsFactory implements RemoteViewsService.Remot
 
     @Override
     public RemoteViews getViewAt(int i) {
-        views = new RemoteViews(mContext.getPackageName(),
-                android.R.layout.simple_list_item_1);
-        views.setTextViewText(android.R.id.text1, mCompanyOrders.get(i).getKey());
+        views = new RemoteViews(mContext.getPackageName(), android.R.layout.simple_list_item_1);
+        CompanyOrder companyOrder = mCompanyOrders.get(i);
+        views.setTextViewText(android.R.id.text1, Utils.formatCompanyOrder(mContext, companyOrder));
         return views;
     }
 

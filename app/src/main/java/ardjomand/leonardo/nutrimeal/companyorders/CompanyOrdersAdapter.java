@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.Utils;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
@@ -45,31 +45,18 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mItems.get(position);
 
-        holder.mIdView.setText(mContext.getString(R.string.order_id, holder.mItem.getKey()));
+        holder.mIdView.setText(Utils.formatOrderKey(mContext, holder.mItem.getKey()));
+
         holder.mCustomerView.setText(holder.mItem.getCustomerKey());
 
-        holder.mDeliveryStatus.setText(mItems.get(position).isDelivered()
-                ? mContext.getString(R.string.order_delivered)
-                : mContext.getString(R.string.order_not_delivered));
+        String formatDeliveryStatus = Utils.formatDeliveryStatus(mContext, mItems.get(position).isDelivered());
+        holder.mDeliveryStatus.setText(formatDeliveryStatus);
 
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        holder.mAmountView.setText(format.format(mItems.get(position).getAmount()));
+        String formattedAmount = Utils.formatAmount(mItems.get(position).getAmount());
+        holder.mAmountView.setText(formattedAmount);
 
         Map<String, CartMeal> mealsMap = holder.mItem.getMeals();
-        StringBuilder builder = new StringBuilder();
-        for (Map.Entry<String, CartMeal> pair : mealsMap.entrySet()) {
-            CartMeal cartMeal = pair.getValue();
-
-            NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
-            String formattedUnitPrice = currencyFormat.format(cartMeal.getUnitPrice());
-            String formattedTotalPrice = currencyFormat.format(cartMeal.getTotalPrice());
-            String cartMealText = mContext.getString(R.string.orders_cart_meal_price,
-                    cartMeal.getName(), cartMeal.getQuantity(), formattedUnitPrice, formattedTotalPrice);
-
-            builder.append(cartMealText);
-            builder.append("\n");
-        }
-        holder.mMealsView.setText(builder.toString().trim());
+        holder.mMealsView.setText(Utils.formatMeals(mContext, mealsMap));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
