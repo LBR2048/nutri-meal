@@ -42,8 +42,7 @@ public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.Remo
 
     @Override
     public void onDataSetChanged() {
-//        loadDummyData();
-
+        //https://github.com/mvescovo/item-reaper/blob/master/app/src/main/java/com/michaelvescovo/android/itemreaper/widget/WidgetListService.java
         mCountDownLatch = new CountDownLatch(1);
         loadData();
         try {
@@ -51,6 +50,8 @@ public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.Remo
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+//        loadDummyData();
     }
 
     @Override
