@@ -61,7 +61,7 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
                             if (uri != null) {
                                 Glide.with(mContext)
                                         .load(uri)
-                                        .apply(RequestOptions.fitCenterTransform().fallback(R.mipmap.ic_launcher))
+                                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
                                         .into(holder.mImageView);
                             }
                         }

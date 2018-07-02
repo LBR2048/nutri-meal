@@ -162,7 +162,7 @@ public class EditMealFragment extends Fragment implements
                             if (uri != null) {
                                 Glide.with(getContext())
                                         .load(uri)
-                                        .apply(RequestOptions.fitCenterTransform().fallback(R.mipmap.ic_launcher))
+                                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
                                         .into(editMealImage);
                             }
                         }
