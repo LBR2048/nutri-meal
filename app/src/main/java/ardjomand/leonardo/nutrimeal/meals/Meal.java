@@ -5,6 +5,7 @@ public class Meal {
     private String name;
     private String description;
     private String imagePath;
+    private long imageLastModified;
     private long unitPrice;
     private boolean available;
 
@@ -51,6 +52,14 @@ public class Meal {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public long getImageLastModified() {
+        return imageLastModified;
+    }
+
+    public void setImageLastModified(long imageLastModified) {
+        this.imageLastModified = imageLastModified;
     }
 
     public long getUnitPrice() {

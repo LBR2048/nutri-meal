@@ -1,13 +1,18 @@
 package ardjomand.leonardo.nutrimeal.data;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 
@@ -72,12 +77,18 @@ public class EditMealInteractorImpl implements EditMealInteractor.Interactor {
     }
 
     @Override
-    public void updateMealImage(String key, Uri imageUri) {
+    public void updateMealImage(final String key, Uri imageUri) {
         if (imageUri != null) {
             FirebaseStorage.getInstance().getReference().child(STORAGE_NODE_MEAL_IMAGES)
-                    .child(key).putFile(imageUri);
-
-            mealsRef.child(key).child("imagePath").setValue(GS + "/" + STORAGE_NODE_MEAL_IMAGES + "/" + key);
+                    .child(key).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        mealsRef.child(key).child("imagePath").setValue(GS + "/" + STORAGE_NODE_MEAL_IMAGES + "/" + key);
+                        mealsRef.child(key).child("imageLastModified").setValue(ServerValue.TIMESTAMP);
+                    }
+                }
+            });
         }
     }
 }
