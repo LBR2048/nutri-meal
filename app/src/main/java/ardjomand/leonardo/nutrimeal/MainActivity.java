@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -92,8 +91,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onOrderedMealClicked(CartMeal cartMeal) {
-        Toast.makeText(this, "Edit " + cartMeal.getName() + " quantity", Toast.LENGTH_SHORT).show();
-        EditCartMealDialogFragment editCartMealDialogFragment = EditCartMealDialogFragment.newInstance("a", "b");
+        EditCartMealDialogFragment editCartMealDialogFragment = EditCartMealDialogFragment.newInstance(cartMeal.getKey());
         editCartMealDialogFragment.show(getSupportFragmentManager(), "Edit Meal Quantity");
     }
 

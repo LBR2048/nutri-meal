@@ -56,6 +56,14 @@ public class CartMeal { // TODO extend from Meal
         this.totalPrice = unitPrice * quantity;
     }
 
+    public void increaseQuantity() {
+        quantity++;
+    }
+
+    public void decreaseQuantity() {
+        if (quantity > 1) quantity--;
+    }
+
     public long getTotalPrice() {
         return totalPrice;
     }

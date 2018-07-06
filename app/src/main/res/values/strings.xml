@@ -34,4 +34,9 @@
     <string name="menu_item_orders">Orders</string>
     <string name="orders_cart_meal_price">%1$s: %2$d x %3$s = %4$s</string>
     <string name="add_widget">Add widget</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_cart_meal_increase">+</string>
+    <string name="edit_cart_meal_decrease">-</string>
 </resources>
