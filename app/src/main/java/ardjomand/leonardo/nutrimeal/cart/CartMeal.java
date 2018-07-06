@@ -57,11 +57,11 @@ public class CartMeal { // TODO extend from Meal
     }
 
     public void increaseQuantity() {
-        quantity++;
+        setQuantity(quantity + 1);
     }
 
     public void decreaseQuantity() {
-        if (quantity > 1) quantity--;
+        if (quantity > 1) setQuantity(quantity - 1);
     }
 
     public long getTotalPrice() {
