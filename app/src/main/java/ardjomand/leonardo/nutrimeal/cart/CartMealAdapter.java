@@ -1,25 +1,21 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
 import android.content.Context;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.NumberFormat;
 import java.util.List;
 
+import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
@@ -53,25 +49,13 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         holder.mItem = mValues.get(position);
 
         String imagePath = mValues.get(position).getImagePath();
-        if (imagePath != null && !imagePath.isEmpty()) {
-            FirebaseStorage.getInstance().getReferenceFromUrl(imagePath).getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            if (uri != null) {
-                                Glide.with(mContext)
-                                        .load(uri)
-                                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
-                                        .into(holder.mImageView);
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            Log.e(TAG, exception.getMessage());
-                        }
-                    });
+        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
+
+        if (mContext != null) {
+            GlideApp.with(mContext)
+                    .load(imageRef)
+                    .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
+                    .into(holder.mImageView);
         }
 
         holder.mNameView.setText(mValues.get(position).getName());

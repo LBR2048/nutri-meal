@@ -1,7 +1,6 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -12,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.NumberFormat;
 
+import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,19 +105,13 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
         quantityView.setText(NumberFormat.getInstance().format(cartMeal.getQuantity()));
 
         String imagePath = cartMeal.getImagePath();
-        if (imagePath != null && !imagePath.isEmpty()) {
-            FirebaseStorage.getInstance().getReferenceFromUrl(imagePath).getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            if (getContext() != null) {
-                                Glide.with(getContext())
-                                        .load(uri)
-                                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
-                                        .into(imageView);
-                            }
-                        }
-                    });
+        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
+
+        if (getContext() != null) {
+            GlideApp.with(getContext())
+                    .load(imageRef)
+                    .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
+                    .into(imageView);
         }
     }
 

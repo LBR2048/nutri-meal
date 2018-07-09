@@ -17,12 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import butterknife.BindView;
@@ -160,26 +159,13 @@ public class EditMealFragment extends Fragment implements
 
     @Override
     public void showMealImage(String imagePath) {
-        if (imagePath != null && !imagePath.isEmpty()) {
-            FirebaseStorage.getInstance().getReferenceFromUrl(imagePath).getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            if (uri != null) {
-                                Glide.with(getContext())
-                                        .load(uri)
-                                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
-                                        .into(editMealImage);
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // TODO Log error
-                            Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
+
+        if (getContext() != null) {
+            GlideApp.with(getContext())
+                    .load(imageRef)
+                    .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
+                    .into(editMealImage);
         }
     }
 
