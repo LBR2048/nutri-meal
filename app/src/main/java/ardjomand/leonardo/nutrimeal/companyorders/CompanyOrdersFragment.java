@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.widget.OrdersWidget;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -155,11 +156,15 @@ public class CompanyOrdersFragment extends Fragment implements
     @Override
     public void addOrder(CompanyOrder companyOrder) {
         adapter.addData(companyOrder);
+        Toast.makeText(getContext(), "Updating widgets", Toast.LENGTH_SHORT).show();
+        OrdersWidget.updateAllWidgets(getContext());
     }
 
     @Override
     public void updateOrder(CompanyOrder companyOrder) {
         adapter.updateData(companyOrder);
+        Toast.makeText(getContext(), "Updating widgets", Toast.LENGTH_SHORT).show();
+        OrdersWidget.updateAllWidgets(getContext());
     }
 
     @Override
