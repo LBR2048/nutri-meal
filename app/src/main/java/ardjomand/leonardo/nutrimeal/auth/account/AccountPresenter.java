@@ -23,7 +23,9 @@ public class AccountPresenter implements AccountContract.Presenter {
     public void createAccount(String name, String email, String password, String repeatedPassword, String type) {
         // TODO check if any of the fields are null
         // TODO check if passwords match
-        view.showProgressBar(true);
+        if (view != null) {
+            view.showProgressBar(true);
+        }
 
         User user = new User(name, email, type);
         authInteractor.createAccount(new AuthRepository.Interactor.CreateAccountCallback() {
@@ -47,7 +49,9 @@ public class AccountPresenter implements AccountContract.Presenter {
 
     @Override
     public void getCurrentUser() {
-        view.showProgressBar(true);
+        if (view != null) {
+            view.showProgressBar(true);
+        }
 
         authInteractor.getCurrentUser(new AuthRepository.Interactor.GetCurrentUserCallback() {
             @Override

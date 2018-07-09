@@ -21,7 +21,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void logIn(String email, String password) {
-        view.showProgressBar(true);
+        if (view != null) {
+            view.showProgressBar(true);
+        }
 
         authInteractor.logIn(new AuthRepository.Interactor.LogInCallback() {
             @Override
@@ -44,7 +46,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void getCurrentUser() {
-        view.showProgressBar(true);
+        if (view != null) {
+            view.showProgressBar(true);
+        }
 
         authInteractor.getCurrentUser(new AuthRepository.Interactor.GetCurrentUserCallback() {
             @Override

@@ -117,9 +117,15 @@ public class AccountFragment extends Fragment implements AccountContract.View{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.setView(null);
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
+
     //endregion
 
     @OnClick(R.id.signup_button)

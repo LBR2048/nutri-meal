@@ -127,9 +127,15 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.setView(null);
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
+
     //endregion
 
     @OnClick({R.id.login_button, R.id.signup_text})
