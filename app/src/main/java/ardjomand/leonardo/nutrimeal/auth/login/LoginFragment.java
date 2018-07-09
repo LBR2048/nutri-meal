@@ -136,7 +136,6 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_button:
-                Toast.makeText(getContext(), "Login clicked", Toast.LENGTH_SHORT).show();
                 presenter.logIn(
                         loginEmailEditText.getText().toString(),
                         loginPasswordEditText.getText().toString());
