@@ -15,9 +15,14 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     private EditMealContract.View view;
     private EditMealInteractor.Interactor interactor;
 
-    public EditMealPresenter(EditMealContract.View view) {
+    EditMealPresenter(EditMealContract.View view) {
         this.view = view;
         interactor = new EditMealInteractorImpl(this);
+    }
+
+    @Override
+    public void setView(EditMealContract.View view) {
+        this.view = view;
     }
 
     @Override

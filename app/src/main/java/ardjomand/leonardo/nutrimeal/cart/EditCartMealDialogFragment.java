@@ -125,8 +125,13 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.setView(null);
         unbinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
     }
 
     @OnClick({R.id.edit_cart_meal_increase, R.id.edit_cart_meal_decrease})

@@ -12,9 +12,14 @@ public class UsersPresenter implements UsersContract.Presenter, UsersRepository.
     private final UsersRepository.Repository repository;
     private UsersContract.View view;
 
-    public UsersPresenter(UsersContract.View view) {
+    UsersPresenter(UsersContract.View view) {
         this.view = view;
         repository = new UsersRepositoryImpl(this);
+    }
+
+    @Override
+    public void setView(UsersContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -30,12 +35,16 @@ public class UsersPresenter implements UsersContract.Presenter, UsersRepository.
     @Override
     public void onUserAdded(User user) {
         Log.i(TAG, "User " + user.toString() + " added");
-        view.addUser(user);
+        if (view != null){
+            view.addUser(user);
+        }
     }
 
     @Override
     public void onUserChanged(User user) {
-        view.updateUser(user);
+        if (view != null){
+            view.updateUser(user);
+        }
     }
 
     @Override

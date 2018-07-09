@@ -136,6 +136,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.setView(null);
         unbinder.unbind();
     }
     //endregion

@@ -11,9 +11,14 @@ public class CustomerOrdersPresenter implements CustomerOrdersContract.Presenter
     private final CustomerOrdersRepository.Repository repository;
     private CustomerOrdersContract.View view;
 
-    public CustomerOrdersPresenter(CustomerOrdersContract.View view) {
+    CustomerOrdersPresenter(CustomerOrdersContract.View view) {
         this.view = view;
         repository = new CustomerOrdersRepositoryImpl(this);
+    }
+
+    @Override
+    public void setView(CustomerOrdersContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -29,12 +34,16 @@ public class CustomerOrdersPresenter implements CustomerOrdersContract.Presenter
     @Override
     public void onOrderAdded(CustomerOrder customerOrder) {
         Log.i(TAG, "CustomerOrder " + customerOrder.toString() + " added");
-        view.addOrder(customerOrder);
+        if (view != null){
+            view.addOrder(customerOrder);
+        }
     }
 
     @Override
     public void onOrderChanged(CustomerOrder customerOrder) {
-        view.updateOrder(customerOrder);
+        if (view != null){
+            view.updateOrder(customerOrder);
+        }
     }
 
     @Override

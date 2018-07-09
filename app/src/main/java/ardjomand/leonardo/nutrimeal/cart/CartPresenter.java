@@ -16,10 +16,15 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     private final CartRepository.Repository repository;
     private final PlaceOrderInteractor.Interactor placeOrderInteractor;
 
-    public CartPresenter(CartContract.View view) {
+    CartPresenter(CartContract.View view) {
         this.view = view;
         repository = new CartRepositoryImpl(this);
         placeOrderInteractor = new PlaceOrderInteractorImpl(this);
+    }
+
+    @Override
+    public void setView(CartContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -45,12 +50,16 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     @Override
     public void onSelectedMealAdded(CartMeal cartMeal) {
         Log.i(TAG, "Selected meal " + cartMeal.getName() + " added");
-        view.addCartMeal(cartMeal);
+        if (view != null) {
+            view.addCartMeal(cartMeal);
+        }
     }
 
     @Override
     public void onSelectedMealChanged(CartMeal cartMeal) {
-        view.updateCartMeal(cartMeal);
+        if (view != null){
+            view.updateCartMeal(cartMeal);
+        }
     }
 
     @Override

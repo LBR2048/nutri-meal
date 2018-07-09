@@ -23,6 +23,8 @@ interface MealsContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void subscribeToMealsUpdates();
 
         void unsubscribeFromMealsUpdates();

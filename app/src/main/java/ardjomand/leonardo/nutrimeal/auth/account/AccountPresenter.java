@@ -7,11 +7,16 @@ import ardjomand.leonardo.nutrimeal.data.AuthRepositoryImpl;
 public class AccountPresenter implements AccountContract.Presenter {
 
     private final AuthRepository.Interactor authInteractor;
-    private final AccountContract.View view;
+    private AccountContract.View view;
 
     public AccountPresenter(AccountContract.View view) {
         this.view = view;
         authInteractor = new AuthRepositoryImpl();
+    }
+
+    @Override
+    public void setView(AccountContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -24,14 +29,18 @@ public class AccountPresenter implements AccountContract.Presenter {
         authInteractor.createAccount(new AuthRepository.Interactor.CreateAccountCallback() {
             @Override
             public void onSuccess() {
-                view.showProgressBar(false);
-                view.goToMainScreen();
+                if (view != null){
+                    view.showProgressBar(false);
+                    view.goToMainScreen();
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                view.showProgressBar(false);
-                view.showError(e.getMessage());
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.showError(e.getMessage());
+                }
             }
         }, user, password, type);
     }
@@ -43,20 +52,25 @@ public class AccountPresenter implements AccountContract.Presenter {
         authInteractor.getCurrentUser(new AuthRepository.Interactor.GetCurrentUserCallback() {
             @Override
             public void onUserLoggedIn(User user) {
-                view.showProgressBar(false);
-                view.goToMainScreen();
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.goToMainScreen();
+                }
             }
 
             @Override
             public void onUserLoggedOut() {
-                view.showProgressBar(false);
-                // Do nothing
+                if (view != null) {
+                    view.showProgressBar(false);
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                view.showProgressBar(false);
-                view.showError(e.getMessage());
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.showError(e.getMessage());
+                }
             }
         });
     }

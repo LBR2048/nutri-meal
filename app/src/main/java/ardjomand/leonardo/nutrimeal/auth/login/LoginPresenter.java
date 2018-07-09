@@ -7,11 +7,16 @@ import ardjomand.leonardo.nutrimeal.data.AuthRepositoryImpl;
 public class LoginPresenter implements LoginContract.Presenter {
 
     private final AuthRepository.Interactor authInteractor;
-    private final LoginContract.View view;
+    private LoginContract.View view;
 
     LoginPresenter(LoginContract.View view) {
         this.view = view;
         authInteractor = new AuthRepositoryImpl();
+    }
+
+    @Override
+    public void setView(LoginContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -21,14 +26,18 @@ public class LoginPresenter implements LoginContract.Presenter {
         authInteractor.logIn(new AuthRepository.Interactor.LogInCallback() {
             @Override
             public void onSuccess() {
-                view.showProgressBar(false);
-                view.goToMainScreen();
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.goToMainScreen();
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                view.showProgressBar(false);
-                view.showError(e.getMessage());
+                if (view != null){
+                    view.showProgressBar(false);
+                    view.showError(e.getMessage());
+                }
             }
         }, email, password);
     }
@@ -40,21 +49,27 @@ public class LoginPresenter implements LoginContract.Presenter {
         authInteractor.getCurrentUser(new AuthRepository.Interactor.GetCurrentUserCallback() {
             @Override
             public void onUserLoggedIn(User user) {
-                view.showProgressBar(false);
-                view.goToMainScreen();
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.goToMainScreen();
+                }
             }
 
             @Override
             public void onUserLoggedOut() {
-                view.showProgressBar(false);
-                view.showLoginForm(true);
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.showLoginForm(true);
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                view.showProgressBar(false);
-                view.showLoginForm(true);
-                view.showError(e.getMessage());
+                if (view != null) {
+                    view.showProgressBar(false);
+                    view.showLoginForm(true);
+                    view.showError(e.getMessage());
+                }
             }
         });
     }

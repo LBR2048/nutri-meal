@@ -16,6 +16,8 @@ interface CompanyOrdersContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void subscribeToOrdersUpdates();
 
         void unsubscribeFromOrdersUpdates();

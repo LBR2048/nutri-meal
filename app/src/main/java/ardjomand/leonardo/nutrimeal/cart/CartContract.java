@@ -17,6 +17,8 @@ interface CartContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void subscribeToCartUpdates();
 
         void unsubscribeFromCartUpdates();

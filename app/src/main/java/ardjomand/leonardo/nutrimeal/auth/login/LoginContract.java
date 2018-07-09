@@ -4,6 +4,8 @@ public interface LoginContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void logIn(String email, String password);
 
         void getCurrentUser();

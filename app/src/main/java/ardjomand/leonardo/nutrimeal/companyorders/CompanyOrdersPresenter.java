@@ -11,9 +11,14 @@ public class CompanyOrdersPresenter implements CompanyOrdersContract.Presenter, 
     private final CompanyOrdersRepository.Repository repository;
     private CompanyOrdersContract.View view;
 
-    public CompanyOrdersPresenter(CompanyOrdersContract.View view) {
+    CompanyOrdersPresenter(CompanyOrdersContract.View view) {
         this.view = view;
         repository = new CompanyOrdersRepositoryImpl(this);
+    }
+
+    @Override
+    public void setView(CompanyOrdersContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -29,12 +34,16 @@ public class CompanyOrdersPresenter implements CompanyOrdersContract.Presenter, 
     @Override
     public void onOrderAdded(CompanyOrder companyOrder) {
         Log.i(TAG, "CompanyOrder " + companyOrder.toString() + " added");
-        view.addOrder(companyOrder);
+        if (view != null){
+            view.addOrder(companyOrder);
+        }
     }
 
     @Override
     public void onOrderChanged(CompanyOrder companyOrder) {
-        view.updateOrder(companyOrder);
+        if (view != null){
+            view.updateOrder(companyOrder);
+        }
     }
 
     @Override

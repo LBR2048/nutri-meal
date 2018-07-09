@@ -127,6 +127,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.setView(null);
         unbinder.unbind();
     }
     //endregion

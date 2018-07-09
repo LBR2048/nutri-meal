@@ -153,6 +153,12 @@ public class MealsFragment extends Fragment implements
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
     //endregion
 
     //region Menu

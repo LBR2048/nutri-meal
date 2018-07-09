@@ -17,6 +17,8 @@ interface UsersContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void subscribeToUsersUpdates();
 
         void unsubscribeFromUsersUpdates();

@@ -137,6 +137,12 @@ public class EditMealFragment extends Fragment implements
         presenter.unsubscribeFromMealUpdates();
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
     //endregion
 
     //region Presenter callbacks

@@ -14,10 +14,15 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     private final MealRepository.Repository repository;
     private MealsContract.View view;
 
-    public MealsPresenter(MealsContract.View view) {
+    MealsPresenter(MealsContract.View view) {
         this.view = view;
         repository = new MealRepositoryImpl(this);
         editCartInteractor = new EditCartInteractorImpl(this);
+    }
+
+    @Override
+    public void setView(MealsContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -39,30 +44,40 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
 
     @Override
     public void editMeal(String key) {
-        view.goToEditMeal(key);
+        if (view != null){
+            view.goToEditMeal(key);
+        }
     }
 
     @Override
     public void editCartMealQuantity(String key) {
-        view.goToEditCartMealQuantity(key);
+        if (view != null){
+            view.goToEditCartMealQuantity(key);
+        }
     }
 
     @Override
     public void createNewMeal() {
         String key = repository.createMeal();
-        view.goToEditMeal(key);
+        if (view != null){
+            view.goToEditMeal(key);
+        }
     }
 
     @Override
     public void onMealAdded(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " added");
-        view.addMeal(meal);
+        if (view != null){
+            view.addMeal(meal);
+        }
     }
 
     @Override
     public void onMealChanged(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " changed");
-        view.updateMeal(meal);
+        if (view != null){
+            view.updateMeal(meal);
+        }
     }
 
     @Override

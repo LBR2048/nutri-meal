@@ -17,6 +17,8 @@ interface EditMealContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void subscribeForMealUpdates(String key);
 
         void unsubscribeFromMealUpdates();

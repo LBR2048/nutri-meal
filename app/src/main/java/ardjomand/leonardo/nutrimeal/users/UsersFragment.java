@@ -143,6 +143,13 @@ public class UsersFragment extends Fragment implements
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
+
     //endregion
 
     //region Presenter callbacks
