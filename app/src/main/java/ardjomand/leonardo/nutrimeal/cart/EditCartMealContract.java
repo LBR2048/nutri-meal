@@ -9,6 +9,8 @@ public interface EditCartMealContract {
 
     interface Presenter {
 
+        void setView(View view);
+
         void subscribeForCartMealsUpdates(String key);
 
         void unsubscribeFromCartMealsUpdates();

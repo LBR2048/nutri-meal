@@ -17,6 +17,8 @@ interface MealsContract {
         void showError();
 
         void goToEditMeal(String key);
+
+        void goToEditCartMealQuantity(String key);
     }
 
     interface Presenter {
@@ -28,6 +30,8 @@ interface MealsContract {
         void addMealToCart(Meal meal);
 
         void editMeal(String key);
+
+        void editCartMealQuantity(String key);
 
         void createNewMeal();
     }

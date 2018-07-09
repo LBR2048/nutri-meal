@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import butterknife.Unbinder;
 public class EditCartMealDialogFragment extends DialogFragment implements EditCartMealContract.View {
 
     private static final String ARG_CART_MEAL_KEY = "arg_cart_meal_key";
+    private static final String EDIT_CART_MEAL_DIALOG_FRAGMENT_TAG = "EditCartMealDialogFragmentTag";
 
     //region GUI
     @BindView(R.id.edit_cart_meal_name)
@@ -60,6 +62,10 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
         args.putString(ARG_CART_MEAL_KEY, key);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public static void showDialog(AppCompatActivity activity, String key, String tag) {
+        newInstance(key).show(activity.getSupportFragmentManager(), tag);
     }
 
     @Override
@@ -119,6 +125,7 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.setView(null);
         unbinder.unbind();
     }
 

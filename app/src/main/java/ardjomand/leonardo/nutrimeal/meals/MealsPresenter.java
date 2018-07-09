@@ -43,6 +43,11 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     }
 
     @Override
+    public void editCartMealQuantity(String key) {
+        view.goToEditCartMealQuantity(key);
+    }
+
+    @Override
     public void createNewMeal() {
         String key = repository.createMeal();
         view.goToEditMeal(key);

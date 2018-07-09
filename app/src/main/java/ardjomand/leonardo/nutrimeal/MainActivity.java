@@ -64,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onEditCartMealQuantity(String key) {
+        EditCartMealDialogFragment.showDialog(this, key, "tag1");
+    }
+
+    @Override
     public void onGoToCartClicked() {
         getSupportFragmentManager()
                 .beginTransaction()
@@ -91,8 +96,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onOrderedMealClicked(CartMeal cartMeal) {
-        EditCartMealDialogFragment editCartMealDialogFragment = EditCartMealDialogFragment.newInstance(cartMeal.getKey());
-        editCartMealDialogFragment.show(getSupportFragmentManager(), "Edit Meal Quantity");
+        EditCartMealDialogFragment.showDialog(this, cartMeal.getKey(), "tag2");
     }
 
     @Override
@@ -114,4 +118,5 @@ public class MainActivity extends AppCompatActivity implements
         startActivity(intent);
         finish();
     }
+
 }

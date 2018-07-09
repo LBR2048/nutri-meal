@@ -203,7 +203,11 @@ public class MealsFragment extends Fragment implements
         mListener.onEditMealClicked(key);
     }
 
-    //endregion
+    @Override
+    public void goToEditCartMealQuantity(String key) {
+        mListener.onEditCartMealQuantity(key);
+    }
+//endregion
 
     private void setTitle() {
         if (getActivity() instanceof AppCompatActivity) {
@@ -232,14 +236,17 @@ public class MealsFragment extends Fragment implements
         if (BuildConfig.FLAVOR.equals("company")) {
             presenter.editMeal(meal.getKey());
         } else {
+            // TODO add meal to cart only if item quantity in cart is zero
             presenter.addMealToCart(meal);
+            presenter.editCartMealQuantity(meal.getKey());
             // TODO only show toast if meal was successfully added to cart
-            Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
         }
     }
 
     public interface OnMealFragmentInteractionListener {
         void onEditMealClicked(String key);
+        void onEditCartMealQuantity(String key);
         void onGoToCartClicked();
         void onGoToOrdersClicked();
     }

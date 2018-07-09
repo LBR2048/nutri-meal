@@ -5,12 +5,17 @@ import ardjomand.leonardo.nutrimeal.data.EditCartMealQuantityInteractorImpl;
 
 public class EditCartMealDialogPresenter implements EditCartMealContract.Presenter, EditCartMealQuantityInteractor.Presenter {
 
-    private final EditCartMealContract.View view;
+    private EditCartMealContract.View view;
     private final EditCartMealQuantityInteractor.Interactor editCartInteractor;
 
     public EditCartMealDialogPresenter(EditCartMealContract.View view) {
         this.view = view;
         editCartInteractor = new EditCartMealQuantityInteractorImpl(this);
+    }
+
+    @Override
+    public void setView(EditCartMealContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -25,7 +30,9 @@ public class EditCartMealDialogPresenter implements EditCartMealContract.Present
 
     @Override
     public void onCartMealUpdated(CartMeal cartMeal) {
-        view.updateCartMeal(cartMeal);
+        if (view != null){
+            view.updateCartMeal(cartMeal);
+        }
     }
 
     @Override
