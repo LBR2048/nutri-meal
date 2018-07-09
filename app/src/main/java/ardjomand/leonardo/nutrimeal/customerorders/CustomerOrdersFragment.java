@@ -156,7 +156,6 @@ public class CustomerOrdersFragment extends Fragment implements
     @Override
     public void addOrder(CustomerOrder customerOrder) {
         adapter.addData(customerOrder);
-        Toast.makeText(getContext(), "Updating widgets", Toast.LENGTH_SHORT).show();
         OrdersWidget.updateAllWidgets(getContext());
     }
 
