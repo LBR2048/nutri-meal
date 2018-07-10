@@ -12,6 +12,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -57,7 +60,6 @@ public class EditMealFragment extends Fragment implements
     //endregion
 
     private EditMealPresenter presenter;
-    private Meal meal;
     private String key;
     private Uri imageUri;
 
@@ -86,6 +88,8 @@ public class EditMealFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
         if (getArguments() != null) {
             key = getArguments().getString(ARG_KEY);
         }
@@ -141,6 +145,24 @@ public class EditMealFragment extends Fragment implements
         presenter.setView(null);
     }
     //endregion
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_edit_meal_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit_meal_delete:
+                Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show();
+                presenter.deleteMeal(key);
+                getFragmentManager().popBackStack();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     //region Presenter callbacks
     @Override

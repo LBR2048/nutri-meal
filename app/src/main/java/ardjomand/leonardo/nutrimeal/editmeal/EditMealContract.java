@@ -28,5 +28,7 @@ interface EditMealContract {
         void updateMeal(Meal meal);
 
         void updateMealImage(String key, Uri imageUri);
+
+        void deleteMeal(String key);
     }
 }

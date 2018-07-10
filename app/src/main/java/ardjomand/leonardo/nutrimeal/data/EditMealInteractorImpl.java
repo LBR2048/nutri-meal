@@ -91,4 +91,9 @@ public class EditMealInteractorImpl implements EditMealInteractor.Interactor {
             });
         }
     }
+
+    @Override
+    public void deleteMeal(String key) {
+        mealsRef.child(key).setValue(null);
+    }
 }

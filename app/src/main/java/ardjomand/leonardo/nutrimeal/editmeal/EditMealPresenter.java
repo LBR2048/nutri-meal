@@ -56,4 +56,9 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
             }
         }
     }
+
+    @Override
+    public void deleteMeal(String key) {
+        interactor.deleteMeal(key);
+    }
 }
