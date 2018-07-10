@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onEditMealClicked(String key) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, EditMealFragment.newInstance(key, "b"), EDIT_MEAL_FRAGMENT_TAG)
+                .replace(R.id.fragment_container, EditMealFragment.newInstance(key), EDIT_MEAL_FRAGMENT_TAG)
                 .addToBackStack(null)
                 .commit();
     }

@@ -43,9 +43,9 @@ import static android.app.Activity.RESULT_OK;
 public class EditMealFragment extends Fragment implements
         EditMealContract.View {
 
-    public static final String STATE_KEY = "state-key";
+    private static final String STATE_KEY = "state-key";
     private static final String ARG_KEY = "arg-meal";
-    public static final int PICK_IMAGE_CODE = 1046;
+    private static final int PICK_IMAGE_CODE = 1046;
 
     //region Views
     @BindView(R.id.edit_meal_image)
@@ -56,27 +56,17 @@ public class EditMealFragment extends Fragment implements
     TextInputEditText editMealDescription;
     @BindView(R.id.edit_meal_price)
     TextInputEditText editMealPrice;
-    Unbinder unbinder;
+    private Unbinder unbinder;
     //endregion
 
     private EditMealPresenter presenter;
     private String key;
-    private Uri imageUri;
 
     public EditMealFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditMealFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditMealFragment newInstance(String param1, String param2) {
+    public static EditMealFragment newInstance(String param1) {
         EditMealFragment fragment = new EditMealFragment();
         Bundle args = new Bundle();
         args.putString(ARG_KEY, param1);
@@ -96,7 +86,7 @@ public class EditMealFragment extends Fragment implements
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_meal, container, false);
@@ -146,6 +136,7 @@ public class EditMealFragment extends Fragment implements
     }
     //endregion
 
+    //region Menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -156,13 +147,15 @@ public class EditMealFragment extends Fragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit_meal_delete:
-                Toast.makeText(getContext(), "delete", Toast.LENGTH_SHORT).show();
                 presenter.deleteMeal(key);
-                getFragmentManager().popBackStack();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+    //endregion
 
     //region Presenter callbacks
     @Override
@@ -204,7 +197,7 @@ public class EditMealFragment extends Fragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && data != null) {
             if (requestCode == PICK_IMAGE_CODE) {
-                imageUri = data.getData();
+                Uri imageUri = data.getData();
                 presenter.updateMealImage(key, imageUri);
                 Toast.makeText(getContext(), imageUri.toString(), Toast.LENGTH_LONG).show();
             }
@@ -230,7 +223,7 @@ public class EditMealFragment extends Fragment implements
         }
     }
 
-    public void updateMeal() {
+    private void updateMeal() {
         String name = editMealName.getText().toString();
         String description = editMealDescription.getText().toString();
         String unitPriceString = editMealPrice.getText().toString();
