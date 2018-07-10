@@ -157,17 +157,19 @@ public class EditMealFragment extends Fragment implements
 
     @Override
     public void showMealImage(String imagePath) {
-        // TODO Maybe it is better to put this check in the presenter
-        if (imagePath != null && !imagePath.isEmpty()) {
-            StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
+        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
 
-            if (getContext() != null) {
-                GlideApp.with(getContext())
-                        .load(imageRef)
-                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
-                        .into(editMealImage);
-            }
+        if (getContext() != null) {
+            GlideApp.with(getContext())
+                    .load(imageRef)
+                    .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
+                    .into(editMealImage);
         }
+    }
+
+    @Override
+    public void showAddMealImageIcon() {
+        editMealImage.setImageResource(R.drawable.ic_add_a_photo_black_24dp);
     }
 
     @Override

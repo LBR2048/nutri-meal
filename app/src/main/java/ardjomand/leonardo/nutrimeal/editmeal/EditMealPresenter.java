@@ -49,7 +49,11 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     public void showMeal(Meal meal) {
         if (view != null) {
             view.showMeal(meal);
-            view.showMealImage(meal.getImagePath());
+            if (meal.getImagePath() != null && !meal.getImagePath().isEmpty()) {
+                view.showMealImage(meal.getImagePath());
+            } else {
+                view.showAddMealImageIcon();
+            }
         }
     }
 }

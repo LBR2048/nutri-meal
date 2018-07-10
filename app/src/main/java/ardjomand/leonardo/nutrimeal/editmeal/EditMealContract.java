@@ -12,6 +12,8 @@ interface EditMealContract {
 
         void showMealImage(String imagePath);
 
+        void showAddMealImageIcon();
+
         void showError();
     }
 
