@@ -159,13 +159,16 @@ public class EditMealFragment extends Fragment implements
 
     @Override
     public void showMealImage(String imagePath) {
-        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
+        // TODO Maybe it is better to put this check in the presenter
+        if (imagePath != null && !imagePath.isEmpty()) {
+            StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imagePath);
 
-        if (getContext() != null) {
-            GlideApp.with(getContext())
-                    .load(imageRef)
-                    .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
-                    .into(editMealImage);
+            if (getContext() != null) {
+                GlideApp.with(getContext())
+                        .load(imageRef)
+                        .apply(RequestOptions.centerCropTransform().fallback(R.mipmap.ic_launcher))
+                        .into(editMealImage);
+            }
         }
     }
 
@@ -199,6 +202,7 @@ public class EditMealFragment extends Fragment implements
         if (getActivity() instanceof AppCompatActivity) {
             ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (supportActionBar != null) {
+                // TODO change title to Add new meal if the FAB is clicked
                 supportActionBar.setTitle(R.string.edit_meal_title);
             }
         }
