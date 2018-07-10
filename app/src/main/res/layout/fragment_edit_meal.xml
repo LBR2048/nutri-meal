@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/text_margin"
                 android:hint="@string/edit_meal_description_hint"
-                android:inputType="textCapSentences"
+                android:inputType="textCapSentences|textMultiLine"
                 android:maxLines="5"
                 tools:text="Meal description description description description description description description description description description description description description description description description description description description" />
 
