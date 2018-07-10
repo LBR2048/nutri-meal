@@ -50,8 +50,7 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object value = dataSnapshot.getValue();
 
-                placeOrderInCustomerOrders(value);
-                placeOrderInOrders(value);
+                saveOrderInOrdersAndInCustomerOrders(value);
 
                 // Delete cart contents
                 customerCartRef.removeValue();
@@ -66,30 +65,31 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
         customerCartRef.addListenerForSingleValueEvent(valueEventListener);
     }
 
-    private void placeOrderInCustomerOrders(Object value) {
-        DatabaseReference orderRef = customerOrdersRef.push();
-        orderRef.setValue(value);
+    private void saveOrderInOrdersAndInCustomerOrders(Object value) {
+        // Get a key that will be used for the order in both nodes
+        String key = this.ordersRef.push().getKey();
+
+
+        // Save order in orders/$key
+        DatabaseReference ordersRef = this.ordersRef.child(key);
+        ordersRef.setValue(value);
 
         // Fill in missing properties
-        orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
-        orderRef.child("delivered").setValue(false);
+        ordersRef.child("deliveryDate").setValue(System.currentTimeMillis());
+        ordersRef.child("delivered").setValue(false);
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
-            orderRef.child("customerKey").setValue(firebaseUser.getUid());
+            ordersRef.child("customerKey").setValue(firebaseUser.getUid());
         }
-    }
 
-    private void placeOrderInOrders(Object value) {
-        DatabaseReference orderRef = ordersRef.push();
-        orderRef.setValue(value);
+
+        // Save order in customer-orders/$key
+        DatabaseReference customerOrdersRef = this.customerOrdersRef.child(key);
+        customerOrdersRef.setValue(value);
 
         // Fill in missing properties
-        orderRef.child("deliveryDate").setValue(System.currentTimeMillis());
-        orderRef.child("delivered").setValue(false);
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            orderRef.child("customerKey").setValue(firebaseUser.getUid());
-        }
+        customerOrdersRef.child("deliveryDate").setValue(System.currentTimeMillis());
+        customerOrdersRef.child("delivered").setValue(false);
     }
 
 }
