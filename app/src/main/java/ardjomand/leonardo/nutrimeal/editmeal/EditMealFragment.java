@@ -100,18 +100,16 @@ public class EditMealFragment extends Fragment implements
 
         setTitle();
 
+        presenter = new EditMealPresenter(this);
+
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onStart() {
+        super.onStart();
 
-        presenter = new EditMealPresenter(this);
-
-        if (savedInstanceState == null) {
-            presenter.subscribeForMealUpdates(key);
-        }
+        presenter.subscribeForMealUpdates(key);
     }
 
     @Override
