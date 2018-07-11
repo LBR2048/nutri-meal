@@ -161,6 +161,6 @@ public class CustomerOrdersFragment extends Fragment implements
 
     @Override
     public void onOrderClicked(CustomerOrder customerOrder) {
-//        presenter.addMealToCart(meal);
+        // TODO Add possibility to see more details about the order
     }
 }

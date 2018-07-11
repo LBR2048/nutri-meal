@@ -199,7 +199,6 @@ public class EditMealFragment extends Fragment implements
             if (requestCode == PICK_IMAGE_CODE) {
                 Uri imageUri = data.getData();
                 presenter.updateMealImage(key, imageUri);
-                Toast.makeText(getContext(), imageUri.toString(), Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -28,7 +28,6 @@ import butterknife.Unbinder;
 public class EditCartMealDialogFragment extends DialogFragment implements EditCartMealContract.View {
 
     private static final String ARG_CART_MEAL_KEY = "arg_cart_meal_key";
-    private static final String EDIT_CART_MEAL_DIALOG_FRAGMENT_TAG = "EditCartMealDialogFragmentTag";
 
     //region GUI
     @BindView(R.id.edit_cart_meal_name)

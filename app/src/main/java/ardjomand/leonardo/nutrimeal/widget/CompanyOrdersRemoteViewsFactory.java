@@ -27,7 +27,7 @@ public class CompanyOrdersRemoteViewsFactory implements RemoteViewsService.Remot
     private List<CompanyOrder> mCompanyOrders = new ArrayList<>();
     private CountDownLatch mCountDownLatch;
 
-    public CompanyOrdersRemoteViewsFactory(Context context, Intent intent) {
+    CompanyOrdersRemoteViewsFactory(Context context, Intent intent) {
         mContext = context;
         int mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);

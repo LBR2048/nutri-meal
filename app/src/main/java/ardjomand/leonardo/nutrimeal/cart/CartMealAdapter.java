@@ -27,12 +27,11 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  */
 public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHolder> {
 
-    public static final String TAG = CartMealAdapter.class.getSimpleName();
     private final Context mContext;
     private final CartFragment.OnOrderedMealFragmentInteractionListener mListener;
     private List<CartMeal> mValues;
 
-    public CartMealAdapter(List<CartMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener, Context context) {
+    CartMealAdapter(List<CartMeal> items, CartFragment.OnOrderedMealFragmentInteractionListener listener, Context context) {
         mValues = items;
         mListener = listener;
         mContext = context;
@@ -66,9 +65,11 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
         String formattedUnitPrice = currencyFormat.format(mValues.get(position).getUnitPrice());
         String formattedTotalPrice = currencyFormat.format(mValues.get(position).getTotalPrice());
-        String cartMealText = mContext.getString(R.string.cart_meal_price,
-                holder.mItem.getQuantity(), formattedUnitPrice, formattedTotalPrice);
-        holder.mPriceView.setText(cartMealText);
+        if (mContext != null) {
+            String cartMealText = mContext.getString(R.string.cart_meal_price,
+                    holder.mItem.getQuantity(), formattedUnitPrice, formattedTotalPrice);
+            holder.mPriceView.setText(cartMealText);
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +86,6 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mValues.size();
-    }
-
-    public void replaceData(List<CartMeal> cartMeals) {
-        mValues = cartMeals;
-        notifyDataSetChanged();
     }
 
     public void addData(CartMeal cartMeal) {

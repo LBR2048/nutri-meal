@@ -14,7 +14,6 @@ import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
 
-    public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     private static final String NODE_MEALS = "meals";
     private static final String NODE_AMOUNT = "amount";
     private static final String NODE_CUSTOMER_CART = "customer-cart";
@@ -22,12 +21,6 @@ public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
     private DatabaseReference customerCartRef;
 
     public EditCartInteractorImpl(MealsPresenter presenter) {
-        MealsPresenter mealsPresenter = presenter;
-
-        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference()
-                .child(NODE_MEALS);
-
-
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             customerCartRef = FirebaseDatabase.getInstance().getReference()
@@ -46,7 +39,9 @@ public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
                 if (dataSnapshot.exists()) {
                     // If yes, increment quantity and total cart amount
                     CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
-                    cartMeal.setQuantity(cartMeal.getQuantity() + 1);
+                    if (cartMeal != null) {
+                        cartMeal.setQuantity(cartMeal.getQuantity() + 1);
+                    }
                     customerCartRef.child(NODE_MEALS).child(meal.getKey()).setValue(cartMeal);
                     increaseAmount(meal.getUnitPrice());
 

@@ -14,7 +14,6 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
 
     private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     private static final String NODE_ORDERS = "orders";
-    public static final String NODE_MEALS = "meals";
     private static final String NODE_CUSTOMER_CART = "customer-cart";
 
     private DatabaseReference customerOrdersRef;
@@ -22,7 +21,6 @@ public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor
     private DatabaseReference customerCartRef;
 
     public PlaceOrderInteractorImpl(CartPresenter presenter) {
-        CartPresenter cartPresenter = presenter;
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {

@@ -17,10 +17,6 @@ public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Re
 
     private static final String TAG = CustomerOrdersRepositoryImpl.class.getSimpleName();
     private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    public static final String NODE_MEALS = "meals";
-
-    // TODO add current order ID
-    private final String orderId = "order1";
 
     private final CustomerOrdersPresenter presenter;
     private DatabaseReference ordersRef;

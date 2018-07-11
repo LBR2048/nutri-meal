@@ -6,9 +6,9 @@ public class CartMeal { // TODO extend from Meal
     private String name;
     private String description;
     private String imagePath;
-    private long unitPrice;
-    private int quantity;
-    private long totalPrice;
+    private long unitPrice = 0;
+    private int quantity = 0;
+    private long totalPrice = 0;
 
     public CartMeal() {
     }

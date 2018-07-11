@@ -25,7 +25,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     private List<User> mItems;
 
     UsersAdapter(List<User> orders, OnMealAdapterInteractionListener listener, Context context) {
-        Context mContext = context;
         mItems = orders;
         mListener = listener;
     }

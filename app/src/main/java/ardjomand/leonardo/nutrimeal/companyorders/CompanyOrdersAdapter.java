@@ -75,11 +75,6 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
         return mItems.size();
     }
 
-    public void replaceData(List<CompanyOrder> companyOrders) {
-        mItems = companyOrders;
-        notifyDataSetChanged();
-    }
-
     public void addData(CompanyOrder companyOrder) {
         mItems.add(companyOrder);
         notifyItemInserted(mItems.size() - 1);

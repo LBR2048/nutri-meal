@@ -157,6 +157,6 @@ public class CompanyOrdersFragment extends Fragment implements
 
     @Override
     public void onOrderClicked(CompanyOrder companyOrder) {
-
+        // TODO Add possibility to change order status
     }
 }
