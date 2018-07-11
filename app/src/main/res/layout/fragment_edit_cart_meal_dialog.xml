@@ -30,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_cart_meal_name"
+        android:contentDescription="@string/a11y_meal_image"
         tools:src="@mipmap/ic_launcher_round" />
 
     <Button

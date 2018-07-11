@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/a11y_meal_image"
             android:src="@drawable/ic_add_a_photo_black_24dp" />
 
     </LinearLayout>

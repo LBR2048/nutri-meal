@@ -41,4 +41,5 @@
 
     <string name="edit_meal_menu_item_delete">Delete</string>
     <string name="widget_title">Orders</string>
+    <string name="a11y_meal_image">Meal image</string>
 </resources>

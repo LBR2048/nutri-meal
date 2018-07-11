@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:scaleType="centerCrop"
-        tools:src="@drawable/ic_launcher_background"/>
+        android:contentDescription="@string/a11y_meal_image"
+        tools:src="@drawable/ic_launcher_background" />
 
     <LinearLayout
         android:layout_width="0dp"
