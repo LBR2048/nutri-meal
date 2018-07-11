@@ -23,12 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnOrdersFragmentInteractionListener}
- * interface.
- */
 public class CustomerOrdersFragment extends Fragment implements
         CustomerOrdersContract.View,
         CustomerOrdersAdapter.OnMealAdapterInteractionListener {
