@@ -52,38 +52,24 @@ public class Utils {
     @NonNull
     public static String formatCompanyOrder(Context context, CompanyOrder companyOrder) {
 
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(formatOrderKey(context, companyOrder.getKey()));
-        builder.append("\n");
-
-        builder.append(companyOrder.getCustomerKey());
-        builder.append("\n") ;
-
-        builder.append(formatDeliveryStatus(context, companyOrder.isDelivered()));
-        builder.append("\n");
-
-        builder.append(formatAmount(companyOrder.getAmount()));
-        builder.append("\n");
-
-        builder.append(formatMeals(context, companyOrder.getMeals()));
-
-        return builder.toString();
+        return formatOrderKey(context, companyOrder.getKey()) +
+                "\n" +
+                companyOrder.getCustomerKey() +
+                "\n" +
+                formatDeliveryStatus(context, companyOrder.isDelivered()) +
+                "\n" +
+                formatAmount(companyOrder.getAmount()) +
+                "\n" +
+                formatMeals(context, companyOrder.getMeals());
     }
 
     @NonNull
     public static String formatCustomerOrder(Context context, CustomerOrder customerOrder) {
 
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(formatOrderKey(context, customerOrder.getKey()));
-        builder.append("\n");
-
-        builder.append(formatDeliveryStatus(context, customerOrder.isDelivered()));
-        builder.append("\n");
-
-        builder.append(formatAmount(customerOrder.getAmount()));
-
-        return builder.toString();
+        return formatOrderKey(context, customerOrder.getKey()) +
+                "\n" +
+                formatDeliveryStatus(context, customerOrder.isDelivered()) +
+                "\n" +
+                formatAmount(customerOrder.getAmount());
     }
 }
