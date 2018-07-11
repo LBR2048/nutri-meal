@@ -37,7 +37,7 @@ public class UsersFragment extends Fragment implements
     //region Member variables
     private int mColumnCount = 1;
     private Unbinder unbinder;
-    private UsersPresenter presenter;
+    private UsersContract.Presenter presenter;
     private UsersAdapter adapter;
     //endregion
 

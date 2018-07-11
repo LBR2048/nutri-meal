@@ -37,7 +37,7 @@ public class CompanyOrdersFragment extends Fragment implements
     //region Member variables
     private int mColumnCount = 1;
     private Unbinder unbinder;
-    private CompanyOrdersPresenter presenter;
+    private CompanyOrdersContract.Presenter presenter;
     private CompanyOrdersAdapter adapter;
     //endregion
 

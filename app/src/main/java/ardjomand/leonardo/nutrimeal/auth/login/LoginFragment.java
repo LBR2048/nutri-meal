@@ -45,7 +45,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     //endregion
 
     private OnFragmentInteractionListener mListener;
-    private LoginPresenter presenter;
+    private LoginContract.Presenter presenter;
 
     //region Constructors
     public LoginFragment() {

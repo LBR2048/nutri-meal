@@ -45,7 +45,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     private int mColumnCount = 1;
     private OnOrderedMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private CartPresenter presenter;
+    private CartContract.Presenter presenter;
     private CartMealAdapter adapter;
     //endregion
 

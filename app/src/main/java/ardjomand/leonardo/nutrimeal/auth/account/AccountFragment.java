@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment implements AccountContract.View{
     //endregion
 
     private OnFragmentInteractionListener mListener;
-    private AccountPresenter presenter;
+    private AccountContract.Presenter presenter;
 
     //region Constructors
     public AccountFragment() {

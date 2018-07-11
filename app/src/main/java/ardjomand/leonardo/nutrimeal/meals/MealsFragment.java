@@ -55,7 +55,7 @@ public class MealsFragment extends Fragment implements
     private int mColumnCount = 1;
     private OnMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private MealsPresenter presenter;
+    private MealsContract.Presenter presenter;
     private MealAdapter adapter;
     //endregion
 

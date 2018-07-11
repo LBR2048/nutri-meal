@@ -41,7 +41,7 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
     //endregion
 
     private String mCartMealKey;
-    private EditCartMealDialogPresenter presenter;
+    private EditCartMealContract.Presenter presenter;
     private CartMeal cartMeal;
 
     public EditCartMealDialogFragment() {

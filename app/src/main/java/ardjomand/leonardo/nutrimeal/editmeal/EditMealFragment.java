@@ -59,7 +59,7 @@ public class EditMealFragment extends Fragment implements
     private Unbinder unbinder;
     //endregion
 
-    private EditMealPresenter presenter;
+    private EditMealContract.Presenter presenter;
     private String key;
 
     public EditMealFragment() {
