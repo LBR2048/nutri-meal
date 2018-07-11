@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.google.firebase.database.FirebaseDatabase;
 
-class MyApplication extends Application {
+public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
