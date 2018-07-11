@@ -196,12 +196,12 @@ public class MealsFragment extends Fragment implements
 
     @Override
     public void showEmptyMeals() {
-        Toast.makeText(getActivity(), "No meals available", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_no_items_available, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_items_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
     }
 
     @Override
