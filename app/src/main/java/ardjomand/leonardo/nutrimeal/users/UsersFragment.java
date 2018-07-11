@@ -19,17 +19,10 @@ import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.auth.User;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnOrdersFragmentInteractionListener}
- * interface.
- */
 public class UsersFragment extends Fragment implements
         UsersContract.View,
         UsersAdapter.OnMealAdapterInteractionListener {
@@ -43,17 +36,12 @@ public class UsersFragment extends Fragment implements
 
     //region Member variables
     private int mColumnCount = 1;
-    private OnOrdersFragmentInteractionListener mListener;
     private Unbinder unbinder;
     private UsersPresenter presenter;
     private UsersAdapter adapter;
     //endregion
 
     //region Constructors
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public UsersFragment() {
     }
 
@@ -108,18 +96,6 @@ public class UsersFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        // TODO Orders fragment has no need to communicate user interaction to Activity
-//        if (context instanceof OnOrdersFragmentInteractionListener) {
-//            mListener = (OnOrdersFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnOrdersFragmentInteractionListener");
-//        }
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         adapter.clearData();
@@ -130,12 +106,6 @@ public class UsersFragment extends Fragment implements
     public void onStop() {
         super.onStop();
         presenter.unsubscribeFromUsersUpdates();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -202,8 +172,4 @@ public class UsersFragment extends Fragment implements
         Toast.makeText(getContext(), item.getName() + " clicked", Toast.LENGTH_SHORT).show();
     }
 
-    public interface OnOrdersFragmentInteractionListener {
-        void onMealClicked(Meal item);
-        void onPlaceOrdersClicked();
-    }
 }

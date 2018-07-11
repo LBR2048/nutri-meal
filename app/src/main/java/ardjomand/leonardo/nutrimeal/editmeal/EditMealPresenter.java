@@ -13,7 +13,7 @@ import ardjomand.leonardo.nutrimeal.meals.Meal;
 public class EditMealPresenter implements EditMealContract.Presenter, EditMealInteractor.Presenter {
 
     private EditMealContract.View view;
-    private EditMealInteractor.Interactor interactor;
+    private final EditMealInteractor.Interactor interactor;
 
     EditMealPresenter(EditMealContract.View view) {
         this.view = view;

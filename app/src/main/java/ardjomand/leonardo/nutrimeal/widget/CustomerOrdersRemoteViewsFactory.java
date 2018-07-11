@@ -19,19 +19,17 @@ import ardjomand.leonardo.nutrimeal.data.CustomerWidgetRepositoryImpl;
  * Created by unity on 09/01/18.
  */
 
-public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final Context mContext;
-    private final int mAppWidgetId;
     private CustomerWidgetRepository repository;
 
     private List<CustomerOrder> mCustomerOrders = new ArrayList<>();
-    private RemoteViews views;
     private CountDownLatch mCountDownLatch;
 
     public CustomerOrdersRemoteViewsFactory(Context context, Intent intent) {
         mContext = context;
-        mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        int mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
@@ -66,7 +64,7 @@ public class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.Remo
 
     @Override
     public RemoteViews getViewAt(int i) {
-        views = new RemoteViews(mContext.getPackageName(), android.R.layout.simple_list_item_1);
+        RemoteViews views = new RemoteViews(mContext.getPackageName(), android.R.layout.simple_list_item_1);
         CustomerOrder customerOrder = mCustomerOrders.get(i);
         views.setTextViewText(android.R.id.text1, Utils.formatCustomerOrder(mContext, customerOrder));
         return views;

@@ -22,16 +22,14 @@ import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepositoryImpl;
 public class CompanyOrdersRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final Context mContext;
-    private final int mAppWidgetId;
     private CompanyWidgetRepository repository;
 
     private List<CompanyOrder> mCompanyOrders = new ArrayList<>();
-    private RemoteViews views;
     private CountDownLatch mCountDownLatch;
 
     public CompanyOrdersRemoteViewsFactory(Context context, Intent intent) {
         mContext = context;
-        mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        int mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
@@ -66,7 +64,7 @@ public class CompanyOrdersRemoteViewsFactory implements RemoteViewsService.Remot
 
     @Override
     public RemoteViews getViewAt(int i) {
-        views = new RemoteViews(mContext.getPackageName(), android.R.layout.simple_list_item_1);
+        RemoteViews views = new RemoteViews(mContext.getPackageName(), android.R.layout.simple_list_item_1);
         CompanyOrder companyOrder = mCompanyOrders.get(i);
         views.setTextViewText(android.R.id.text1, Utils.formatCompanyOrder(mContext, companyOrder));
         return views;

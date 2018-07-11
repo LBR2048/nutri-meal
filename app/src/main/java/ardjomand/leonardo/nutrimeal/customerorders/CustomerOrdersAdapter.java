@@ -25,7 +25,7 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
     private final Context mContext;
     private List<CustomerOrder> mItems;
 
-    public CustomerOrdersAdapter(List<CustomerOrder> customerOrders, OnMealAdapterInteractionListener listener, Context context) {
+    CustomerOrdersAdapter(List<CustomerOrder> customerOrders, OnMealAdapterInteractionListener listener, Context context) {
         mContext = context;
         mItems = customerOrders;
         mListener = listener;

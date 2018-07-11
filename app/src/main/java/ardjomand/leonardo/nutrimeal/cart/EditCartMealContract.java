@@ -1,6 +1,6 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
-public interface EditCartMealContract {
+interface EditCartMealContract {
 
     interface View {
 

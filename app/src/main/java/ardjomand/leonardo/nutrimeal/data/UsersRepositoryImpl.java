@@ -13,11 +13,11 @@ import ardjomand.leonardo.nutrimeal.users.UsersPresenter;
 
 public class UsersRepositoryImpl implements UsersRepository.Repository {
 
-    public static final String TAG = UsersRepositoryImpl.class.getSimpleName();
-    public static final String NODE_USERS = "users";
+    private static final String TAG = UsersRepositoryImpl.class.getSimpleName();
+    private static final String NODE_USERS = "users";
 
-    private UsersPresenter presenter;
-    private DatabaseReference usersRef;
+    private final UsersPresenter presenter;
+    private final DatabaseReference usersRef;
     private ChildEventListener usersEventListener;
 
     public UsersRepositoryImpl(UsersPresenter presenter) {

@@ -9,7 +9,7 @@ import ardjomand.leonardo.nutrimeal.data.MealRepositoryImpl;
 
 public class MealsPresenter implements MealsContract.Presenter, MealRepository.Presenter {
 
-    public static final String TAG = MealsPresenter.class.getSimpleName();
+    private static final String TAG = MealsPresenter.class.getSimpleName();
     private final EditCartInteractor.Interactor editCartInteractor;
     private final MealRepository.Repository repository;
     private MealsContract.View view;

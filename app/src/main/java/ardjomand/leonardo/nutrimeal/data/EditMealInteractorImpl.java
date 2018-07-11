@@ -22,9 +22,9 @@ import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class EditMealInteractorImpl implements EditMealInteractor.Interactor {
 
-    public static final String NODE_MEALS = "meals";
-    public static final String STORAGE_NODE_MEAL_IMAGES = "meal-images";
-    public static final String GS = "gs://nutrimeal-b786e.appspot.com";
+    private static final String NODE_MEALS = "meals";
+    private static final String STORAGE_NODE_MEAL_IMAGES = "meal-images";
+    private static final String GS = "gs://nutrimeal-b786e.appspot.com";
 
     private final DatabaseReference mealsRef;
     private final EditMealInteractor.Presenter presenter;

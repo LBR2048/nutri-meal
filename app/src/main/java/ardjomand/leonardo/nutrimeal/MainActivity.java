@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements
         MealsFragment.OnMealFragmentInteractionListener,
         CartFragment.OnOrderedMealFragmentInteractionListener {
 
-    public static final String EDIT_MEAL_FRAGMENT_TAG = "edit-meal-fragment-tag";
+    private static final String EDIT_MEAL_FRAGMENT_TAG = "edit-meal-fragment-tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

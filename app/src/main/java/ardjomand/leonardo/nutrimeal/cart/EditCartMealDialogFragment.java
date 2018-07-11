@@ -48,13 +48,6 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param key Parameter 1.
-     * @return A new instance of fragment EditCartMealDialogFragment.
-     */
     public static EditCartMealDialogFragment newInstance(String key) {
         EditCartMealDialogFragment fragment = new EditCartMealDialogFragment();
         Bundle args = new Bundle();
@@ -67,6 +60,7 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
         newInstance(key).show(activity.getSupportFragmentManager(), tag);
     }
 
+    //region Lifecycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +91,7 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
         super.onStop();
         presenter.unsubscribeFromCartMealsUpdates();
     }
+    //endregion
 
     @Override
     public void updateCartMeal(CartMeal cartMeal) {

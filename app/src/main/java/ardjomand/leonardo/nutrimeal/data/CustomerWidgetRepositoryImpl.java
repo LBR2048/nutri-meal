@@ -17,7 +17,7 @@ import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
 public class CustomerWidgetRepositoryImpl implements CustomerWidgetRepository {
 
     public static final String TAG = CustomerWidgetRepositoryImpl.class.getSimpleName();
-    public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
+    private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     public static final String NODE_MEALS = "meals";
 
     // TODO add current order ID

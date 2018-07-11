@@ -1,6 +1,6 @@
 package ardjomand.leonardo.nutrimeal.auth.account;
 
-public interface AccountContract {
+interface AccountContract {
 
     interface Presenter {
 

@@ -29,7 +29,7 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  */
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
-    public static final String TAG = MealAdapter.class.getSimpleName();
+    private static final String TAG = MealAdapter.class.getSimpleName();
     private final Context mContext;
     private List<Meal> mMeals;
     private final OnMealAdapterInteractionListener mListener;

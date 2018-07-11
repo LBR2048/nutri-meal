@@ -15,18 +15,16 @@ import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
 
     public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    public static final String NODE_MEALS = "meals";
-    public static final String NODE_AMOUNT = "amount";
-    public static final String NODE_CUSTOMER_CART = "customer-cart";
+    private static final String NODE_MEALS = "meals";
+    private static final String NODE_AMOUNT = "amount";
+    private static final String NODE_CUSTOMER_CART = "customer-cart";
 
-    private final MealsPresenter mealsPresenter;
-    private final DatabaseReference mealsRef;
     private DatabaseReference customerCartRef;
 
     public EditCartInteractorImpl(MealsPresenter presenter) {
-        mealsPresenter = presenter;
+        MealsPresenter mealsPresenter = presenter;
 
-        mealsRef = FirebaseDatabase.getInstance().getReference()
+        DatabaseReference mealsRef = FirebaseDatabase.getInstance().getReference()
                 .child(NODE_MEALS);
 
 

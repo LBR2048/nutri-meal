@@ -8,7 +8,7 @@ public class EditCartMealDialogPresenter implements EditCartMealContract.Present
     private EditCartMealContract.View view;
     private final EditCartMealQuantityInteractor.Interactor editCartInteractor;
 
-    public EditCartMealDialogPresenter(EditCartMealContract.View view) {
+    EditCartMealDialogPresenter(EditCartMealContract.View view) {
         this.view = view;
         editCartInteractor = new EditCartMealQuantityInteractorImpl(this);
     }

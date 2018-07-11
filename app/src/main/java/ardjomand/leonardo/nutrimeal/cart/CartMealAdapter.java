@@ -107,14 +107,14 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView mImageView;
-        public final TextView mNameView;
-        public final TextView mDescriptionView;
-        public final TextView mPriceView;
-        public CartMeal mItem;
+        final View mView;
+        final ImageView mImageView;
+        final TextView mNameView;
+        final TextView mDescriptionView;
+        final TextView mPriceView;
+        CartMeal mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mImageView = view.findViewById(R.id.meal_image);

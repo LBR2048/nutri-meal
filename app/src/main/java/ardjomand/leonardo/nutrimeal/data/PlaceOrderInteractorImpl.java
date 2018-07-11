@@ -12,18 +12,17 @@ import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 
 public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor {
 
-    public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    public static final String NODE_ORDERS = "orders";
+    private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
+    private static final String NODE_ORDERS = "orders";
     public static final String NODE_MEALS = "meals";
-    public static final String NODE_CUSTOMER_CART = "customer-cart";
+    private static final String NODE_CUSTOMER_CART = "customer-cart";
 
-    private final CartPresenter cartPresenter;
     private DatabaseReference customerOrdersRef;
     private DatabaseReference ordersRef;
     private DatabaseReference customerCartRef;
 
     public PlaceOrderInteractorImpl(CartPresenter presenter) {
-        cartPresenter = presenter;
+        CartPresenter cartPresenter = presenter;
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {

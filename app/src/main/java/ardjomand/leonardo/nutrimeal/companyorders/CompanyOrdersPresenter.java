@@ -7,7 +7,7 @@ import ardjomand.leonardo.nutrimeal.data.CompanyOrdersRepositoryImpl;
 
 public class CompanyOrdersPresenter implements CompanyOrdersContract.Presenter, CompanyOrdersRepository.Presenter {
 
-    public static final String TAG = CompanyOrdersPresenter.class.getSimpleName();
+    private static final String TAG = CompanyOrdersPresenter.class.getSimpleName();
     private final CompanyOrdersRepository.Repository repository;
     private CompanyOrdersContract.View view;
 

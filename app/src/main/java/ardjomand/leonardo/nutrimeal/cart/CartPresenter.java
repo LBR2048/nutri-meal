@@ -10,7 +10,7 @@ import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class CartPresenter implements CartContract.Presenter, CartRepository.Presenter {
 
-    public static final String TAG = CartPresenter.class.getSimpleName();
+    private static final String TAG = CartPresenter.class.getSimpleName();
 
     private CartContract.View view;
     private final CartRepository.Repository repository;

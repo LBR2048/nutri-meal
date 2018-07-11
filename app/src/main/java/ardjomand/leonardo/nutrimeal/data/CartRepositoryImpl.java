@@ -15,11 +15,11 @@ import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 
 public class CartRepositoryImpl implements CartRepository.Repository {
 
-    public static final String NODE_CUSTOMER_CART = "customer-cart";
-    public static final String NODE_MEALS = "meals";
-    public static final String TAG = CartRepositoryImpl.class.getSimpleName();
+    private static final String NODE_CUSTOMER_CART = "customer-cart";
+    private static final String NODE_MEALS = "meals";
+    private static final String TAG = CartRepositoryImpl.class.getSimpleName();
 
-    private CartPresenter presenter;
+    private final CartPresenter presenter;
     private DatabaseReference customerCartRef;
     private ChildEventListener cartEventListener;
 

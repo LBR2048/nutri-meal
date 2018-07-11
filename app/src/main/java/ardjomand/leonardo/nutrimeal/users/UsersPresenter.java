@@ -8,7 +8,7 @@ import ardjomand.leonardo.nutrimeal.data.UsersRepositoryImpl;
 
 public class UsersPresenter implements UsersContract.Presenter, UsersRepository.Presenter {
 
-    public static final String TAG = UsersPresenter.class.getSimpleName();
+    private static final String TAG = UsersPresenter.class.getSimpleName();
     private final UsersRepository.Repository repository;
     private UsersContract.View view;
 

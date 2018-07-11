@@ -18,8 +18,8 @@ import ardjomand.leonardo.nutrimeal.auth.User;
 
 public class AuthRepositoryImpl implements AuthRepository.Interactor {
 
-    public static final String TAG = AuthRepositoryImpl.class.getSimpleName();
-    public static final String NODE_USERS = "users";
+    private static final String TAG = AuthRepositoryImpl.class.getSimpleName();
+    private static final String NODE_USERS = "users";
 
     private final FirebaseAuth auth;
     private final DatabaseReference usersRef;

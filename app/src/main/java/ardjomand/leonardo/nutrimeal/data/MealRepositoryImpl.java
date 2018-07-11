@@ -13,11 +13,11 @@ import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class MealRepositoryImpl implements MealRepository.Repository {
 
-    public static final String TAG = MealRepositoryImpl.class.getSimpleName();
-    public static final String NODE_MEALS = "meals";
+    private static final String TAG = MealRepositoryImpl.class.getSimpleName();
+    private static final String NODE_MEALS = "meals";
 
-    private MealsPresenter presenter;
-    private DatabaseReference mealsRef;
+    private final MealsPresenter presenter;
+    private final DatabaseReference mealsRef;
     private ChildEventListener mealsEventListener;
 
     public MealRepositoryImpl(MealsPresenter presenter) {

@@ -22,11 +22,10 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
     private final OnMealAdapterInteractionListener mListener;
-    private final Context mContext;
     private List<User> mItems;
 
-    public UsersAdapter(List<User> orders, OnMealAdapterInteractionListener listener, Context context) {
-        mContext = context;
+    UsersAdapter(List<User> orders, OnMealAdapterInteractionListener listener, Context context) {
+        Context mContext = context;
         mItems = orders;
         mListener = listener;
     }

@@ -204,6 +204,7 @@ public class EditMealFragment extends Fragment implements
         }
     }
 
+    //region Helper methods
     private void pickPhotoFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (getActivity() != null) {
@@ -238,6 +239,7 @@ public class EditMealFragment extends Fragment implements
         Meal updatedMeal = new Meal(key, name, description, "", unitPrice, true);
         presenter.updateMeal(updatedMeal);
     }
+    //endregion
 
     @OnClick(R.id.edit_meal_image)
     public void onViewClicked() {

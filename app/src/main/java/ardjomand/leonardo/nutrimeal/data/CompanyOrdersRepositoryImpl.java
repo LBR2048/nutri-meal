@@ -15,14 +15,14 @@ import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersPresenter;
 
 public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repository {
 
-    public static final String TAG = CompanyOrdersRepositoryImpl.class.getSimpleName();
-    public static final String NODE_ORDERS = "orders";
+    private static final String TAG = CompanyOrdersRepositoryImpl.class.getSimpleName();
+    private static final String NODE_ORDERS = "orders";
     public static final String NODE_MEALS = "meals";
 
     // TODO add current order ID
     private final String orderId = "order1";
 
-    private CompanyOrdersPresenter presenter;
+    private final CompanyOrdersPresenter presenter;
     private DatabaseReference ordersRef;
     private ChildEventListener ordersEventListener;
 

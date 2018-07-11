@@ -18,7 +18,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.widget.OrdersWidget;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +42,6 @@ public class CustomerOrdersFragment extends Fragment implements
 
     //region Member variables
     private int mColumnCount = 1;
-    private OnOrdersFragmentInteractionListener mListener;
     private Unbinder unbinder;
     private CustomerOrdersPresenter presenter;
     private CustomerOrdersAdapter adapter;
@@ -108,18 +106,6 @@ public class CustomerOrdersFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        // TODO Orders fragment has no need to communicate user interaction to Activity
-//        if (context instanceof OnOrdersFragmentInteractionListener) {
-//            mListener = (OnOrdersFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnOrdersFragmentInteractionListener");
-//        }
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         adapter.clearData();
@@ -130,12 +116,6 @@ public class CustomerOrdersFragment extends Fragment implements
     public void onStop() {
         super.onStop();
         presenter.unsubscribeFromOrdersUpdates();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -188,10 +168,5 @@ public class CustomerOrdersFragment extends Fragment implements
     @Override
     public void onOrderClicked(CustomerOrder customerOrder) {
 //        presenter.addMealToCart(meal);
-    }
-
-    public interface OnOrdersFragmentInteractionListener {
-        void onMealClicked(Meal item);
-        void onPlaceOrdersClicked();
     }
 }
