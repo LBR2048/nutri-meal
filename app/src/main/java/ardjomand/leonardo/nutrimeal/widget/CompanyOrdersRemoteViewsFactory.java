@@ -97,6 +97,13 @@ public class CompanyOrdersRemoteViewsFactory implements RemoteViewsService.Remot
                 mCompanyOrders = companyOrders;
                 mCountDownLatch.countDown();
             }
+
+            @Override
+            public void onUserLoggedOut() {
+                // TODO show a user logged out message on widget
+                mCompanyOrders.clear();
+                mCountDownLatch.countDown();
+            }
         });
     }
 

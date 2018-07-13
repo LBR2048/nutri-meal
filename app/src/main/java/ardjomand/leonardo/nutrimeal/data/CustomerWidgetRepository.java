@@ -8,6 +8,7 @@ public interface CustomerWidgetRepository {
 
     interface LoadCustomersOrdersCallback {
         void onComplete(List<CustomerOrder> customerOrders);
+        void onUserLoggedOut();
     }
 
     void loadCustomerOrders(LoadCustomersOrdersCallback loadCustomersOrdersCallback);

@@ -10,5 +10,6 @@ public interface CompanyWidgetRepository {
 
     interface LoadCompanyOrdersCallback {
         void onComplete(List<CompanyOrder> companyOrders);
+        void onUserLoggedOut();
     }
 }

@@ -97,6 +97,13 @@ class CustomerOrdersRemoteViewsFactory implements RemoteViewsService.RemoteViews
                 mCustomerOrders = customerOrders;
                 mCountDownLatch.countDown();
             }
+
+            @Override
+            public void onUserLoggedOut() {
+                // TODO show a user logged out message on widget
+                mCustomerOrders.clear();
+                mCountDownLatch.countDown();
+            }
         });
     }
 
