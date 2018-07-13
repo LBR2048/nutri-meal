@@ -2,37 +2,34 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.orders.Order;
-import ardjomand.leonardo.nutrimeal.orders.OrdersPresenter;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersPresenter;
 
-public class OrdersRepositoryImpl implements OrdersRepository.Repository {
+public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repository {
 
-    public static final String TAG = OrdersRepositoryImpl.class.getSimpleName();
-    public static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    public static final String NODE_MEALS = "meals";
+    private static final String TAG = CompanyOrdersRepositoryImpl.class.getSimpleName();
+    private static final String NODE_ORDERS = "orders";
 
-    // TODO add current customer ID
-    private final String customerId = "customer1";
-
-    // TODO add current order ID
-    private final String orderId = "order1";
-
-    private OrdersPresenter presenter;
+    private final CompanyOrdersPresenter presenter;
     private DatabaseReference ordersRef;
     private ChildEventListener ordersEventListener;
 
-    public OrdersRepositoryImpl(OrdersPresenter presenter) {
+    public CompanyOrdersRepositoryImpl(CompanyOrdersPresenter presenter) {
         this.presenter = presenter;
 
-        ordersRef = FirebaseDatabase.getInstance().getReference()
-                .child(NODE_CUSTOMER_ORDERS)
-                .child(customerId);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            ordersRef = FirebaseDatabase.getInstance().getReference()
+                    .child(NODE_ORDERS);
+        }
     }
 
     @Override
@@ -42,12 +39,20 @@ public class OrdersRepositoryImpl implements OrdersRepository.Repository {
             ordersEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    presenter.onOrderAdded(dataSnapshot.getValue(Order.class));
+                    CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
+                    if (companyOrder != null) {
+                        companyOrder.setKey(dataSnapshot.getKey());
+                        presenter.onOrderAdded(companyOrder);
+                    }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    presenter.onOrderChanged(dataSnapshot.getValue(Order.class));
+                    CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
+                    if (companyOrder != null) {
+                        companyOrder.setKey(dataSnapshot.getKey());
+                        presenter.onOrderChanged(companyOrder);
+                    }
                 }
 
                 @Override

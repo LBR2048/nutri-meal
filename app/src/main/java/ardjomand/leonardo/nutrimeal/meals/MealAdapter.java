@@ -1,17 +1,27 @@
 package ardjomand.leonardo.nutrimeal.meals;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.text.NumberFormat;
 import java.util.List;
+
+import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Meal} and makes a call to the
@@ -19,10 +29,13 @@ import java.util.List;
  */
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
+    private static final String TAG = MealAdapter.class.getSimpleName();
+    private final Context mContext;
     private List<Meal> mMeals;
     private final OnMealAdapterInteractionListener mListener;
 
-    public MealAdapter(List<Meal> meals, OnMealAdapterInteractionListener listener) {
+    public MealAdapter(List<Meal> meals, OnMealAdapterInteractionListener listener, Context context) {
+        mContext = context;
         mMeals = meals;
         mListener = listener;
     }
@@ -38,7 +51,29 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mMeals.get(position);
-        holder.mImageView.setText(mMeals.get(position).getImagePath());
+
+        String imagePath = mMeals.get(position).getImagePath();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            FirebaseStorage.getInstance().getReferenceFromUrl(imagePath).getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if (uri != null) {
+                                Glide.with(mContext)
+                                        .load(uri)
+                                        .apply(RequestOptions.fitCenterTransform().fallback(R.mipmap.ic_launcher))
+                                        .into(holder.mImageView);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Log.e(TAG, exception.getMessage());
+                        }
+                    });
+        }
+
         holder.mNameView.setText(mMeals.get(position).getName());
         holder.mDescriptionView.setText(mMeals.get(position).getDescription());
 
@@ -62,9 +97,15 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         return mMeals.size();
     }
 
+    public void updateData(Meal meal) {
+        int index = getIndexForKey(meal.getKey());
+        mMeals.set(index, meal);
+        notifyItemChanged(index);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
-        final TextView mImageView;
+        final ImageView mImageView;
         final TextView mNameView;
         final TextView mDescriptionView;
         final TextView mPriceView;
@@ -73,7 +114,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         ViewHolder(View view) {
             super(view);
             mView = view;
-            mImageView = view.findViewById(R.id.meal_imagePath);
+            mImageView = view.findViewById(R.id.meal_image);
             mNameView = view.findViewById(R.id.meal_name);
             mDescriptionView = view.findViewById(R.id.meal_description);
             mPriceView = view.findViewById(R.id.meal_price);
@@ -81,7 +122,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mImageView.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + "'";
         }
     }
 
@@ -99,7 +140,21 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         mMeals.clear();
         notifyDataSetChanged();
     }
+
     public interface OnMealAdapterInteractionListener {
         void onMealClicked(Meal item);
+    }
+
+    // TODO move to Utils class using generic type
+    private int getIndexForKey(String key) {
+        int index = 0;
+        for (Meal meal : mMeals) {
+            if (meal.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
     }
 }

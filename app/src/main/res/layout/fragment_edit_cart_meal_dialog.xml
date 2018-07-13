@@ -1,0 +1,70 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="ardjomand.leonardo.nutrimeal.cart.EditCartMealDialogFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/edit_cart_meal_name"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Meal 15" />
+
+    <ImageView
+        android:id="@+id/edit_cart_meal_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_cart_meal_name"
+        android:contentDescription="@string/a11y_meal_image"
+        tools:src="@mipmap/ic_launcher_round" />
+
+    <Button
+        android:id="@+id/edit_cart_meal_increase"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/edit_cart_meal_increase"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_cart_meal_quantity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/edit_cart_meal_quantity"
+        app:layout_constraintTop_toTopOf="@+id/edit_cart_meal_quantity" />
+
+    <Button
+        android:id="@+id/edit_cart_meal_decrease"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/edit_cart_meal_decrease"
+        app:layout_constraintEnd_toStartOf="@+id/edit_cart_meal_quantity"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_cart_meal_image" />
+
+    <TextView
+        android:id="@+id/edit_cart_meal_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_cart_meal_decrease"
+        app:layout_constraintEnd_toStartOf="@+id/edit_cart_meal_increase"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/edit_cart_meal_decrease"
+        app:layout_constraintTop_toTopOf="@+id/edit_cart_meal_decrease"
+        tools:text="2" />
+
+</android.support.constraint.ConstraintLayout>

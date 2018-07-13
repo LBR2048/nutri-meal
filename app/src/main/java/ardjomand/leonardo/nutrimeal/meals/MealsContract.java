@@ -10,14 +10,20 @@ interface MealsContract {
 
         void addMeal(Meal meal);
 
+        void updateMeal(Meal meal);
+
         void showEmptyMeals();
 
         void showError();
 
-        void goToEditMeal(Meal meal);
+        void goToEditMeal(String key);
+
+        void goToEditCartMealQuantity(String key);
     }
 
     interface Presenter {
+
+        void setView(View view);
 
         void subscribeToMealsUpdates();
 
@@ -25,6 +31,10 @@ interface MealsContract {
 
         void addMealToCart(Meal meal);
 
-        void editMeal(Meal meal);
+        void editMeal(String key);
+
+        void editCartMealQuantity(String key);
+
+        void createNewMeal();
     }
 }

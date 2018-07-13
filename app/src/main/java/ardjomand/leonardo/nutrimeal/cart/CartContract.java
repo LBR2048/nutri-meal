@@ -6,7 +6,9 @@ interface CartContract {
 
     interface View {
 
-        void addSelectedMeal(CartMeal meal);
+        void addCartMeal(CartMeal meal);
+
+        void updateCartMeal(CartMeal meal);
 
         void showEmptyMeals();
 
@@ -14,6 +16,8 @@ interface CartContract {
     }
 
     interface Presenter {
+
+        void setView(View view);
 
         void subscribeToCartUpdates();
 

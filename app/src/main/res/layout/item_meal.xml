@@ -6,25 +6,19 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/meal_image"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="2"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"/>
+        android:contentDescription="@string/a11y_meal_image"
+        tools:src="@drawable/ic_launcher_background" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/meal_imagePath"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem"
-            tools:text ="Image Path" />
 
         <TextView
             android:id="@+id/meal_name"
@@ -40,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:textAppearance="?attr/textAppearanceListItem"
-            tools:text ="Description" />
+            tools:text ="Description description description description" />
 
         <TextView
             android:id="@+id/meal_price"

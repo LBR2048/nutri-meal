@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.users;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,20 +18,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.auth.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnOrdersFragmentInteractionListener}
- * interface.
- */
-public class OrdersFragment extends Fragment implements
-        OrdersContract.View,
-        OrdersAdapter.OnMealAdapterInteractionListener {
+public class UsersFragment extends Fragment implements
+        UsersContract.View,
+        UsersAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
@@ -42,23 +36,18 @@ public class OrdersFragment extends Fragment implements
 
     //region Member variables
     private int mColumnCount = 1;
-    private OnOrdersFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private OrdersPresenter presenter;
-    private OrdersAdapter adapter;
+    private UsersContract.Presenter presenter;
+    private UsersAdapter adapter;
     //endregion
 
     //region Constructors
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public OrdersFragment() {
+    public UsersFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static OrdersFragment newInstance(int columnCount) {
-        OrdersFragment fragment = new OrdersFragment();
+    public static UsersFragment newInstance(int columnCount) {
+        UsersFragment fragment = new UsersFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -75,7 +64,7 @@ public class OrdersFragment extends Fragment implements
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        presenter = new OrdersPresenter(this);
+        presenter = new UsersPresenter(this);
     }
 
     @Override
@@ -95,7 +84,7 @@ public class OrdersFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new OrdersAdapter(new ArrayList<Order>(), this, getContext());
+        adapter = new UsersAdapter(new ArrayList<User>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration
@@ -107,34 +96,16 @@ public class OrdersFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        // TODO Orders fragment has no need to communicate user interaction to Activity
-//        if (context instanceof OnOrdersFragmentInteractionListener) {
-//            mListener = (OnOrdersFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnOrdersFragmentInteractionListener");
-//        }
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         adapter.clearData();
-        presenter.subscribeToOrdersUpdates();
+        presenter.subscribeToUsersUpdates();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.unsubscribeFromOrdersUpdates();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        presenter.unsubscribeFromUsersUpdates();
     }
 
     @Override
@@ -142,22 +113,34 @@ public class OrdersFragment extends Fragment implements
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
+
     //endregion
 
     //region Presenter callbacks
     @Override
-    public void addOrder(Order order) {
-        adapter.addData(order);
+    public void addUser(User user) {
+        adapter.addData(user);
     }
 
     @Override
-    public void showEmptyOrder() {
-        Toast.makeText(getActivity(), "Cart is empty", Toast.LENGTH_SHORT).show();
+    public void updateUser(User user) {
+        adapter.updateData(user);
+    }
+
+    @Override
+    public void showEmptyUser() {
+        Toast.makeText(getActivity(), R.string.error_no_items_available, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_items_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
     }
     //endregion
 
@@ -171,12 +154,8 @@ public class OrdersFragment extends Fragment implements
     }
 
     @Override
-    public void onOrderClicked(Order order) {
-//        presenter.addMealToCart(meal);
+    public void onUserClicked(User item) {
+        Toast.makeText(getContext(), item.getName() + " clicked", Toast.LENGTH_SHORT).show();
     }
 
-    public interface OnOrdersFragmentInteractionListener {
-        void onMealClicked(Meal item);
-        void onPlaceOrdersClicked();
-    }
 }

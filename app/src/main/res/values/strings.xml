@@ -3,10 +3,45 @@
     <string name="meals_title">Meals</string>
     <string name="go_to_cart_button">Go to cart</string>
     <string name="cart_title">Cart</string>
-    <string name="place_order_button">Place order</string>
+    <string name="place_order_button">Place Order</string>
     <string name="orders_title">Orders</string>
     <string name="order_delivered">Delivered</string>
     <string name="order_not_delivered">Not yet delivered</string>
     <string name="cart_meal_price">%1$d x %2$s = %3$s</string>
     <string name="edit_meal_title">Edit meal</string>
+
+    <!-- Auth common -->
+    <string name="login_account_auth_email_hint">E-mail</string>
+    <string name="login_account_password_hint">Password</string>
+
+    <!-- Login -->
+    <string name="login_button">Login</string>
+    <string name="login_create_account">Create account</string>
+    <string name="login_forgot_password">I forgot my password</string>
+    <string name="login_facebook_button">Login with Facebook</string>
+    <string name="login_google_button">Login with Google+</string>
+
+    <!-- Account -->
+    <string name="account_name_hint">Name</string>
+    <string name="account_company_hint">Company</string>
+    <string name="account_repeat_password_hint">Repeat password</string>
+    <string name="account_register_button">Register</string>
+    <string name="logout_menu_item">Logout</string>
+    <string name="order_id">Order ID: %1$s</string>
+    <string name="edit_meal_description_hint">Description</string>
+    <string name="edit_meal_name_hint">Name</string>
+    <string name="edit_meal_price_hint">Price</string>
+    <string name="menu_item_orders">Orders</string>
+    <string name="orders_cart_meal_price">%1$s: %2$d x %3$s = %4$s</string>
+    <string name="add_widget">Add widget</string>
+
+
+    <string name="edit_cart_meal_increase">+</string>
+    <string name="edit_cart_meal_decrease">-</string>
+
+    <string name="edit_meal_menu_item_delete">Delete</string>
+    <string name="widget_title">Orders</string>
+    <string name="a11y_meal_image">Meal image</string>
+    <string name="error_no_items_available">No items available</string>
+    <string name="error_items_could_not_be_downloaded">Items could not be downloaded</string>
 </resources>

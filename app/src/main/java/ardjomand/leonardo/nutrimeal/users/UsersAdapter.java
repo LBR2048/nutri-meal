@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.orders;
+package ardjomand.leonardo.nutrimeal.users;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.auth.User;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
@@ -19,14 +19,12 @@ import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractio
  * {@link RecyclerView.Adapter} that can display a {@link Meal} and makes a call to the
  * specified {@link OnMealFragmentInteractionListener}.
  */
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
+public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
     private final OnMealAdapterInteractionListener mListener;
-    private final Context mContext;
-    private List<Order> mItems;
+    private List<User> mItems;
 
-    public OrdersAdapter(List<Order> orders, OnMealAdapterInteractionListener listener, Context context) {
-        mContext = context;
+    UsersAdapter(List<User> orders, OnMealAdapterInteractionListener listener, Context context) {
         mItems = orders;
         mListener = listener;
     }
@@ -35,7 +33,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_order, parent, false);
+                .inflate(R.layout.item_user, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,15 +41,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mItems.get(position);
 
-        // TODO show correct ID
-        holder.mIdView.setText("Order ID");
-
-        holder.mDeliveryStatus.setText(mItems.get(position).isDelivered()
-                ? mContext.getString(R.string.order_delivered)
-                : mContext.getString(R.string.order_not_delivered));
-
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        holder.mAmountView.setText(format.format(mItems.get(position).getAmount()));
+        holder.mNameView.setText(holder.mItem.getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +49,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onOrderClicked(holder.mItem);
+                    mListener.onUserClicked(holder.mItem);
                 }
             }
         });
@@ -70,13 +60,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void replaceData(List<Order> orders) {
+    public void replaceData(List<User> orders) {
         mItems = orders;
         notifyDataSetChanged();
     }
 
-    public void addData(Order order) {
-        mItems.add(order);
+    public void addData(User user) {
+        mItems.add(user);
         notifyItemInserted(mItems.size() - 1);
     }
 
@@ -85,28 +75,42 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public void updateData(User user) {
+        int index = getIndexForKey(user.getKey());
+        mItems.set(index, user);
+        notifyItemChanged(index);
+    }
+
+    private int getIndexForKey(String key) {
+        int index = 0;
+        for (User user : mItems) {
+            if (user.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
+    }
+
     public interface OnMealAdapterInteractionListener {
-        void onOrderClicked(Order item);
+        void onUserClicked(User item);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
-        final TextView mIdView;
-        final TextView mDeliveryStatus;
-        final TextView mAmountView;
-        Order mItem;
+        final TextView mNameView;
+        User mItem;
 
         ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.order_id);
-            mDeliveryStatus = view.findViewById(R.id.order_delivery_status);
-            mAmountView = view.findViewById(R.id.order_amount);
+            mNameView = view.findViewById(R.id.user_name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mDeliveryStatus.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + "'";
         }
     }
 }

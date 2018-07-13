@@ -13,11 +13,11 @@ import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class MealRepositoryImpl implements MealRepository.Repository {
 
-    public static final String TAG = MealRepositoryImpl.class.getSimpleName();
-    public static final String NODE_MEALS = "meals";
+    private static final String TAG = MealRepositoryImpl.class.getSimpleName();
+    private static final String NODE_MEALS = "meals";
 
-    private MealsPresenter presenter;
-    private DatabaseReference mealsRef;
+    private final MealsPresenter presenter;
+    private final DatabaseReference mealsRef;
     private ChildEventListener mealsEventListener;
 
     public MealRepositoryImpl(MealsPresenter presenter) {
@@ -28,21 +28,24 @@ public class MealRepositoryImpl implements MealRepository.Repository {
 
     @Override
     public void subscribeForMealUpdates() {
-
         if (mealsEventListener == null) {
             mealsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                    meal.setKey(dataSnapshot.getKey());
-                    presenter.onMealAdded(meal);
+                    if (meal != null) {
+                        meal.setKey(dataSnapshot.getKey());
+                        presenter.onMealAdded(meal);
+                    }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     Meal meal = dataSnapshot.getValue(Meal.class);
-                    meal.setKey(dataSnapshot.getKey());
-                    presenter.onMealChanged(meal);
+                    if (meal != null) {
+                        meal.setKey(dataSnapshot.getKey());
+                        presenter.onMealChanged(meal);
+                    }
                 }
 
                 @Override
@@ -72,5 +75,11 @@ public class MealRepositoryImpl implements MealRepository.Repository {
             mealsEventListener = null;
             Log.i(TAG, "Unsubscribing from meal updates");
         }
+    }
+
+    @Override
+    public String createMeal() {
+        DatabaseReference newMealRef = mealsRef.push();
+        return newMealRef.getKey();
     }
 }

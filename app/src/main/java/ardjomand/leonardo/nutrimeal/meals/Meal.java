@@ -5,6 +5,7 @@ public class Meal {
     private String name;
     private String description;
     private String imagePath;
+    private long imageLastModified;
     private long unitPrice;
     private boolean available;
 
@@ -14,14 +15,6 @@ public class Meal {
 
     public Meal(String key, String name, String description, String imagePath, long unitPrice, boolean available) {
         this.key = key;
-        this.name = name;
-        this.description = description;
-        this.imagePath = imagePath;
-        this.unitPrice = unitPrice;
-        this.available = available;
-    }
-
-    public Meal(String name, String description, String imagePath, long unitPrice, boolean available) {
         this.name = name;
         this.description = description;
         this.imagePath = imagePath;
@@ -59,6 +52,14 @@ public class Meal {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public long getImageLastModified() {
+        return imageLastModified;
+    }
+
+    public void setImageLastModified(long imageLastModified) {
+        this.imageLastModified = imageLastModified;
     }
 
     public long getUnitPrice() {

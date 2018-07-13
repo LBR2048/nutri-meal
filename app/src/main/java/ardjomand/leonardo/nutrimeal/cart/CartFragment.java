@@ -45,7 +45,7 @@ public class CartFragment extends Fragment implements CartContract.View {
     private int mColumnCount = 1;
     private OnOrderedMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private CartPresenter presenter;
+    private CartContract.Presenter presenter;
     private CartMealAdapter adapter;
     //endregion
 
@@ -136,24 +136,30 @@ public class CartFragment extends Fragment implements CartContract.View {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        presenter.setView(null);
         unbinder.unbind();
     }
     //endregion
 
     //region Presenter callbacks
     @Override
-    public void addSelectedMeal(CartMeal cartMeal) {
+    public void addCartMeal(CartMeal cartMeal) {
         adapter.addData(cartMeal);
     }
 
     @Override
+    public void updateCartMeal(CartMeal cartMeal) {
+        adapter.updateData(cartMeal);
+    }
+
+    @Override
     public void showEmptyMeals() {
-        Toast.makeText(getActivity(), "No meals available in cart", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_no_items_available, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_no_items_available, Toast.LENGTH_SHORT).show();
     }
     //endregion
 

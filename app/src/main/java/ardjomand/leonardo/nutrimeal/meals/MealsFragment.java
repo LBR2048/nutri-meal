@@ -3,6 +3,7 @@ package ardjomand.leonardo.nutrimeal.meals;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,13 +47,15 @@ public class MealsFragment extends Fragment implements
     Button button;
     @BindView(R.id.list)
     RecyclerView recyclerView;
+    @BindView(R.id.meals_add_fab)
+    FloatingActionButton addMeal;
     //endregion
 
     //region Member variables
     private int mColumnCount = 1;
     private OnMealFragmentInteractionListener mListener;
     private Unbinder unbinder;
-    private MealsPresenter presenter;
+    private MealsContract.Presenter presenter;
     private MealAdapter adapter;
     //endregion
 
@@ -75,6 +81,7 @@ public class MealsFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -100,7 +107,7 @@ public class MealsFragment extends Fragment implements
         }
 
         // Set adapter
-        adapter = new MealAdapter(new ArrayList<Meal>(), this);
+        adapter = new MealAdapter(new ArrayList<Meal>(), this, getContext());
         recyclerView.setAdapter(adapter);
 
         // Set decoration
@@ -146,6 +153,29 @@ public class MealsFragment extends Fragment implements
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
+    //endregion
+
+    //region Menu
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_meals_fragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_orders:
+                mListener.onGoToOrdersClicked();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     //endregion
 
     //region Presenter callbacks
@@ -160,21 +190,30 @@ public class MealsFragment extends Fragment implements
     }
 
     @Override
+    public void updateMeal(Meal meal) {
+        adapter.updateData(meal);
+    }
+
+    @Override
     public void showEmptyMeals() {
-        Toast.makeText(getActivity(), "No meals available", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_no_items_available, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.error_items_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void goToEditMeal(Meal meal) {
-        mListener.onEditMealClicked(meal);
+    public void goToEditMeal(String key) {
+        mListener.onEditMealClicked(key);
     }
 
-    //endregion
+    @Override
+    public void goToEditCartMealQuantity(String key) {
+        mListener.onEditCartMealQuantity(key);
+    }
+//endregion
 
     private void setTitle() {
         if (getActivity() instanceof AppCompatActivity) {
@@ -185,24 +224,36 @@ public class MealsFragment extends Fragment implements
         }
     }
 
-    @OnClick(R.id.button)
-    public void onViewClicked() {
-        mListener.onGoToCartClicked();
+    @OnClick({R.id.button, R.id.meals_add_fab})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.button:
+                mListener.onGoToCartClicked();
+                break;
+
+            case R.id.meals_add_fab:
+                presenter.createNewMeal();
+                break;
+        }
     }
 
     @Override
     public void onMealClicked(Meal meal) {
         if (BuildConfig.FLAVOR.equals("company")) {
-            presenter.editMeal(meal);
+            presenter.editMeal(meal.getKey());
         } else {
+            // TODO add meal to cart only if item quantity in cart is zero
             presenter.addMealToCart(meal);
+            presenter.editCartMealQuantity(meal.getKey());
             // TODO only show toast if meal was successfully added to cart
-            Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), meal.getName() + " added to cart", Toast.LENGTH_SHORT).show();
         }
     }
 
     public interface OnMealFragmentInteractionListener {
-        void onEditMealClicked(Meal item);
+        void onEditMealClicked(String key);
+        void onEditCartMealQuantity(String key);
         void onGoToCartClicked();
+        void onGoToOrdersClicked();
     }
 }

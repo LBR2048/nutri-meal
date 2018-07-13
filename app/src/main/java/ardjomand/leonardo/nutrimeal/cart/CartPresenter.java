@@ -10,16 +10,21 @@ import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class CartPresenter implements CartContract.Presenter, CartRepository.Presenter {
 
-    public static final String TAG = CartPresenter.class.getSimpleName();
+    private static final String TAG = CartPresenter.class.getSimpleName();
 
     private CartContract.View view;
     private final CartRepository.Repository repository;
     private final PlaceOrderInteractor.Interactor placeOrderInteractor;
 
-    public CartPresenter(CartContract.View view) {
+    CartPresenter(CartContract.View view) {
         this.view = view;
         repository = new CartRepositoryImpl(this);
         placeOrderInteractor = new PlaceOrderInteractorImpl(this);
+    }
+
+    @Override
+    public void setView(CartContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -45,12 +50,16 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     @Override
     public void onSelectedMealAdded(CartMeal cartMeal) {
         Log.i(TAG, "Selected meal " + cartMeal.getName() + " added");
-        view.addSelectedMeal(cartMeal);
+        if (view != null) {
+            view.addCartMeal(cartMeal);
+        }
     }
 
     @Override
     public void onSelectedMealChanged(CartMeal cartMeal) {
-
+        if (view != null){
+            view.updateCartMeal(cartMeal);
+        }
     }
 
     @Override

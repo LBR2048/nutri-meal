@@ -9,15 +9,20 @@ import ardjomand.leonardo.nutrimeal.data.MealRepositoryImpl;
 
 public class MealsPresenter implements MealsContract.Presenter, MealRepository.Presenter {
 
-    public static final String TAG = MealsPresenter.class.getSimpleName();
+    private static final String TAG = MealsPresenter.class.getSimpleName();
     private final EditCartInteractor.Interactor editCartInteractor;
     private final MealRepository.Repository repository;
     private MealsContract.View view;
 
-    public MealsPresenter(MealsContract.View view) {
+    MealsPresenter(MealsContract.View view) {
         this.view = view;
         repository = new MealRepositoryImpl(this);
         editCartInteractor = new EditCartInteractorImpl(this);
+    }
+
+    @Override
+    public void setView(MealsContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -38,19 +43,41 @@ public class MealsPresenter implements MealsContract.Presenter, MealRepository.P
     }
 
     @Override
-    public void editMeal(Meal meal) {
-        view.goToEditMeal(meal);
+    public void editMeal(String key) {
+        if (view != null){
+            view.goToEditMeal(key);
+        }
+    }
+
+    @Override
+    public void editCartMealQuantity(String key) {
+        if (view != null){
+            view.goToEditCartMealQuantity(key);
+        }
+    }
+
+    @Override
+    public void createNewMeal() {
+        String key = repository.createMeal();
+        if (view != null){
+            view.goToEditMeal(key);
+        }
     }
 
     @Override
     public void onMealAdded(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " added");
-        view.addMeal(meal);
+        if (view != null){
+            view.addMeal(meal);
+        }
     }
 
     @Override
     public void onMealChanged(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " changed");
+        if (view != null){
+            view.updateMeal(meal);
+        }
     }
 
     @Override
