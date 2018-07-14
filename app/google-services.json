@@ -1,0 +1,167 @@
+{
+  "project_info": {
+    "project_number": "976751085508",
+    "firebase_url": "https://nutrimeal-b786e.firebaseio.com",
+    "project_id": "nutrimeal-b786e",
+    "storage_bucket": "nutrimeal-b786e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976751085508:android:25845ad4a3815643",
+        "android_client_info": {
+          "package_name": "ardjomand.leonardo.nutrimeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976751085508-d3944gfqjj4ssd3oq5rn803unkd71rhl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ardjomand.leonardo.nutrimeal",
+            "certificate_hash": "0484a1515ce5d53a25df28359a1e053018caf7b3"
+          }
+        },
+        {
+          "client_id": "976751085508-46sq08dt4c2usjpkc216h4bapeogslf8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ardjomand.leonardo.nutrimeal",
+            "certificate_hash": "85388149e07b1563b62d0c2775dc2681ecd8ef1f"
+          }
+        },
+        {
+          "client_id": "976751085508-ojl4fhl98aepacf7j3suoq2uego8u4nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhL3V1TS7FXwCcJ7gPPDUe6c0Do3dWhLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976751085508-ojl4fhl98aepacf7j3suoq2uego8u4nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976751085508:android:be0944cd1b1bb97d",
+        "android_client_info": {
+          "package_name": "ardjomand.leonardo.nutrimeal.company"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976751085508-sdbhjtjapcqfbtkr3idlgc6btipccd4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ardjomand.leonardo.nutrimeal.company",
+            "certificate_hash": "85388149e07b1563b62d0c2775dc2681ecd8ef1f"
+          }
+        },
+        {
+          "client_id": "976751085508-9g4o3i96oqo08hhhmbae3lgrnaviojsf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ardjomand.leonardo.nutrimeal.company",
+            "certificate_hash": "0484a1515ce5d53a25df28359a1e053018caf7b3"
+          }
+        },
+        {
+          "client_id": "976751085508-ojl4fhl98aepacf7j3suoq2uego8u4nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhL3V1TS7FXwCcJ7gPPDUe6c0Do3dWhLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976751085508-ojl4fhl98aepacf7j3suoq2uego8u4nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976751085508:android:967e45bea4d5a51d",
+        "android_client_info": {
+          "package_name": "ardjomand.leonardo.nutrimeal.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976751085508-93n53jgipolju5c9rp8jgt1rknhnb6mo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ardjomand.leonardo.nutrimeal.customer",
+            "certificate_hash": "85388149e07b1563b62d0c2775dc2681ecd8ef1f"
+          }
+        },
+        {
+          "client_id": "976751085508-aaq2777qm6bl7g44ne5tq63b7sdhj5s4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ardjomand.leonardo.nutrimeal.customer",
+            "certificate_hash": "0484a1515ce5d53a25df28359a1e053018caf7b3"
+          }
+        },
+        {
+          "client_id": "976751085508-ojl4fhl98aepacf7j3suoq2uego8u4nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhL3V1TS7FXwCcJ7gPPDUe6c0Do3dWhLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976751085508-ojl4fhl98aepacf7j3suoq2uego8u4nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
