@@ -41,7 +41,6 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
 
     private String mCartMealKey;
     private EditCartMealContract.Presenter presenter;
-    private CartMeal cartMeal;
 
     public EditCartMealDialogFragment() {
         // Required empty public constructor
@@ -94,7 +93,6 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
 
     @Override
     public void updateCartMeal(CartMeal cartMeal) {
-        this.cartMeal = cartMeal;
         nameView.setText(cartMeal.getName());
         quantityView.setText(NumberFormat.getInstance().format(cartMeal.getQuantity()));
 
@@ -125,12 +123,10 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.edit_cart_meal_increase:
-                cartMeal.increaseQuantity();
-                presenter.editCartMeal(cartMeal);
+                presenter.increaseQuantity();
                 break;
             case R.id.edit_cart_meal_decrease:
-                cartMeal.decreaseQuantity();
-                presenter.editCartMeal(cartMeal);
+                presenter.decreaseQuantity();
                 break;
         }
     }

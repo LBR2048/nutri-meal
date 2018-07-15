@@ -7,6 +7,7 @@ public class EditCartMealDialogPresenter implements EditCartMealContract.Present
 
     private EditCartMealContract.View view;
     private final EditCartMealQuantityInteractor.Interactor editCartInteractor;
+    private CartMeal cartMeal;
 
     EditCartMealDialogPresenter(EditCartMealContract.View view) {
         this.view = view;
@@ -31,12 +32,20 @@ public class EditCartMealDialogPresenter implements EditCartMealContract.Present
     @Override
     public void onCartMealUpdated(CartMeal cartMeal) {
         if (view != null){
+            this.cartMeal = cartMeal;
             view.updateCartMeal(cartMeal);
         }
     }
 
     @Override
-    public void editCartMeal(CartMeal cartMeal) {
+    public void increaseQuantity() {
+        cartMeal.increaseQuantity();
+        editCartInteractor.editCartMeal(cartMeal);
+    }
+
+    @Override
+    public void decreaseQuantity() {
+        cartMeal.decreaseQuantity();
         editCartInteractor.editCartMeal(cartMeal);
     }
 }

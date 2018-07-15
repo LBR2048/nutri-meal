@@ -15,6 +15,8 @@ interface EditCartMealContract {
 
         void unsubscribeFromCartMealsUpdates();
 
-        void editCartMeal(CartMeal cartMeal);
+        void increaseQuantity();
+
+        void decreaseQuantity();
     }
 }
