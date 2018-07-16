@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -69,7 +70,12 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onEditCartMealQuantity(String key) {
-        EditCartMealDialogFragment.showDialog(this, key, "tag1");
+        // TODO this is not following the MVP pattern
+        if (Utils.isNetworkAvailable(this)) {
+            EditCartMealDialogFragment.showDialog(this, key, "tag1");
+        } else {
+            Toast.makeText(this, R.string.error_internet_connection, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
