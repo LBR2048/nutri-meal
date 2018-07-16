@@ -39,13 +39,17 @@ public class EditCartMealDialogPresenter implements EditCartMealContract.Present
 
     @Override
     public void increaseQuantity() {
-        cartMeal.increaseQuantity();
-        editCartInteractor.editCartMeal(cartMeal);
+        if (cartMeal != null) {
+            cartMeal.increaseQuantity();
+            editCartInteractor.editCartMeal(cartMeal);
+        }
     }
 
     @Override
     public void decreaseQuantity() {
-        cartMeal.decreaseQuantity();
-        editCartInteractor.editCartMeal(cartMeal);
+        if (cartMeal != null) {
+            cartMeal.decreaseQuantity();
+            editCartInteractor.editCartMeal(cartMeal);
+        }
     }
 }
