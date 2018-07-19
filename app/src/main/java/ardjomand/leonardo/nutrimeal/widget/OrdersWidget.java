@@ -9,6 +9,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
+import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.Trigger;
+
 import ardjomand.leonardo.nutrimeal.MainActivity;
 import ardjomand.leonardo.nutrimeal.R;
 
@@ -16,6 +23,9 @@ import ardjomand.leonardo.nutrimeal.R;
  * Implementation of App Widget functionality.
  */
 public class OrdersWidget extends AppWidgetProvider {
+
+    public static final String WIDGET_JOB_TAG = "WidgetJobTag";
+    public static final int ONE_HOUR_SECONDS = 3600;
 
     public static void updateAllWidgets(Context context){
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -60,11 +70,23 @@ public class OrdersWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(context));
+        Job job = dispatcher.newJobBuilder()
+                .setService(WidgetJobService.class)
+                .setTag(WIDGET_JOB_TAG)
+                .setRecurring(true)
+                .setLifetime(Lifetime.FOREVER)
+                .setTrigger(Trigger.executionWindow(0, ONE_HOUR_SECONDS))
+                .setConstraints(Constraint.ON_ANY_NETWORK)
+                .build();
+        dispatcher.mustSchedule(job);
     }
 
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(context));
+        dispatcher.cancel(WIDGET_JOB_TAG);
     }
 }
 

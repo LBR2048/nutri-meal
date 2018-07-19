@@ -33,6 +33,13 @@
             android:name=".widget.OrdersService"
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
+        <service
+            android:name=".widget.WidgetJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
