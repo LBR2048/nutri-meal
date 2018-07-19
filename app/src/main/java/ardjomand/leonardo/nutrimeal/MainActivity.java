@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                getSupportFragmentManager().popBackStack();
+                break;
+
             case R.id.menu_item_logout:
                 logout();
                 navigateToAuthActivity();

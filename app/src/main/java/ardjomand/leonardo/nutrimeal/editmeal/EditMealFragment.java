@@ -213,12 +213,15 @@ public class EditMealFragment extends Fragment implements
         }
     }
 
+    // TODO move the responsibility of setting title to the parent activity
+    // this will make it easier for the fragments to be added instead of replaced
     private void setTitle() {
         if (getActivity() instanceof AppCompatActivity) {
             ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (supportActionBar != null) {
                 // TODO change title to Add new meal if the FAB is clicked
                 supportActionBar.setTitle(R.string.edit_meal_title);
+                supportActionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
     }

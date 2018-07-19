@@ -163,11 +163,14 @@ public class CartFragment extends Fragment implements CartContract.View {
     }
     //endregion
 
+    // TODO move the responsibility of setting title to the parent activity
+    // this will make it easier for the fragments to be added instead of replaced
     private void setTitle() {
         if (getActivity() instanceof AppCompatActivity) {
             ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (supportActionBar != null) {
                 supportActionBar.setTitle(R.string.cart_title);
+                supportActionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
     }
