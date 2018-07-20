@@ -14,6 +14,10 @@ import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
 
 public class Utils {
 
+    // Prevents the class from being instantiated
+    // https://stackoverflow.com/questions/25223553/how-can-i-create-an-utility-class
+    private Utils() {}
+
     public static String formatOrderKey(Context mContext, String key) {
         return mContext.getString(R.string.order_id, key);
     }
@@ -75,7 +79,7 @@ public class Utils {
                 formatAmount(customerOrder.getAmount());
     }
 
-    static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
