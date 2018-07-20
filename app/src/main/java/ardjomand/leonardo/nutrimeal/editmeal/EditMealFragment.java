@@ -245,8 +245,6 @@ public class EditMealFragment extends Fragment implements
 
     @OnClick(R.id.edit_meal_image)
     public void onViewClicked() {
-        Toast.makeText(getContext(), "Image clicked", Toast.LENGTH_SHORT).show();
-
         pickPhotoFromGallery();
     }
 
