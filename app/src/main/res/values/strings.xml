@@ -45,4 +45,5 @@
     <string name="error_no_items_available">No items available</string>
     <string name="error_items_could_not_be_downloaded">Items could not be downloaded</string>
     <string name="error_internet_connection">Please check your internet connection</string>
+    <string name="a11_add_new_meal">Add new meal</string>
 </resources>
