@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 
-public class CartRepositoryImpl implements CartRepository.Repository {
+public class CartRepositoryImpl implements GenericRepository.Repository {
 
     private static final String NODE_CUSTOMER_CART = "customer-cart";
     private static final String NODE_MEALS = "meals";

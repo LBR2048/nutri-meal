@@ -1,6 +1,6 @@
 package ardjomand.leonardo.nutrimeal.data;
 
-public interface CompanyOrdersRepository {
+public interface GenericRepository {
 
     interface Repository {
 

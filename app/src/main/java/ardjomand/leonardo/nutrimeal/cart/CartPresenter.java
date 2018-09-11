@@ -2,7 +2,7 @@ package ardjomand.leonardo.nutrimeal.cart;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.data.CartRepository;
+import ardjomand.leonardo.nutrimeal.data.GenericRepository;
 import ardjomand.leonardo.nutrimeal.data.CartRepositoryImpl;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractor;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractorImpl;
@@ -10,12 +10,12 @@ import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class CartPresenter implements
         CartContract.Presenter,
-        CartRepository.Presenter<CartMeal> {
+        GenericRepository.Presenter<CartMeal> {
 
     private static final String TAG = CartPresenter.class.getSimpleName();
 
     private CartContract.View view;
-    private final CartRepository.Repository repository;
+    private final GenericRepository.Repository repository;
     private final PlaceOrderInteractor.Interactor placeOrderInteractor;
 
     CartPresenter(CartContract.View view) {

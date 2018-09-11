@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
 import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersPresenter;
 
-public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repository {
+public class CompanyOrdersRepositoryImpl implements GenericRepository.Repository {
 
     private static final String TAG = CompanyOrdersRepositoryImpl.class.getSimpleName();
     private static final String NODE_ORDERS = "orders";
