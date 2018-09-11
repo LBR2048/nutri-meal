@@ -8,7 +8,9 @@ import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractor;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractorImpl;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 
-public class CartPresenter implements CartContract.Presenter, CartRepository.Presenter {
+public class CartPresenter implements
+        CartContract.Presenter,
+        CartRepository.Presenter<CartMeal> {
 
     private static final String TAG = CartPresenter.class.getSimpleName();
 
@@ -34,12 +36,12 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
 
     @Override
     public void subscribeToCartUpdates() {
-        repository.subscribeForCartUpdates();
+        repository.subscribe();
     }
 
     @Override
     public void unsubscribeFromCartUpdates() {
-        repository.unsubscribeFromCartUpdates();
+        repository.unsubscribe();
     }
 
     @Override
@@ -48,22 +50,22 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     }
 
     @Override
-    public void onSelectedMealAdded(CartMeal cartMeal) {
-        Log.i(TAG, "Selected meal " + cartMeal.getName() + " added");
+    public void onItemAdded(CartMeal item) {
+        Log.i(TAG, "Selected meal " + item.getName() + " added");
         if (view != null) {
-            view.addCartMeal(cartMeal);
+            view.addCartMeal(item);
         }
     }
 
     @Override
-    public void onSelectedMealChanged(CartMeal cartMeal) {
+    public void onItemChanged(CartMeal item) {
         if (view != null){
-            view.updateCartMeal(cartMeal);
+            view.updateCartMeal(item);
         }
     }
 
     @Override
-    public void onSelectedMealRemoved(String key) {
+    public void onItemRemoved(String key) {
 
     }
 }

@@ -34,7 +34,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
     }
 
     @Override
-    public void subscribeForCartUpdates() {
+    public void subscribe() {
         if (cartEventListener == null) {
             cartEventListener = new ChildEventListener() {
                 @Override
@@ -42,7 +42,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
                     CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
                     if (cartMeal != null) {
                         cartMeal.setKey(dataSnapshot.getKey());
-                        presenter.onSelectedMealAdded(cartMeal);
+                        presenter.onItemAdded(cartMeal);
                     }
                 }
 
@@ -51,13 +51,13 @@ public class CartRepositoryImpl implements CartRepository.Repository {
                     CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
                     if (cartMeal != null) {
                         cartMeal.setKey(dataSnapshot.getKey());
-                        presenter.onSelectedMealChanged(cartMeal);
+                        presenter.onItemChanged(cartMeal);
                     }
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    presenter.onSelectedMealRemoved(dataSnapshot.getKey());
+                    presenter.onItemRemoved(dataSnapshot.getKey());
                 }
 
                 @Override
@@ -76,7 +76,7 @@ public class CartRepositoryImpl implements CartRepository.Repository {
     }
 
     @Override
-    public void unsubscribeFromCartUpdates() {
+    public void unsubscribe() {
         if (cartEventListener != null) {
             customerCartRef.removeEventListener(cartEventListener);
             cartEventListener = null;

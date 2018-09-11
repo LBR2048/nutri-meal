@@ -1,22 +1,20 @@
 package ardjomand.leonardo.nutrimeal.data;
 
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-
 public interface CartRepository {
 
     interface Repository {
 
-        void subscribeForCartUpdates();
+        void subscribe();
 
-        void unsubscribeFromCartUpdates();
+        void unsubscribe();
     }
 
-    interface Presenter {
+    interface Presenter<T> {
 
-        void onSelectedMealAdded(CartMeal cartMeal);
+        void onItemAdded(T item);
 
-        void onSelectedMealChanged(CartMeal cartMeal);
+        void onItemChanged(T item);
 
-        void onSelectedMealRemoved(String key);
+        void onItemRemoved(String key);
     }
 }
