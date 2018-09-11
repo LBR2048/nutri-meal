@@ -33,7 +33,7 @@ public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repo
     }
 
     @Override
-    public void subscribeForOrdersUpdates() {
+    public void subscribe() {
 
         if (ordersEventListener == null) {
             ordersEventListener = new ChildEventListener() {
@@ -42,7 +42,7 @@ public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repo
                     CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
                     if (companyOrder != null) {
                         companyOrder.setKey(dataSnapshot.getKey());
-                        presenter.onOrderAdded(companyOrder);
+                        presenter.onItemAdded(companyOrder);
                     }
                 }
 
@@ -51,13 +51,13 @@ public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repo
                     CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
                     if (companyOrder != null) {
                         companyOrder.setKey(dataSnapshot.getKey());
-                        presenter.onOrderChanged(companyOrder);
+                        presenter.onItemChanged(companyOrder);
                     }
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    presenter.onOrderRemoved(dataSnapshot.getKey());
+                    presenter.onItemRemoved(dataSnapshot.getKey());
                 }
 
                 @Override
@@ -76,7 +76,7 @@ public class CompanyOrdersRepositoryImpl implements CompanyOrdersRepository.Repo
     }
 
     @Override
-    public void unsubscribeFromOrdersUpdates() {
+    public void unsubscribe() {
         if (ordersEventListener != null) {
             ordersRef.removeEventListener(ordersEventListener);
             ordersEventListener = null;

@@ -5,7 +5,9 @@ import android.util.Log;
 import ardjomand.leonardo.nutrimeal.data.CompanyOrdersRepository;
 import ardjomand.leonardo.nutrimeal.data.CompanyOrdersRepositoryImpl;
 
-public class CompanyOrdersPresenter implements CompanyOrdersContract.Presenter, CompanyOrdersRepository.Presenter {
+public class CompanyOrdersPresenter implements
+        CompanyOrdersContract.Presenter,
+        CompanyOrdersRepository.Presenter<CompanyOrder> {
 
     private static final String TAG = CompanyOrdersPresenter.class.getSimpleName();
     private final CompanyOrdersRepository.Repository repository;
@@ -23,31 +25,31 @@ public class CompanyOrdersPresenter implements CompanyOrdersContract.Presenter, 
 
     @Override
     public void subscribeToOrdersUpdates() {
-        repository.subscribeForOrdersUpdates();
+        repository.subscribe();
     }
 
     @Override
     public void unsubscribeFromOrdersUpdates() {
-        repository.unsubscribeFromOrdersUpdates();
+        repository.unsubscribe();
     }
 
     @Override
-    public void onOrderAdded(CompanyOrder companyOrder) {
-        Log.i(TAG, "CompanyOrder " + companyOrder.toString() + " added");
+    public void onItemAdded(CompanyOrder item) {
+        Log.i(TAG, "CompanyOrder " + item.toString() + " added");
         if (view != null){
-            view.addOrder(companyOrder);
+            view.addOrder(item);
         }
     }
 
     @Override
-    public void onOrderChanged(CompanyOrder companyOrder) {
+    public void onItemChanged(CompanyOrder item) {
         if (view != null){
-            view.updateOrder(companyOrder);
+            view.updateOrder(item);
         }
     }
 
     @Override
-    public void onOrderRemoved(String key) {
+    public void onItemRemoved(String key) {
 
     }
 }
