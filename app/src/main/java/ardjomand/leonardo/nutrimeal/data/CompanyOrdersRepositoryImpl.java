@@ -2,56 +2,51 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersPresenter;
-
-public class CompanyOrdersRepositoryImpl implements GenericRepository.Repository {
+public class CompanyOrdersRepositoryImpl<T extends KeyClass> implements GenericRepository.Repository {
 
     private static final String TAG = CompanyOrdersRepositoryImpl.class.getSimpleName();
-    private static final String NODE_ORDERS = "orders";
 
-    private final CompanyOrdersPresenter presenter;
-    private DatabaseReference ordersRef;
-    private ChildEventListener ordersEventListener;
+    private final GenericRepository.Presenter<T> presenter;
+    private final Class<T> clazz;
 
-    public CompanyOrdersRepositoryImpl(CompanyOrdersPresenter presenter) {
+    private DatabaseReference itemsRef;
+    private ChildEventListener itemsEventListener;
+
+    public CompanyOrdersRepositoryImpl(GenericRepository.Presenter<T> presenter, Class<T> clazz) {
         this.presenter = presenter;
+        this.clazz = clazz;
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            ordersRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_ORDERS);
-        }
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+        itemsRef = firebaseHelper.getOrdersRef();
+
+//        itemsRef = firebaseHelper.getItemsRef(clazz);
     }
 
     @Override
     public void subscribe() {
-
-        if (ordersEventListener == null) {
-            ordersEventListener = new ChildEventListener() {
+        if (itemsEventListener == null) {
+            itemsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
-                    if (companyOrder != null) {
-                        companyOrder.setKey(dataSnapshot.getKey());
-                        presenter.onItemAdded(companyOrder);
+                    T item = dataSnapshot.getValue(clazz);
+                    if (item != null) {
+                        item.setKey(dataSnapshot.getKey());
+                        presenter.onItemAdded(item);
                     }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    CompanyOrder companyOrder = dataSnapshot.getValue(CompanyOrder.class);
-                    if (companyOrder != null) {
-                        companyOrder.setKey(dataSnapshot.getKey());
-                        presenter.onItemChanged(companyOrder);
+                    T item = dataSnapshot.getValue(clazz);
+                    if (item != null) {
+                        item.setKey(dataSnapshot.getKey());
+                        presenter.onItemChanged(item);
                     }
                 }
 
@@ -70,16 +65,16 @@ public class CompanyOrdersRepositoryImpl implements GenericRepository.Repository
 
                 }
             };
-            ordersRef.addChildEventListener(ordersEventListener);
+            itemsRef.addChildEventListener(itemsEventListener);
             Log.i(TAG, "Subscribing to order updates");
         }
     }
 
     @Override
     public void unsubscribe() {
-        if (ordersEventListener != null) {
-            ordersRef.removeEventListener(ordersEventListener);
-            ordersEventListener = null;
+        if (itemsEventListener != null) {
+            itemsRef.removeEventListener(itemsEventListener);
+            itemsEventListener = null;
             Log.i(TAG, "Unsubscribing from orders updates");
         }
     }

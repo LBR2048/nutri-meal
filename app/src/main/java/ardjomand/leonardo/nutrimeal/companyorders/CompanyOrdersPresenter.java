@@ -15,7 +15,7 @@ public class CompanyOrdersPresenter implements
 
     CompanyOrdersPresenter(CompanyOrdersContract.View view) {
         this.view = view;
-        repository = new CompanyOrdersRepositoryImpl(this);
+        repository = new CompanyOrdersRepositoryImpl<>(this, CompanyOrder.class);
     }
 
     @Override
