@@ -2,44 +2,36 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+public class CartRepositoryImpl<T extends KeyClass> implements GenericRepository.Repository {
 
-
-public class CartRepositoryImpl<T extends CartMeal> implements GenericRepository.Repository {
-
-    private static final String NODE_CUSTOMER_CART = "customer-cart";
-    private static final String NODE_MEALS = "meals";
     private static final String TAG = CartRepositoryImpl.class.getSimpleName();
 
     private final GenericRepository.Presenter<T> presenter;
     private final Class<T> clazz;
 
-    private DatabaseReference customerCartRef;
-    private ChildEventListener cartEventListener;
+    private DatabaseReference itemsRef;
+    private ChildEventListener itemsEventListener;
 
     public CartRepositoryImpl(GenericRepository.Presenter<T> presenter, Class<T> clazz) {
         this.presenter = presenter;
         this.clazz = clazz;
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            customerCartRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_CUSTOMER_CART).child(firebaseUser.getUid()).child(NODE_MEALS);
-        }
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+        itemsRef = firebaseHelper.getCustomerCartRef();
+
+//        itemsRef = firebaseHelper.getItemsRef(clazz);
     }
 
     @Override
     public void subscribe() {
-        if (cartEventListener == null) {
-            cartEventListener = new ChildEventListener() {
+        if (itemsEventListener == null) {
+            itemsEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     T item = dataSnapshot.getValue(clazz);
@@ -73,16 +65,16 @@ public class CartRepositoryImpl<T extends CartMeal> implements GenericRepository
                     Log.e(TAG, databaseError.getMessage());
                 }
             };
-            customerCartRef.addChildEventListener(cartEventListener);
+            itemsRef.addChildEventListener(itemsEventListener);
             Log.i(TAG, "Subscribing to cart updates");
         }
     }
 
     @Override
     public void unsubscribe() {
-        if (cartEventListener != null) {
-            customerCartRef.removeEventListener(cartEventListener);
-            cartEventListener = null;
+        if (itemsEventListener != null) {
+            itemsRef.removeEventListener(itemsEventListener);
+            itemsEventListener = null;
             Log.i(TAG, "Unsubscribing from cart updates");
         }
     }
