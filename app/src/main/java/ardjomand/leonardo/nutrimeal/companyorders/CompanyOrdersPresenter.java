@@ -2,8 +2,8 @@ package ardjomand.leonardo.nutrimeal.companyorders;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.data.CompanyOrdersRepositoryImpl;
 import ardjomand.leonardo.nutrimeal.data.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.GenericRepositoryImpl;
 
 public class CompanyOrdersPresenter implements
         CompanyOrdersContract.Presenter,
@@ -15,7 +15,7 @@ public class CompanyOrdersPresenter implements
 
     CompanyOrdersPresenter(CompanyOrdersContract.View view) {
         this.view = view;
-        repository = new CompanyOrdersRepositoryImpl<>(this, CompanyOrder.class);
+        repository = new GenericRepositoryImpl<>(this, CompanyOrder.class);
     }
 
     @Override
