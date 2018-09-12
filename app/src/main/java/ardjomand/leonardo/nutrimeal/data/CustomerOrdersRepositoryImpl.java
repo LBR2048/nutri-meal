@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrdersPresenter;
 
-public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Repository {
+public class CustomerOrdersRepositoryImpl implements GenericRepository.Repository {
 
     private static final String TAG = CustomerOrdersRepositoryImpl.class.getSimpleName();
     private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
@@ -34,7 +34,7 @@ public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Re
     }
 
     @Override
-    public void subscribeForOrdersUpdates() {
+    public void subscribe() {
 
         if (ordersEventListener == null) {
             ordersEventListener = new ChildEventListener() {
@@ -43,7 +43,7 @@ public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Re
                     CustomerOrder customerOrder = dataSnapshot.getValue(CustomerOrder.class);
                     if (customerOrder != null) {
                         customerOrder.setKey(dataSnapshot.getKey());
-                        presenter.onOrderAdded(customerOrder);
+                        presenter.onItemAdded(customerOrder);
                     }
                 }
 
@@ -52,13 +52,13 @@ public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Re
                     CustomerOrder customerOrder = dataSnapshot.getValue(CustomerOrder.class);
                     if (customerOrder != null) {
                         customerOrder.setKey(dataSnapshot.getKey());
-                        presenter.onOrderChanged(customerOrder);
+                        presenter.onItemChanged(customerOrder);
                     }
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    presenter.onOrderRemoved(dataSnapshot.getKey());
+                    presenter.onItemRemoved(dataSnapshot.getKey());
                 }
 
                 @Override
@@ -77,7 +77,7 @@ public class CustomerOrdersRepositoryImpl implements CustomerOrdersRepository.Re
     }
 
     @Override
-    public void unsubscribeFromOrdersUpdates() {
+    public void unsubscribe() {
         if (ordersEventListener != null) {
             ordersRef.removeEventListener(ordersEventListener);
             ordersEventListener = null;
