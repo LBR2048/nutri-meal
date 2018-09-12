@@ -9,6 +9,7 @@ import ardjomand.leonardo.nutrimeal.auth.User;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class FirebaseHelper {
 
@@ -31,6 +32,10 @@ public class FirebaseHelper {
 
     private DatabaseReference getOrdersRef() {
         return databaseRef.child(NODE_ORDERS);
+    }
+
+    private DatabaseReference getMealsRef() {
+        return databaseRef.child(NODE_MEALS);
     }
 
     private DatabaseReference getCustomerCartRef() {
@@ -57,6 +62,9 @@ public class FirebaseHelper {
 
         } else if (clazz == CompanyOrder.class) {
             return getOrdersRef();
+
+        } else if (clazz == Meal.class) {
+            return getMealsRef();
 
         } else if (clazz == CartMeal.class) {
             return getCustomerCartRef();

@@ -1,6 +1,8 @@
 package ardjomand.leonardo.nutrimeal.meals;
 
-public class Meal {
+import ardjomand.leonardo.nutrimeal.data.KeyClass;
+
+public class Meal extends KeyClass {
     private String key;
     private String name;
     private String description;
