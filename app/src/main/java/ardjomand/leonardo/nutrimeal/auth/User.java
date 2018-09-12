@@ -1,6 +1,8 @@
 package ardjomand.leonardo.nutrimeal.auth;
 
-public class User {
+import ardjomand.leonardo.nutrimeal.data.KeyClass;
+
+public class User extends KeyClass {
 
     private String key;
     private String name;
