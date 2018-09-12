@@ -20,7 +20,7 @@ public class CartPresenter implements
 
     CartPresenter(CartContract.View view) {
         this.view = view;
-        repository = new CartRepositoryImpl(this);
+        repository = new CartRepositoryImpl<>(this, CartMeal.class);
         placeOrderInteractor = new PlaceOrderInteractorImpl(this);
     }
 

@@ -11,20 +11,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 
-public class CartRepositoryImpl implements GenericRepository.Repository {
+
+public class CartRepositoryImpl<T extends CartMeal> implements GenericRepository.Repository {
 
     private static final String NODE_CUSTOMER_CART = "customer-cart";
     private static final String NODE_MEALS = "meals";
     private static final String TAG = CartRepositoryImpl.class.getSimpleName();
 
-    private final CartPresenter presenter;
+    private final GenericRepository.Presenter<T> presenter;
+    private final Class<T> clazz;
+
     private DatabaseReference customerCartRef;
     private ChildEventListener cartEventListener;
 
-    public CartRepositoryImpl(CartPresenter presenter) {
+    public CartRepositoryImpl(GenericRepository.Presenter<T> presenter, Class<T> clazz) {
         this.presenter = presenter;
+        this.clazz = clazz;
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
@@ -39,19 +42,19 @@ public class CartRepositoryImpl implements GenericRepository.Repository {
             cartEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
-                    if (cartMeal != null) {
-                        cartMeal.setKey(dataSnapshot.getKey());
-                        presenter.onItemAdded(cartMeal);
+                    T item = dataSnapshot.getValue(clazz);
+                    if (item != null) {
+                        item.setKey(dataSnapshot.getKey());
+                        presenter.onItemAdded(item);
                     }
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    CartMeal cartMeal = dataSnapshot.getValue(CartMeal.class);
-                    if (cartMeal != null) {
-                        cartMeal.setKey(dataSnapshot.getKey());
-                        presenter.onItemChanged(cartMeal);
+                    T item = dataSnapshot.getValue(clazz);
+                    if (item != null) {
+                        item.setKey(dataSnapshot.getKey());
+                        presenter.onItemChanged(item);
                     }
                 }
 
