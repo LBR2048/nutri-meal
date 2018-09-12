@@ -7,9 +7,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
-public class CartRepositoryImpl<T extends KeyClass> implements GenericRepository.Repository {
+public class GenericRepositoryImpl<T extends KeyClass> implements GenericRepository.Repository {
 
-    private static final String TAG = CartRepositoryImpl.class.getSimpleName();
+    private static final String TAG = GenericRepositoryImpl.class.getSimpleName();
 
     private final GenericRepository.Presenter<T> presenter;
     private final Class<T> clazz;
@@ -17,15 +17,13 @@ public class CartRepositoryImpl<T extends KeyClass> implements GenericRepository
     private DatabaseReference itemsRef;
     private ChildEventListener itemsEventListener;
 
-    public CartRepositoryImpl(GenericRepository.Presenter<T> presenter, Class<T> clazz) {
+    public GenericRepositoryImpl(GenericRepository.Presenter<T> presenter, Class<T> clazz) {
         this.presenter = presenter;
         this.clazz = clazz;
 
         FirebaseHelper firebaseHelper = new FirebaseHelper();
 
-        itemsRef = firebaseHelper.getCustomerCartRef();
-
-//        itemsRef = firebaseHelper.getItemsRef(clazz);
+        itemsRef = firebaseHelper.getItemsRef(clazz);
     }
 
     @Override
