@@ -3,8 +3,9 @@ package ardjomand.leonardo.nutrimeal.customerorders;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.KeyClass;
 
-public class CustomerOrder {
+public class CustomerOrder extends KeyClass {
 
     private String key;
     private boolean delivered;

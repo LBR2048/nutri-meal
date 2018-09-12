@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.KeyClass;
 
-public class CompanyOrder {
+public class CompanyOrder extends KeyClass {
 
     private String key;
     private boolean delivered;

@@ -3,7 +3,10 @@ package ardjomand.leonardo.nutrimeal.cart;
 import java.util.ArrayList;
 import java.util.List;
 
-class Cart {
+import ardjomand.leonardo.nutrimeal.data.KeyClass;
+
+class Cart extends KeyClass{
+
     private long amount;
     private List<CartMeal> meals = new ArrayList<>(); // TODO use Set or other List implementation
 
