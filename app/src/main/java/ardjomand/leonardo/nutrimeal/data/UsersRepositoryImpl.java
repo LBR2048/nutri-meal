@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import ardjomand.leonardo.nutrimeal.auth.User;
 import ardjomand.leonardo.nutrimeal.users.UsersPresenter;
 
-public class UsersRepositoryImpl implements UsersRepository.Repository {
+public class UsersRepositoryImpl implements GenericRepository.Repository {
 
     private static final String TAG = UsersRepositoryImpl.class.getSimpleName();
     private static final String NODE_USERS = "users";
@@ -27,7 +27,7 @@ public class UsersRepositoryImpl implements UsersRepository.Repository {
     }
 
     @Override
-    public void subscribeForUsersUpdates() {
+    public void subscribe() {
         if (usersEventListener == null) {
             usersEventListener = new ChildEventListener() {
                 @Override
@@ -35,7 +35,7 @@ public class UsersRepositoryImpl implements UsersRepository.Repository {
                     User user = dataSnapshot.getValue(User.class);
                     if (user != null) {
                         user.setKey(dataSnapshot.getKey());
-                        presenter.onUserAdded(user);
+                        presenter.onItemAdded(user);
                     }
                 }
 
@@ -44,13 +44,13 @@ public class UsersRepositoryImpl implements UsersRepository.Repository {
                     User user = dataSnapshot.getValue(User.class);
                     if (user != null) {
                         user.setKey(dataSnapshot.getKey());
-                        presenter.onUserChanged(user);
+                        presenter.onItemChanged(user);
                     }
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    presenter.onUserRemoved(dataSnapshot.getKey());
+                    presenter.onItemRemoved(dataSnapshot.getKey());
                 }
 
                 @Override
@@ -69,7 +69,7 @@ public class UsersRepositoryImpl implements UsersRepository.Repository {
     }
 
     @Override
-    public void unsubscribeFromUsersUpdates() {
+    public void unsubscribe() {
         if (usersEventListener != null) {
             usersRef.removeEventListener(usersEventListener);
             usersEventListener = null;
