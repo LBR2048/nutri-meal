@@ -12,7 +12,7 @@ import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
-public class EditCartInteractorImpl implements EditCartInteractor.Interactor {
+public class EditCartInteractorImpl implements EditCartInteractor {
 
     private static final String NODE_MEALS = "meals";
     private static final String NODE_AMOUNT = "amount";

@@ -10,7 +10,7 @@ public class EditCartMealDialogPresenter implements
         GenericItemRepository.Presenter<CartMeal> {
 
     private EditCartMealContract.View view;
-    private final EditCartMealQuantityInteractor.Interactor editCartInteractor;
+    private final EditCartMealQuantityInteractor editCartInteractor;
     private CartMeal cartMeal;
     private final GenericItemRepositoryImpl<CartMeal> genericItemRepository;
 

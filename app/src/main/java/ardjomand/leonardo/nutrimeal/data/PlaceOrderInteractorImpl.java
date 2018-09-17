@@ -10,7 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
 
-public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor {
+public class PlaceOrderInteractorImpl implements PlaceOrderInteractor {
 
     private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     private static final String NODE_ORDERS = "orders";

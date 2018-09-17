@@ -14,7 +14,7 @@ public class MealsPresenter implements
         GenericRepository.Presenter<Meal> {
 
     private static final String TAG = MealsPresenter.class.getSimpleName();
-    private final EditCartInteractor.Interactor editCartInteractor;
+    private final EditCartInteractor editCartInteractor;
     private final MealRepository repository;
     private MealsContract.View view;
     private final GenericRepositoryImpl<Meal> genericRepository;

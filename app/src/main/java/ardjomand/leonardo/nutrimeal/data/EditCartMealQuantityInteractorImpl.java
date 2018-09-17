@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 
 public class EditCartMealQuantityInteractorImpl implements
-        EditCartMealQuantityInteractor.Interactor {
+        EditCartMealQuantityInteractor {
 
     private final GenericItemRepository.Presenter<CartMeal> presenter;
     private DatabaseReference customerCartMealsRef;

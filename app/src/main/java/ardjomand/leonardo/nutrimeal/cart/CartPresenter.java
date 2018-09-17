@@ -16,7 +16,7 @@ public class CartPresenter implements
 
     private CartContract.View view;
     private final GenericRepository.Repository repository;
-    private final PlaceOrderInteractor.Interactor placeOrderInteractor;
+    private final PlaceOrderInteractor placeOrderInteractor;
 
     CartPresenter(CartContract.View view) {
         this.view = view;
