@@ -2,28 +2,22 @@ package ardjomand.leonardo.nutrimeal.editmeal;
 
 import android.net.Uri;
 
+import ardjomand.leonardo.nutrimeal.ItemObserverPresenter;
+import ardjomand.leonardo.nutrimeal.ItemObserverView;
 import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 interface EditMealContract {
 
-    interface View {
-
-        void showMeal(Meal meal);
+    interface View<T> extends ItemObserverView<T> {
 
         void showMealImage(String imagePath);
 
         void showAddMealImageIcon();
-
-        void showError();
     }
 
-    interface Presenter {
+    interface Presenter extends ItemObserverPresenter {
 
         void setView(View view);
-
-        void subscribeForMealUpdates(String key);
-
-        void unsubscribeFromMealUpdates();
 
         void updateMeal(Meal meal);
 

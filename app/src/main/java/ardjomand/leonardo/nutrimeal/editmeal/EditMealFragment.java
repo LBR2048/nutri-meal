@@ -41,7 +41,7 @@ import static android.app.Activity.RESULT_OK;
  * create an instance of this fragment.
  */
 public class EditMealFragment extends Fragment implements
-        EditMealContract.View {
+        EditMealContract.View<Meal> {
 
     private static final String STATE_KEY = "state-key";
     private static final String ARG_KEY = "arg-meal";
@@ -103,7 +103,7 @@ public class EditMealFragment extends Fragment implements
     public void onStart() {
         super.onStart();
 
-        presenter.subscribeForMealUpdates(key);
+        presenter.subscribe(key);
     }
 
     @Override
@@ -125,7 +125,7 @@ public class EditMealFragment extends Fragment implements
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.unsubscribeFromMealUpdates();
+        presenter.unsubscribe();
         unbinder.unbind();
     }
 
@@ -159,7 +159,7 @@ public class EditMealFragment extends Fragment implements
 
     //region Presenter callbacks
     @Override
-    public void showMeal(Meal meal) {
+    public void showItem(Meal meal) {
         key = meal.getKey();
         editMealName.setText(meal.getName());
         editMealDescription.setText(meal.getDescription());

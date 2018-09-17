@@ -33,12 +33,12 @@ public class EditMealPresenter implements
     }
 
     @Override
-    public void subscribeForMealUpdates(String key) {
+    public void subscribe(String key) {
         genericItemRepository.subscribe(key);
     }
 
     @Override
-    public void unsubscribeFromMealUpdates() {
+    public void unsubscribe() {
         genericItemRepository.unsubscribe();
     }
 
@@ -55,7 +55,7 @@ public class EditMealPresenter implements
     @Override
     public void onItemRead(Meal meal) {
         if (view != null) {
-            view.showMeal(meal);
+            view.showItem(meal);
             if (meal.getImagePath() != null && !meal.getImagePath().isEmpty()) {
                 view.showMealImage(meal.getImagePath());
             } else {
