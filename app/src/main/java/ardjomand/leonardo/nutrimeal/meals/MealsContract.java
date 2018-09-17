@@ -1,35 +1,21 @@
 package ardjomand.leonardo.nutrimeal.meals;
 
-import java.util.List;
-
+import ardjomand.leonardo.nutrimeal.ObserverPresenter;
+import ardjomand.leonardo.nutrimeal.ObserverView;
 import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 interface MealsContract {
 
-    interface View {
-
-        void showMeals(List<Meal> meals);
-
-        void addMeal(Meal meal);
-
-        void updateMeal(Meal meal);
-
-        void showEmptyMeals();
-
-        void showError();
+    interface View<T> extends ObserverView<T> {
 
         void goToEditMeal(String key);
 
         void goToEditCartMealQuantity(String key);
     }
 
-    interface Presenter {
+    interface Presenter extends ObserverPresenter {
 
         void setView(View view);
-
-        void subscribeToMealsUpdates();
-
-        void unsubscribeFromMealsUpdates();
 
         void addMealToCart(Meal meal);
 

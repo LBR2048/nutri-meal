@@ -33,13 +33,13 @@ public class MealsPresenter implements
     }
 
     @Override
-    public void subscribeToMealsUpdates() {
+    public void subscribe() {
         genericRepository.subscribe();
-//        view.showMeals(DummyMeals.ITEMS);
+//        view.showItems(DummyMeals.ITEMS);
     }
 
     @Override
-    public void unsubscribeFromMealsUpdates() {
+    public void unsubscribe() {
         genericRepository.unsubscribe();
     }
 
@@ -75,7 +75,7 @@ public class MealsPresenter implements
     public void onItemAdded(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " added");
         if (view != null){
-            view.addMeal(meal);
+            view.addItem(meal);
         }
     }
 
@@ -83,7 +83,7 @@ public class MealsPresenter implements
     public void onItemChanged(Meal meal) {
         Log.i(TAG, "Meal " + meal.getName() + " changed");
         if (view != null){
-            view.updateMeal(meal);
+            view.updateItem(meal);
         }
     }
 
