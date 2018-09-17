@@ -25,12 +25,12 @@ public class CompanyOrdersPresenter implements
     }
 
     @Override
-    public void subscribeToOrdersUpdates() {
+    public void subscribe() {
         repository.subscribe();
     }
 
     @Override
-    public void unsubscribeFromOrdersUpdates() {
+    public void unsubscribe() {
         repository.unsubscribe();
     }
 
@@ -38,14 +38,14 @@ public class CompanyOrdersPresenter implements
     public void onItemAdded(CompanyOrder item) {
         Log.i(TAG, "CompanyOrder " + item.toString() + " added");
         if (view != null){
-            view.addOrder(item);
+            view.addItem(item);
         }
     }
 
     @Override
     public void onItemChanged(CompanyOrder item) {
         if (view != null){
-            view.updateOrder(item);
+            view.updateItem(item);
         }
     }
 

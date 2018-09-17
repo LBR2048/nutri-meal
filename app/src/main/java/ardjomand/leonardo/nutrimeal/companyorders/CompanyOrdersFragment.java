@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class CompanyOrdersFragment extends Fragment implements
-        CompanyOrdersContract.View,
+        CompanyOrdersContract.View<CompanyOrder>,
         CompanyOrdersAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -100,13 +100,13 @@ public class CompanyOrdersFragment extends Fragment implements
     public void onStart() {
         super.onStart();
         adapter.clearData();
-        presenter.subscribeToOrdersUpdates();
+        presenter.subscribe();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.unsubscribeFromOrdersUpdates();
+        presenter.unsubscribe();
     }
 
     @Override
@@ -125,19 +125,19 @@ public class CompanyOrdersFragment extends Fragment implements
 
     //region Presenter callbacks
     @Override
-    public void addOrder(CompanyOrder companyOrder) {
+    public void addItem(CompanyOrder companyOrder) {
         adapter.addData(companyOrder);
         OrdersWidget.updateAllWidgets(getContext());
     }
 
     @Override
-    public void updateOrder(CompanyOrder companyOrder) {
+    public void updateItem(CompanyOrder companyOrder) {
         adapter.updateData(companyOrder);
         OrdersWidget.updateAllWidgets(getContext());
     }
 
     @Override
-    public void showEmptyOrder() {
+    public void showEmptyItems() {
         Toast.makeText(getActivity(), R.string.error_items_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
     }
 
