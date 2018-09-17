@@ -26,6 +26,7 @@ public class FirebaseHelper {
 
     }
 
+
     private DatabaseReference getUsersRef() {
         return databaseRef.child(NODE_USERS);
     }
@@ -71,6 +72,23 @@ public class FirebaseHelper {
 
         } else if (clazz == CustomerOrder.class) {
             return getCustomerOrdersRef();
+
+        } else {
+            return null;
+        }
+    }
+
+
+    private DatabaseReference getMealRef(String id) {
+        return databaseRef.child(NODE_MEALS).child(id);
+    }
+
+    public DatabaseReference getItemRef(Class<?> clazz, String id) {
+        if (clazz == Meal.class) {
+            return getMealRef(id);
+
+        } else if (clazz == CartMeal.class) {
+            return getCustomerCartRef();
 
         } else {
             return null;

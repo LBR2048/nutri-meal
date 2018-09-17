@@ -14,10 +14,10 @@ public class EditCartMealDialogPresenter implements
     private CartMeal cartMeal;
     private final GenericItemRepositoryImpl<CartMeal> genericItemRepository;
 
-    EditCartMealDialogPresenter(EditCartMealContract.View view) {
+    EditCartMealDialogPresenter(EditCartMealContract.View view, String key) {
         this.view = view;
         editCartInteractor = new EditCartMealQuantityInteractorImpl(this);
-        genericItemRepository = new GenericItemRepositoryImpl<>(this, CartMeal.class);
+        genericItemRepository = new GenericItemRepositoryImpl<>(this, CartMeal.class, key);
     }
 
     @Override

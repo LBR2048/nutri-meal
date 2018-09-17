@@ -21,9 +21,9 @@ public class EditMealPresenter implements
     private EditMealContract.View view;
     private final EditMealInteractor.Interactor interactor;
 
-    EditMealPresenter(EditMealContract.View view) {
+    EditMealPresenter(EditMealContract.View view, String key) {
         this.view = view;
-        genericItemRepository = new GenericItemRepositoryImpl<>(this, Meal.class);
+        genericItemRepository = new GenericItemRepositoryImpl<>(this, Meal.class, key);
         interactor = new EditMealInteractorImpl(this);
     }
 

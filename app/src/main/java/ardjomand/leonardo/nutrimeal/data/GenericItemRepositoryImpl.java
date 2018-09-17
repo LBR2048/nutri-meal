@@ -15,13 +15,16 @@ public class GenericItemRepositoryImpl<T extends KeyClass> implements GenericIte
     private DatabaseReference itemsRef;
     private ValueEventListener valueEventListener;
 
-    public GenericItemRepositoryImpl(GenericItemRepository.Presenter<T> presenter, Class<T> clazz) {
+    public GenericItemRepositoryImpl(
+            GenericItemRepository.Presenter<T> presenter,
+            Class<T> clazz,
+            String key) {
         this.presenter = presenter;
         this.clazz = clazz;
 
         FirebaseHelper firebaseHelper = new FirebaseHelper();
 
-        itemsRef = firebaseHelper.getItemsRef(clazz);
+        itemsRef = firebaseHelper.getItemRef(clazz, key);
     }
 
     @Override

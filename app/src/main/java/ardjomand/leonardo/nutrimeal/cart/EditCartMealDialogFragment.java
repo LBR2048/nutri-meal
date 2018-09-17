@@ -66,7 +66,7 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
             mCartMealKey = getArguments().getString(ARG_CART_MEAL_KEY);
         }
 
-        presenter = new EditCartMealDialogPresenter(this);
+        presenter = new EditCartMealDialogPresenter(this, mCartMealKey);
     }
 
     @Override

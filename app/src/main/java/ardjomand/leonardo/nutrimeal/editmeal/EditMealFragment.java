@@ -94,7 +94,7 @@ public class EditMealFragment extends Fragment implements
 
         setTitle();
 
-        presenter = new EditMealPresenter(this);
+        presenter = new EditMealPresenter(this, key);
 
         return view;
     }
