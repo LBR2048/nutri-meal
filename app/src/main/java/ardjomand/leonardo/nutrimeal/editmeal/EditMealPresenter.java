@@ -4,19 +4,26 @@ import android.net.Uri;
 
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractor;
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractorImpl;
+import ardjomand.leonardo.nutrimeal.data.GenericItemRepository;
+import ardjomand.leonardo.nutrimeal.data.GenericItemRepositoryImpl;
 import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 /**
  * Created by leonardo on 12/05/2018.
  */
 
-public class EditMealPresenter implements EditMealContract.Presenter, EditMealInteractor.Presenter {
+public class EditMealPresenter implements
+        EditMealContract.Presenter,
+        EditMealInteractor.Presenter,
+        GenericItemRepository.Presenter<Meal> {
 
+    private final GenericItemRepository.Repository genericItemRepository;
     private EditMealContract.View view;
     private final EditMealInteractor.Interactor interactor;
 
     EditMealPresenter(EditMealContract.View view) {
         this.view = view;
+        genericItemRepository = new GenericItemRepositoryImpl<>(this, Meal.class);
         interactor = new EditMealInteractorImpl(this);
     }
 
@@ -27,12 +34,12 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
 
     @Override
     public void subscribeForMealUpdates(String key) {
-        interactor.subscribeForMealUpdates(key);
+        genericItemRepository.subscribe(key);
     }
 
     @Override
     public void unsubscribeFromMealUpdates() {
-        interactor.unsubscribeFromMealUpdates();
+        genericItemRepository.unsubscribe();
     }
 
     @Override
@@ -46,7 +53,7 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     }
 
     @Override
-    public void showMeal(Meal meal) {
+    public void onItemRead(Meal meal) {
         if (view != null) {
             view.showMeal(meal);
             if (meal.getImagePath() != null && !meal.getImagePath().isEmpty()) {

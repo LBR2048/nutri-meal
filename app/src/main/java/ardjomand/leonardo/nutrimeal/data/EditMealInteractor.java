@@ -8,10 +8,6 @@ public interface EditMealInteractor {
 
     interface Interactor {
 
-        void subscribeForMealUpdates(String key);
-
-        void unsubscribeFromMealUpdates();
-
         void updateMeal(Meal meal);
 
         void updateMealImage(String key, Uri imageUri);
@@ -21,7 +17,7 @@ public interface EditMealInteractor {
 
     interface Presenter {
 
-        void showMeal(Meal meal);
+        void onItemRead(Meal meal);
     }
 
 }
