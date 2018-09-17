@@ -16,6 +16,7 @@ public class FirebaseHelper {
     private static final String NODE_ORDERS = "orders";
     private static final String NODE_CUSTOMER_CART = "customer-cart";
     private static final String NODE_MEALS = "meals";
+    private static final String NODE_AMOUNT = "amount";
     private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
     private static final String NODE_USERS = "users";
 
@@ -31,23 +32,33 @@ public class FirebaseHelper {
         return databaseRef.child(NODE_USERS);
     }
 
-    private DatabaseReference getOrdersRef() {
+    public DatabaseReference getOrdersRef() {
         return databaseRef.child(NODE_ORDERS);
     }
 
-    private DatabaseReference getMealsRef() {
+    public DatabaseReference getMealsRef() {
         return databaseRef.child(NODE_MEALS);
     }
 
-    private DatabaseReference getCustomerCartRef() {
+    public DatabaseReference getCustomerCartMealsRef() {
         if (firebaseUser != null) {
-            return databaseRef.child(NODE_CUSTOMER_CART).child(firebaseUser.getUid()).child(NODE_MEALS);
+            return databaseRef.child(NODE_CUSTOMER_CART).child(firebaseUser.getUid())
+                    .child(NODE_MEALS);
         } else {
             return null;
         }
     }
 
-    private DatabaseReference getCustomerOrdersRef() {
+    public DatabaseReference getCustomerCartAmountRef() {
+        if (firebaseUser != null) {
+            return databaseRef.child(NODE_CUSTOMER_CART).child(firebaseUser.getUid())
+                    .child(NODE_AMOUNT);
+        } else {
+            return null;
+        }
+    }
+
+    public DatabaseReference getCustomerOrdersRef() {
         if (firebaseUser != null) {
             return databaseRef.child(NODE_CUSTOMER_ORDERS).child(firebaseUser.getUid());
         } else {
@@ -68,7 +79,7 @@ public class FirebaseHelper {
             return getMealsRef();
 
         } else if (clazz == CartMeal.class) {
-            return getCustomerCartRef();
+            return getCustomerCartMealsRef();
 
         } else if (clazz == CustomerOrder.class) {
             return getCustomerOrdersRef();
@@ -88,7 +99,7 @@ public class FirebaseHelper {
             return getMealRef(id);
 
         } else if (clazz == CartMeal.class) {
-            return getCustomerCartRef();
+            return getCustomerCartMealsRef();
 
         } else {
             return null;

@@ -12,9 +12,7 @@ public class MealRepositoryImpl implements MealRepository {
 
     public MealRepositoryImpl(MealsPresenter presenter) {
         this.presenter = presenter;
-
         FirebaseHelper firebaseHelper = new FirebaseHelper();
-
         mealsRef = firebaseHelper.getItemsRef(Meal.class);
     }
 

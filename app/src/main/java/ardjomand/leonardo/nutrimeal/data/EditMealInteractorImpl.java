@@ -6,9 +6,7 @@ import android.support.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
@@ -20,20 +18,16 @@ import ardjomand.leonardo.nutrimeal.meals.Meal;
 
 public class EditMealInteractorImpl implements EditMealInteractor.Interactor {
 
-    private static final String NODE_MEALS = "meals";
     private static final String STORAGE_NODE_MEAL_IMAGES = "meal-images";
     private static final String GS = "gs://nutrimeal-b786e.appspot.com";
 
     private final DatabaseReference mealsRef;
     private final EditMealInteractor.Presenter presenter;
-    private ValueEventListener mealEventListener;
 
     public EditMealInteractorImpl(EditMealInteractor.Presenter presenter) {
         this.presenter = presenter;
-
-        mealsRef = FirebaseDatabase.getInstance().getReference()
-                .child(NODE_MEALS);
-
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+        mealsRef = firebaseHelper.getMealsRef();
     }
 
     @Override

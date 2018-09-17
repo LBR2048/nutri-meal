@@ -1,11 +1,8 @@
 package ardjomand.leonardo.nutrimeal.data;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import ardjomand.leonardo.nutrimeal.cart.CartMeal;
@@ -14,19 +11,13 @@ import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class EditCartInteractorImpl implements EditCartInteractor {
 
-    private static final String NODE_MEALS = "meals";
-    private static final String NODE_AMOUNT = "amount";
-    private static final String NODE_CUSTOMER_CART = "customer-cart";
-
-    private DatabaseReference customerCartRef;
+    private final DatabaseReference customerCartMealsRef;
+    private final DatabaseReference customerCartAmountRef;
 
     public EditCartInteractorImpl(MealsPresenter presenter) {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            customerCartRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_CUSTOMER_CART)
-                    .child(firebaseUser.getUid());
-        }
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+        customerCartMealsRef = firebaseHelper.getCustomerCartMealsRef();
+        customerCartAmountRef = firebaseHelper.getCustomerCartAmountRef();
     }
 
     @Override
@@ -42,14 +33,14 @@ public class EditCartInteractorImpl implements EditCartInteractor {
                     if (cartMeal != null) {
                         cartMeal.setQuantity(cartMeal.getQuantity() + 1);
                     }
-                    customerCartRef.child(NODE_MEALS).child(meal.getKey()).setValue(cartMeal);
+                    customerCartMealsRef.child(meal.getKey()).setValue(cartMeal);
                     increaseAmount(meal.getUnitPrice());
 
                 } else {
                     // If no, copy meal from menu to cart, set quantity to 1 and set total amount
                     CartMeal cartMeal = new CartMeal(meal.getKey(), meal.getName(), meal.getDescription(),
                             meal.getImagePath(), meal.getUnitPrice(), 1);
-                    customerCartRef.child(NODE_MEALS).child(meal.getKey()).setValue(cartMeal);
+                    customerCartMealsRef.child(meal.getKey()).setValue(cartMeal);
                     increaseAmount(meal.getUnitPrice());
 
                 }
@@ -61,7 +52,7 @@ public class EditCartInteractorImpl implements EditCartInteractor {
             }
         };
 
-        customerCartRef.child(NODE_MEALS).child(meal.getKey()).addListenerForSingleValueEvent(valueEventListener);
+        customerCartMealsRef.child(meal.getKey()).addListenerForSingleValueEvent(valueEventListener);
     }
 
     private void increaseAmount(final long amountToIncrease) {
@@ -71,11 +62,11 @@ public class EditCartInteractorImpl implements EditCartInteractor {
                 if (dataSnapshot.exists()) {
                     // If yes, increment quantity and total cart amount
                     Long amount = dataSnapshot.getValue(Long.class);
-                    customerCartRef.child(NODE_AMOUNT).setValue(amount + amountToIncrease);
+                    customerCartAmountRef.setValue(amount + amountToIncrease);
 
                 } else {
                     // If no, copy meal from menu to cart, set quantity to 1 and set total amount
-                    customerCartRef.child(NODE_AMOUNT).setValue(amountToIncrease);
+                    customerCartAmountRef.setValue(amountToIncrease);
                 }
             }
 
@@ -85,6 +76,6 @@ public class EditCartInteractorImpl implements EditCartInteractor {
             }
         };
 
-        customerCartRef.child(NODE_AMOUNT).addListenerForSingleValueEvent(amountValueEventListener);
+        customerCartAmountRef.addListenerForSingleValueEvent(amountValueEventListener);
     }
 }
