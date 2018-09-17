@@ -81,13 +81,13 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
     @Override
     public void onStart() {
         super.onStart();
-        presenter.subscribeForCartMealsUpdates(mCartMealKey);
+        presenter.subscribe(mCartMealKey);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.unsubscribeFromCartMealsUpdates();
+        presenter.unsubscribe();
     }
     //endregion
 

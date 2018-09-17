@@ -11,9 +11,9 @@ interface EditCartMealContract {
 
         void setView(View view);
 
-        void subscribeForCartMealsUpdates(String key);
+        void subscribe(String key);
 
-        void unsubscribeFromCartMealsUpdates();
+        void unsubscribe();
 
         void increaseQuantity();
 

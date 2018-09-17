@@ -6,15 +6,6 @@ public interface EditCartMealQuantityInteractor {
 
     interface Interactor {
 
-        void subscribeForCartMealUpdates(String key);
-
-        void unsubscribeFromCartMealUpdates();
-
         void editCartMeal(CartMeal cartMeal);
-    }
-
-    interface Presenter {
-
-        void onCartMealUpdated(CartMeal cartMeal);
     }
 }
