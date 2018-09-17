@@ -18,6 +18,8 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.data.pojos.Cart;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
 /**

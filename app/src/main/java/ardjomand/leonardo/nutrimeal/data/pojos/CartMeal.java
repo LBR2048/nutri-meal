@@ -1,6 +1,4 @@
-package ardjomand.leonardo.nutrimeal.cart;
-
-import ardjomand.leonardo.nutrimeal.data.KeyClass;
+package ardjomand.leonardo.nutrimeal.data.pojos;
 
 public class CartMeal extends KeyClass { // TODO extend from Meal
 

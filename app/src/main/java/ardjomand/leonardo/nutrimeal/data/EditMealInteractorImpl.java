@@ -10,7 +10,8 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.FirebaseHelper;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 /**
  * Created by leonardo on 12/05/2018.

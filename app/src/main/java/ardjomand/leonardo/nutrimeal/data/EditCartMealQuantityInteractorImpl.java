@@ -2,7 +2,9 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import com.google.firebase.database.DatabaseReference;
 
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.common.FirebaseHelper;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepository;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 
 public class EditCartMealQuantityInteractorImpl implements
         EditCartMealQuantityInteractor {

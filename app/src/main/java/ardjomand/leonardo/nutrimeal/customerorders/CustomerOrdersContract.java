@@ -1,5 +1,7 @@
 package ardjomand.leonardo.nutrimeal.customerorders;
 
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
+
 interface CustomerOrdersContract {
 
     interface View {

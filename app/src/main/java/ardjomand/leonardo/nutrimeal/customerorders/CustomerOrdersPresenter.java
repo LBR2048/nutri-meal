@@ -2,8 +2,9 @@ package ardjomand.leonardo.nutrimeal.customerorders;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.data.GenericRepository;
-import ardjomand.leonardo.nutrimeal.data.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
 
 public class CustomerOrdersPresenter implements
         CustomerOrdersContract.Presenter,

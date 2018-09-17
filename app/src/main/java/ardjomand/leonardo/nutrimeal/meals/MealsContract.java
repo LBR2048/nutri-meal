@@ -2,6 +2,8 @@ package ardjomand.leonardo.nutrimeal.meals;
 
 import java.util.List;
 
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
+
 interface MealsContract {
 
     interface View {

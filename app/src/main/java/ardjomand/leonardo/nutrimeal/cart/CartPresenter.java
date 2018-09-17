@@ -2,11 +2,12 @@ package ardjomand.leonardo.nutrimeal.cart;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.data.GenericRepository;
-import ardjomand.leonardo.nutrimeal.data.GenericRepositoryImpl;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractor;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractorImpl;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 public class CartPresenter implements
         CartContract.Presenter,

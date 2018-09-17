@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.data;
+package ardjomand.leonardo.nutrimeal.data.common;
 
 public interface GenericItemRepository {
 

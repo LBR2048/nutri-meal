@@ -4,10 +4,11 @@ import android.util.Log;
 
 import ardjomand.leonardo.nutrimeal.data.EditCartInteractor;
 import ardjomand.leonardo.nutrimeal.data.EditCartInteractorImpl;
-import ardjomand.leonardo.nutrimeal.data.GenericRepository;
-import ardjomand.leonardo.nutrimeal.data.GenericRepositoryImpl;
 import ardjomand.leonardo.nutrimeal.data.MealRepository;
 import ardjomand.leonardo.nutrimeal.data.MealRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 public class MealsPresenter implements
         MealsContract.Presenter,

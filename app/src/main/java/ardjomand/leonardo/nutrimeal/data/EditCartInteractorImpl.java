@@ -5,8 +5,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.FirebaseHelper;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class EditCartInteractorImpl implements EditCartInteractor {

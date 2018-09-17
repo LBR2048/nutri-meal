@@ -26,7 +26,7 @@ import com.google.firebase.storage.StorageReference;
 
 import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

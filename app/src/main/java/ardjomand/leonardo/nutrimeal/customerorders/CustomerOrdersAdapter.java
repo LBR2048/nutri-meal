@@ -12,7 +12,8 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
 import ardjomand.leonardo.nutrimeal.Utils;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
 /**

@@ -1,8 +1,8 @@
-package ardjomand.leonardo.nutrimeal.data;
+package ardjomand.leonardo.nutrimeal.data.widgets;
 
 import java.util.List;
 
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.CompanyOrder;
 
 public interface CompanyWidgetRepository {
 

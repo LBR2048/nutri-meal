@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.data.pojos.CompanyOrder;
 import ardjomand.leonardo.nutrimeal.widget.OrdersWidget;
 import butterknife.BindView;
 import butterknife.ButterKnife;

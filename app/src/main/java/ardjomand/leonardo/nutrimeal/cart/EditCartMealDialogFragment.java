@@ -19,6 +19,7 @@ import java.text.NumberFormat;
 
 import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

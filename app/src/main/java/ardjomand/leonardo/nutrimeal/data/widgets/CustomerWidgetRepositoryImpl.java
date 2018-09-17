@@ -1,4 +1,4 @@
-package ardjomand.leonardo.nutrimeal.data;
+package ardjomand.leonardo.nutrimeal.data.widgets;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -11,7 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
 
 public class CustomerWidgetRepositoryImpl implements CustomerWidgetRepository {
 

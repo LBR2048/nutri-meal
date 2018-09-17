@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import ardjomand.leonardo.nutrimeal.auth.User;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 
 public class AuthRepositoryImpl implements AuthRepository.Interactor {
 

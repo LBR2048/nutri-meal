@@ -1,9 +1,11 @@
-package ardjomand.leonardo.nutrimeal.data;
+package ardjomand.leonardo.nutrimeal.data.common;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import ardjomand.leonardo.nutrimeal.data.pojos.KeyClass;
 
 public class GenericItemRepositoryImpl<T extends KeyClass> implements GenericItemRepository.Repository {
 

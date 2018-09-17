@@ -2,7 +2,8 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import com.google.firebase.database.DatabaseReference;
 
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.FirebaseHelper;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsPresenter;
 
 public class MealRepositoryImpl implements MealRepository {

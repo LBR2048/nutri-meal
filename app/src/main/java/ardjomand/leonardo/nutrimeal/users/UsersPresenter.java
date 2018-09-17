@@ -2,9 +2,9 @@ package ardjomand.leonardo.nutrimeal.users;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.auth.User;
-import ardjomand.leonardo.nutrimeal.data.GenericRepository;
-import ardjomand.leonardo.nutrimeal.data.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 
 public class UsersPresenter implements
         UsersContract.Presenter,

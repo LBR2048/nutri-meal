@@ -1,11 +1,9 @@
-package ardjomand.leonardo.nutrimeal.cart;
+package ardjomand.leonardo.nutrimeal.data.pojos;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ardjomand.leonardo.nutrimeal.data.KeyClass;
-
-class Cart extends KeyClass{
+public class Cart extends KeyClass{
 
     private long amount;
     private List<CartMeal> meals = new ArrayList<>(); // TODO use Set or other List implementation

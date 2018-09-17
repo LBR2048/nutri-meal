@@ -25,6 +25,7 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.BuildConfig;
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

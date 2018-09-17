@@ -4,9 +4,9 @@ import android.net.Uri;
 
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractor;
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractorImpl;
-import ardjomand.leonardo.nutrimeal.data.GenericItemRepository;
-import ardjomand.leonardo.nutrimeal.data.GenericItemRepositoryImpl;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 /**
  * Created by leonardo on 12/05/2018.

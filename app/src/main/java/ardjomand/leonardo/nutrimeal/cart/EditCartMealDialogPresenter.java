@@ -2,8 +2,9 @@ package ardjomand.leonardo.nutrimeal.cart;
 
 import ardjomand.leonardo.nutrimeal.data.EditCartMealQuantityInteractor;
 import ardjomand.leonardo.nutrimeal.data.EditCartMealQuantityInteractorImpl;
-import ardjomand.leonardo.nutrimeal.data.GenericItemRepository;
-import ardjomand.leonardo.nutrimeal.data.GenericItemRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 
 public class EditCartMealDialogPresenter implements
         EditCartMealContract.Presenter,

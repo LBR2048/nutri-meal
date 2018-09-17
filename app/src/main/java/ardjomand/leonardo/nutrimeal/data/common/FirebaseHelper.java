@@ -1,15 +1,15 @@
-package ardjomand.leonardo.nutrimeal.data;
+package ardjomand.leonardo.nutrimeal.data.common;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import ardjomand.leonardo.nutrimeal.auth.User;
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.pojos.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 
 public class FirebaseHelper {
 
@@ -23,7 +23,7 @@ public class FirebaseHelper {
     private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private final DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
 
-    FirebaseHelper() {
+    public FirebaseHelper() {
 
     }
 

@@ -1,9 +1,6 @@
-package ardjomand.leonardo.nutrimeal.customerorders;
+package ardjomand.leonardo.nutrimeal.data.pojos;
 
 import java.util.List;
-
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.data.KeyClass;
 
 public class CustomerOrder extends KeyClass {
 
