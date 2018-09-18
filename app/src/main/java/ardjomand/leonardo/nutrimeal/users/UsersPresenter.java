@@ -2,19 +2,21 @@ package ardjomand.leonardo.nutrimeal.users;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.auth.User;
-import ardjomand.leonardo.nutrimeal.data.UsersRepository;
-import ardjomand.leonardo.nutrimeal.data.UsersRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 
-public class UsersPresenter implements UsersContract.Presenter, UsersRepository.Presenter {
+public class UsersPresenter implements
+        UsersContract.Presenter,
+        GenericRepository.Presenter<User> {
 
     private static final String TAG = UsersPresenter.class.getSimpleName();
-    private final UsersRepository.Repository repository;
+    private final GenericRepository.Repository repository;
     private UsersContract.View view;
 
     UsersPresenter(UsersContract.View view) {
         this.view = view;
-        repository = new UsersRepositoryImpl(this);
+        repository = new GenericRepositoryImpl<>(this, User.class);
     }
 
     @Override
@@ -24,16 +26,16 @@ public class UsersPresenter implements UsersContract.Presenter, UsersRepository.
 
     @Override
     public void subscribeToUsersUpdates() {
-        repository.subscribeForUsersUpdates();
+        repository.subscribe();
     }
 
     @Override
     public void unsubscribeFromUsersUpdates() {
-        repository.unsubscribeFromUsersUpdates();
+        repository.unsubscribe();
     }
 
     @Override
-    public void onUserAdded(User user) {
+    public void onItemAdded(User user) {
         Log.i(TAG, "User " + user.toString() + " added");
         if (view != null){
             view.addUser(user);
@@ -41,14 +43,14 @@ public class UsersPresenter implements UsersContract.Presenter, UsersRepository.
     }
 
     @Override
-    public void onUserChanged(User user) {
+    public void onItemChanged(User user) {
         if (view != null){
             view.updateUser(user);
         }
     }
 
     @Override
-    public void onUserRemoved(String key) {
+    public void onItemRemoved(String key) {
 
     }
 }

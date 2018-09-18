@@ -1,6 +1,6 @@
 package ardjomand.leonardo.nutrimeal.users;
 
-import ardjomand.leonardo.nutrimeal.auth.User;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 
 interface UsersContract {
 

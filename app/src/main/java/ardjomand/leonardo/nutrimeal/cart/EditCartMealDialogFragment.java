@@ -19,6 +19,7 @@ import java.text.NumberFormat;
 
 import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -66,7 +67,7 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
             mCartMealKey = getArguments().getString(ARG_CART_MEAL_KEY);
         }
 
-        presenter = new EditCartMealDialogPresenter(this);
+        presenter = new EditCartMealDialogPresenter(this, mCartMealKey);
     }
 
     @Override
@@ -81,13 +82,13 @@ public class EditCartMealDialogFragment extends DialogFragment implements EditCa
     @Override
     public void onStart() {
         super.onStart();
-        presenter.subscribeForCartMealsUpdates(mCartMealKey);
+        presenter.subscribe(mCartMealKey);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.unsubscribeFromCartMealsUpdates();
+        presenter.unsubscribe();
     }
     //endregion
 

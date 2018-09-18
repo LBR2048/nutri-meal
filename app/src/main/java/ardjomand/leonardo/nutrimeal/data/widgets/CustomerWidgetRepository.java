@@ -1,8 +1,8 @@
-package ardjomand.leonardo.nutrimeal.data;
+package ardjomand.leonardo.nutrimeal.data.widgets;
 
 import java.util.List;
 
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
 
 public interface CustomerWidgetRepository {
 

@@ -4,19 +4,26 @@ import android.net.Uri;
 
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractor;
 import ardjomand.leonardo.nutrimeal.data.EditMealInteractorImpl;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericItemRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 /**
  * Created by leonardo on 12/05/2018.
  */
 
-public class EditMealPresenter implements EditMealContract.Presenter, EditMealInteractor.Presenter {
+public class EditMealPresenter implements
+        EditMealContract.Presenter,
+        EditMealInteractor.Presenter,
+        GenericItemRepository.Presenter<Meal> {
 
+    private final GenericItemRepository.Repository genericItemRepository;
     private EditMealContract.View view;
     private final EditMealInteractor.Interactor interactor;
 
-    EditMealPresenter(EditMealContract.View view) {
+    EditMealPresenter(EditMealContract.View view, String key) {
         this.view = view;
+        genericItemRepository = new GenericItemRepositoryImpl<>(this, Meal.class, key);
         interactor = new EditMealInteractorImpl(this);
     }
 
@@ -26,13 +33,13 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     }
 
     @Override
-    public void subscribeForMealUpdates(String key) {
-        interactor.subscribeForMealUpdates(key);
+    public void subscribe(String key) {
+        genericItemRepository.subscribe(key);
     }
 
     @Override
-    public void unsubscribeFromMealUpdates() {
-        interactor.unsubscribeFromMealUpdates();
+    public void unsubscribe() {
+        genericItemRepository.unsubscribe();
     }
 
     @Override
@@ -46,9 +53,9 @@ public class EditMealPresenter implements EditMealContract.Presenter, EditMealIn
     }
 
     @Override
-    public void showMeal(Meal meal) {
+    public void onItemRead(Meal meal) {
         if (view != null) {
-            view.showMeal(meal);
+            view.showItem(meal);
             if (meal.getImagePath() != null && !meal.getImagePath().isEmpty()) {
                 view.showMealImage(meal.getImagePath());
             } else {

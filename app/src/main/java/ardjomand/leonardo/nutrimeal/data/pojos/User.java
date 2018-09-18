@@ -1,6 +1,6 @@
-package ardjomand.leonardo.nutrimeal.auth;
+package ardjomand.leonardo.nutrimeal.data.pojos;
 
-public class User {
+public class User extends KeyClass {
 
     private String key;
     private String name;

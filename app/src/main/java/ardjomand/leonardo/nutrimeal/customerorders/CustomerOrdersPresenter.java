@@ -2,18 +2,21 @@ package ardjomand.leonardo.nutrimeal.customerorders;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.data.CustomerOrdersRepository;
-import ardjomand.leonardo.nutrimeal.data.CustomerOrdersRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
 
-public class CustomerOrdersPresenter implements CustomerOrdersContract.Presenter, CustomerOrdersRepository.Presenter {
+public class CustomerOrdersPresenter implements
+        CustomerOrdersContract.Presenter,
+        GenericRepository.Presenter<CustomerOrder> {
 
     private static final String TAG = CustomerOrdersPresenter.class.getSimpleName();
-    private final CustomerOrdersRepository.Repository repository;
+    private final GenericRepository.Repository repository;
     private CustomerOrdersContract.View view;
 
     CustomerOrdersPresenter(CustomerOrdersContract.View view) {
         this.view = view;
-        repository = new CustomerOrdersRepositoryImpl(this);
+        repository = new GenericRepositoryImpl<>(this, CustomerOrder.class);
     }
 
     @Override
@@ -22,32 +25,32 @@ public class CustomerOrdersPresenter implements CustomerOrdersContract.Presenter
     }
 
     @Override
-    public void subscribeToOrdersUpdates() {
-        repository.subscribeForOrdersUpdates();
+    public void subscribe() {
+        repository.subscribe();
     }
 
     @Override
-    public void unsubscribeFromOrdersUpdates() {
-        repository.unsubscribeFromOrdersUpdates();
+    public void unsubscribe() {
+        repository.unsubscribe();
     }
 
     @Override
-    public void onOrderAdded(CustomerOrder customerOrder) {
-        Log.i(TAG, "CustomerOrder " + customerOrder.toString() + " added");
+    public void onItemAdded(CustomerOrder item) {
+        Log.i(TAG, "CustomerOrder " + item.toString() + " added");
         if (view != null){
-            view.addOrder(customerOrder);
+            view.addItem(item);
         }
     }
 
     @Override
-    public void onOrderChanged(CustomerOrder customerOrder) {
+    public void onItemChanged(CustomerOrder customerOrder) {
         if (view != null){
-            view.updateOrder(customerOrder);
+            view.updateItem(customerOrder);
         }
     }
 
     @Override
-    public void onOrderRemoved(String key) {
+    public void onItemRemoved(String key) {
 
     }
 }

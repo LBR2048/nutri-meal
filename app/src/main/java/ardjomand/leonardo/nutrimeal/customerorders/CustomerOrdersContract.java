@@ -1,24 +1,14 @@
 package ardjomand.leonardo.nutrimeal.customerorders;
 
+import ardjomand.leonardo.nutrimeal.ObserverPresenter;
+import ardjomand.leonardo.nutrimeal.ObserverView;
+
 interface CustomerOrdersContract {
 
-    interface View {
+    interface View<T> extends ObserverView<T> { }
 
-        void addOrder(CustomerOrder customerOrder);
-
-        void updateOrder(CustomerOrder customerOrder);
-
-        void showEmptyOrder();
-
-        void showError();
-    }
-
-    interface Presenter {
+    interface Presenter extends ObserverPresenter {
 
         void setView(View view);
-
-        void subscribeToOrdersUpdates();
-
-        void unsubscribeFromOrdersUpdates();
     }
 }

@@ -12,10 +12,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import ardjomand.leonardo.nutrimeal.auth.AuthActivity;
 import ardjomand.leonardo.nutrimeal.cart.CartFragment;
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
 import ardjomand.leonardo.nutrimeal.cart.EditCartMealDialogFragment;
 import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrdersFragment;
 import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrdersFragment;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 import ardjomand.leonardo.nutrimeal.editmeal.EditMealFragment;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment;
 

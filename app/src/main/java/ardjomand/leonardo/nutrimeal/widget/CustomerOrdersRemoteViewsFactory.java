@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import ardjomand.leonardo.nutrimeal.Utils;
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
-import ardjomand.leonardo.nutrimeal.data.CustomerWidgetRepository;
-import ardjomand.leonardo.nutrimeal.data.CustomerWidgetRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.widgets.CustomerWidgetRepository;
+import ardjomand.leonardo.nutrimeal.data.widgets.CustomerWidgetRepositoryImpl;
 
 /**
  * Created by unity on 09/01/18.

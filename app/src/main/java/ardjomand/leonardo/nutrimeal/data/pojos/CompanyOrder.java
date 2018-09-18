@@ -1,11 +1,9 @@
-package ardjomand.leonardo.nutrimeal.companyorders;
+package ardjomand.leonardo.nutrimeal.data.pojos;
 
 import java.util.List;
 import java.util.Map;
 
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-
-public class CompanyOrder {
+public class CompanyOrder extends KeyClass {
 
     private String key;
     private boolean delivered;

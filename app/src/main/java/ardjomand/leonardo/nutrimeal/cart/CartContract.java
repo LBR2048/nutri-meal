@@ -1,6 +1,7 @@
 package ardjomand.leonardo.nutrimeal.cart;
 
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 interface CartContract {
 

@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import ardjomand.leonardo.nutrimeal.Utils;
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
-import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepository;
-import ardjomand.leonardo.nutrimeal.data.CompanyWidgetRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.data.widgets.CompanyWidgetRepository;
+import ardjomand.leonardo.nutrimeal.data.widgets.CompanyWidgetRepositoryImpl;
 
 /**
  * Created by unity on 09/01/18.

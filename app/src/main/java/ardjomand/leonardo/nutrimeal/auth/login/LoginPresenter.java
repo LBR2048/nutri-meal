@@ -1,8 +1,8 @@
 package ardjomand.leonardo.nutrimeal.auth.login;
 
-import ardjomand.leonardo.nutrimeal.auth.User;
 import ardjomand.leonardo.nutrimeal.data.AuthRepository;
 import ardjomand.leonardo.nutrimeal.data.AuthRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 
 public class LoginPresenter implements LoginContract.Presenter {
 

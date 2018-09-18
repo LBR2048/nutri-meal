@@ -2,23 +2,26 @@ package ardjomand.leonardo.nutrimeal.cart;
 
 import android.util.Log;
 
-import ardjomand.leonardo.nutrimeal.data.CartRepository;
-import ardjomand.leonardo.nutrimeal.data.CartRepositoryImpl;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractor;
 import ardjomand.leonardo.nutrimeal.data.PlaceOrderInteractorImpl;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepository;
+import ardjomand.leonardo.nutrimeal.data.common.GenericRepositoryImpl;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
-public class CartPresenter implements CartContract.Presenter, CartRepository.Presenter {
+public class CartPresenter implements
+        CartContract.Presenter,
+        GenericRepository.Presenter<CartMeal> {
 
     private static final String TAG = CartPresenter.class.getSimpleName();
 
     private CartContract.View view;
-    private final CartRepository.Repository repository;
-    private final PlaceOrderInteractor.Interactor placeOrderInteractor;
+    private final GenericRepository.Repository repository;
+    private final PlaceOrderInteractor placeOrderInteractor;
 
     CartPresenter(CartContract.View view) {
         this.view = view;
-        repository = new CartRepositoryImpl(this);
+        repository = new GenericRepositoryImpl<>(this, CartMeal.class);
         placeOrderInteractor = new PlaceOrderInteractorImpl(this);
     }
 
@@ -34,12 +37,12 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
 
     @Override
     public void subscribeToCartUpdates() {
-        repository.subscribeForCartUpdates();
+        repository.subscribe();
     }
 
     @Override
     public void unsubscribeFromCartUpdates() {
-        repository.unsubscribeFromCartUpdates();
+        repository.unsubscribe();
     }
 
     @Override
@@ -48,22 +51,22 @@ public class CartPresenter implements CartContract.Presenter, CartRepository.Pre
     }
 
     @Override
-    public void onSelectedMealAdded(CartMeal cartMeal) {
-        Log.i(TAG, "Selected meal " + cartMeal.getName() + " added");
+    public void onItemAdded(CartMeal item) {
+        Log.i(TAG, "Selected meal " + item.getName() + " added");
         if (view != null) {
-            view.addCartMeal(cartMeal);
+            view.addCartMeal(item);
         }
     }
 
     @Override
-    public void onSelectedMealChanged(CartMeal cartMeal) {
+    public void onItemChanged(CartMeal item) {
         if (view != null){
-            view.updateCartMeal(cartMeal);
+            view.updateCartMeal(item);
         }
     }
 
     @Override
-    public void onSelectedMealRemoved(String key) {
+    public void onItemRemoved(String key) {
 
     }
 }

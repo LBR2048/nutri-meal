@@ -5,36 +5,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import ardjomand.leonardo.nutrimeal.cart.CartPresenter;
+import ardjomand.leonardo.nutrimeal.data.common.FirebaseHelper;
 
-public class PlaceOrderInteractorImpl implements PlaceOrderInteractor.Interactor {
-
-    private static final String NODE_CUSTOMER_ORDERS = "customer-orders";
-    private static final String NODE_ORDERS = "orders";
-    private static final String NODE_CUSTOMER_CART = "customer-cart";
+public class PlaceOrderInteractorImpl implements PlaceOrderInteractor {
 
     private DatabaseReference customerOrdersRef;
     private DatabaseReference ordersRef;
     private DatabaseReference customerCartRef;
 
     public PlaceOrderInteractorImpl(CartPresenter presenter) {
-
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            customerOrdersRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_CUSTOMER_ORDERS)
-                    .child(firebaseUser.getUid());
-
-            ordersRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_ORDERS);
-
-            customerCartRef = FirebaseDatabase.getInstance().getReference()
-                    .child(NODE_CUSTOMER_CART)
-                    .child(firebaseUser.getUid());
-        }
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+        customerOrdersRef = firebaseHelper.getCustomerOrdersRef();
+        ordersRef = firebaseHelper.getOrdersRef();
+        customerCartRef = firebaseHelper.getCustomerCartMealsRef();
     }
 
     @Override

@@ -2,15 +2,11 @@ package ardjomand.leonardo.nutrimeal.data;
 
 import android.net.Uri;
 
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 
 public interface EditMealInteractor {
 
     interface Interactor {
-
-        void subscribeForMealUpdates(String key);
-
-        void unsubscribeFromMealUpdates();
 
         void updateMeal(Meal meal);
 
@@ -21,7 +17,7 @@ public interface EditMealInteractor {
 
     interface Presenter {
 
-        void showMeal(Meal meal);
+        void onItemRead(Meal meal);
     }
 
 }

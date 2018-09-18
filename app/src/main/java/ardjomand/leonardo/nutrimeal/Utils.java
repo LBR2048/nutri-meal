@@ -8,9 +8,9 @@ import android.support.annotation.NonNull;
 import java.text.NumberFormat;
 import java.util.Map;
 
-import ardjomand.leonardo.nutrimeal.cart.CartMeal;
-import ardjomand.leonardo.nutrimeal.companyorders.CompanyOrder;
-import ardjomand.leonardo.nutrimeal.customerorders.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
+import ardjomand.leonardo.nutrimeal.data.pojos.CompanyOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
 
 public class Utils {
 

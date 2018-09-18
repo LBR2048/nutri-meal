@@ -21,10 +21,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.BuildConfig;
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +37,7 @@ import butterknife.Unbinder;
  * interface.
  */
 public class MealsFragment extends Fragment implements
-        MealsContract.View,
+        MealsContract.View<Meal>,
         MealAdapter.OnMealAdapterInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -133,13 +133,13 @@ public class MealsFragment extends Fragment implements
     public void onStart() {
         super.onStart();
         adapter.clearData();
-        presenter.subscribeToMealsUpdates();
+        presenter.subscribe();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.unsubscribeFromMealsUpdates();
+        presenter.unsubscribe();
     }
 
     @Override
@@ -180,22 +180,17 @@ public class MealsFragment extends Fragment implements
 
     //region Presenter callbacks
     @Override
-    public void showMeals(List<Meal> meals) {
-        adapter.replaceData(meals);
-    }
-
-    @Override
-    public void addMeal(Meal meal) {
+    public void addItem(Meal meal) {
         adapter.addData(meal);
     }
 
     @Override
-    public void updateMeal(Meal meal) {
+    public void updateItem(Meal meal) {
         adapter.updateData(meal);
     }
 
     @Override
-    public void showEmptyMeals() {
+    public void showEmptyItems() {
         Toast.makeText(getActivity(), R.string.error_no_items_available, Toast.LENGTH_SHORT).show();
     }
 

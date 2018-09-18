@@ -1,6 +1,7 @@
-package ardjomand.leonardo.nutrimeal.meals;
+package ardjomand.leonardo.nutrimeal.data.pojos;
 
-public class Meal {
+public class Meal extends KeyClass {
+
     private String key;
     private String name;
     private String description;

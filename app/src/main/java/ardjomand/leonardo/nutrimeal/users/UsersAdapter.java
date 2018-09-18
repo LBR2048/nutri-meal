@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
-import ardjomand.leonardo.nutrimeal.auth.User;
-import ardjomand.leonardo.nutrimeal.meals.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
+import ardjomand.leonardo.nutrimeal.data.pojos.User;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
 /**
