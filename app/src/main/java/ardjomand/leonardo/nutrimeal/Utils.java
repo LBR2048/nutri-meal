@@ -6,11 +6,13 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Map;
 
 import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 import ardjomand.leonardo.nutrimeal.data.pojos.CompanyOrder;
 import ardjomand.leonardo.nutrimeal.data.pojos.CustomerOrder;
+import ardjomand.leonardo.nutrimeal.data.pojos.KeyClass;
 
 public class Utils {
 
@@ -84,5 +86,17 @@ public class Utils {
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
+    public static int getIndexForKey(String key, List<? extends KeyClass> items) {
+        int index = 0;
+        for (KeyClass item : items) {
+            if (item.getKey().equals(key)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        throw new IllegalArgumentException("Key not found");
     }
 }

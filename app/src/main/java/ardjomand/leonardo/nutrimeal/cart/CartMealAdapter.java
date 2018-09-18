@@ -18,6 +18,7 @@ import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.GlideApp;
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.Utils;
 import ardjomand.leonardo.nutrimeal.data.pojos.Cart;
 import ardjomand.leonardo.nutrimeal.data.pojos.CartMeal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
@@ -101,7 +102,7 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
     }
 
     public void updateData(CartMeal cartMeal) {
-        int index = getIndexForKey(cartMeal.getKey());
+        int index = Utils.getIndexForKey(cartMeal.getKey(), mValues);
         mValues.set(index, cartMeal);
         notifyItemChanged(index);
     }
@@ -127,17 +128,5 @@ public class CartMealAdapter extends RecyclerView.Adapter<CartMealAdapter.ViewHo
         public String toString() {
             return super.toString() + " '" + mNameView.getText() + "'";
         }
-    }
-
-    private int getIndexForKey(String key) {
-        int index = 0;
-        for (CartMeal cartMeal : mValues) {
-            if (cartMeal.getKey().equals(key)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        throw new IllegalArgumentException("Key not found");
     }
 }

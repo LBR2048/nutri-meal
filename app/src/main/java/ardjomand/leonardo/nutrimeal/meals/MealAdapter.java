@@ -21,6 +21,7 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.Utils;
 import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
 
@@ -99,7 +100,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
     }
 
     public void updateData(Meal meal) {
-        int index = getIndexForKey(meal.getKey());
+        int index = Utils.getIndexForKey(meal.getKey(), mMeals);
         mMeals.set(index, meal);
         notifyItemChanged(index);
     }
@@ -146,16 +147,4 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
         void onMealClicked(Meal item);
     }
 
-    // TODO move to Utils class using generic type
-    private int getIndexForKey(String key) {
-        int index = 0;
-        for (Meal meal : mMeals) {
-            if (meal.getKey().equals(key)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        throw new IllegalArgumentException("Key not found");
-    }
 }

@@ -87,21 +87,9 @@ public class CompanyOrdersAdapter extends RecyclerView.Adapter<CompanyOrdersAdap
     }
 
     public void updateData(CompanyOrder companyOrder) {
-        int index = getIndexForKey(companyOrder.getKey());
+        int index = Utils.getIndexForKey(companyOrder.getKey(), mItems);
         mItems.set(index, companyOrder);
         notifyItemChanged(index);
-    }
-
-    private int getIndexForKey(String key) {
-        int index = 0;
-        for (CompanyOrder companyOrder : mItems) {
-            if (companyOrder.getKey().equals(key)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        throw new IllegalArgumentException("Key not found");
     }
 
     public interface OnMealAdapterInteractionListener {

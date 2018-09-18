@@ -8,7 +8,7 @@ interface CompanyOrdersContract {
 
     interface View<T> extends ObserverView<T> { }
 
-    interface Presenter extends ObserverPresenter{
+    interface Presenter extends ObserverPresenter {
 
         void setView(View view);
     }

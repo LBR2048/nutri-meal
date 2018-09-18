@@ -85,21 +85,9 @@ public class CustomerOrdersAdapter extends RecyclerView.Adapter<CustomerOrdersAd
     }
 
     public void updateData(CustomerOrder customerOrder) {
-        int index = getIndexForKey(customerOrder.getKey());
+        int index = Utils.getIndexForKey(customerOrder.getKey(), mItems);
         mItems.set(index, customerOrder);
         notifyItemChanged(index);
-    }
-
-    private int getIndexForKey(String key) {
-        int index = 0;
-        for (CustomerOrder customerOrder : mItems) {
-            if (customerOrder.getKey().equals(key)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        throw new IllegalArgumentException("Key not found");
     }
 
     public interface OnMealAdapterInteractionListener {

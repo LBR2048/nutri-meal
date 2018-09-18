@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ardjomand.leonardo.nutrimeal.R;
+import ardjomand.leonardo.nutrimeal.Utils;
 import ardjomand.leonardo.nutrimeal.data.pojos.Meal;
 import ardjomand.leonardo.nutrimeal.data.pojos.User;
 import ardjomand.leonardo.nutrimeal.meals.MealsFragment.OnMealFragmentInteractionListener;
@@ -76,21 +77,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     }
 
     public void updateData(User user) {
-        int index = getIndexForKey(user.getKey());
+        int index = Utils.getIndexForKey(user.getKey(), mItems);
         mItems.set(index, user);
         notifyItemChanged(index);
-    }
-
-    private int getIndexForKey(String key) {
-        int index = 0;
-        for (User user : mItems) {
-            if (user.getKey().equals(key)) {
-                return index;
-            } else {
-                index++;
-            }
-        }
-        throw new IllegalArgumentException("Key not found");
     }
 
     public interface OnMealAdapterInteractionListener {
