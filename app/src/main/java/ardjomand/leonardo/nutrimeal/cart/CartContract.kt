@@ -7,9 +7,9 @@ internal interface CartContract {
 
     interface View {
 
-        fun addCartMeal(meal: CartMeal)
+        fun addCartMeal(cartMeal: CartMeal)
 
-        fun updateCartMeal(meal: CartMeal)
+        fun updateCartMeal(cartMeal: CartMeal)
 
         fun showEmptyMeals()
 
@@ -18,7 +18,7 @@ internal interface CartContract {
 
     interface Presenter {
 
-        fun setView(view: View)
+        fun setView(view: View?)
 
         fun subscribeToCartUpdates()
 

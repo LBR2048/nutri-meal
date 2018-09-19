@@ -17,7 +17,7 @@ internal interface UsersContract {
 
     interface Presenter {
 
-        fun setView(view: View)
+        fun setView(view: View?)
 
         fun subscribeToUsersUpdates()
 

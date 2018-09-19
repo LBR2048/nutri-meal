@@ -42,7 +42,9 @@ class EditCartMealDialogFragment : DialogFragment(),
 
     override fun onStart() {
         super.onStart()
-        presenter.subscribe(mCartMealKey)
+        mCartMealKey?.let {
+            presenter.subscribe(it)
+        }
     }
 
     override fun onStop() {

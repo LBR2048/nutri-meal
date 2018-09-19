@@ -87,13 +87,13 @@ class CustomerOrdersFragment : Fragment(), CustomerOrdersContract.View<CustomerO
     //endregion
 
     //region Presenter callbacks
-    override fun addItem(customerOrder: CustomerOrder) {
-        adapter.addData(customerOrder)
+    override fun addItem(item: CustomerOrder) {
+        adapter.addData(item)
         OrdersWidget.updateAllWidgets(context)
     }
 
-    override fun updateItem(customerOrder: CustomerOrder) {
-        adapter.updateData(customerOrder)
+    override fun updateItem(item: CustomerOrder) {
+        adapter.updateData(item)
         OrdersWidget.updateAllWidgets(context)
     }
 

@@ -83,13 +83,13 @@ class CompanyOrdersFragment : Fragment(),
     //endregion
 
     //region Presenter callbacks
-    override fun addItem(companyOrder: CompanyOrder) {
-        adapter.addData(companyOrder)
+    override fun addItem(item: CompanyOrder) {
+        adapter.addData(item)
         OrdersWidget.updateAllWidgets(context)
     }
 
-    override fun updateItem(companyOrder: CompanyOrder) {
-        adapter.updateData(companyOrder)
+    override fun updateItem(item: CompanyOrder) {
+        adapter.updateData(item)
         OrdersWidget.updateAllWidgets(context)
     }
 

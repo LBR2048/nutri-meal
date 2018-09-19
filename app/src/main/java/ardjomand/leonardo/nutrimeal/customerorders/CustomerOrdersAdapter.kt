@@ -59,7 +59,7 @@ internal constructor(private val mItems: MutableList<CustomerOrder>,
     }
 
     interface OnMealAdapterInteractionListener {
-        fun onOrderClicked(item: CustomerOrder)
+        fun onOrderClicked(customerOrder: CustomerOrder)
     }
 
     inner class ViewHolder internal constructor(internal val mView: View) : RecyclerView.ViewHolder(mView) {

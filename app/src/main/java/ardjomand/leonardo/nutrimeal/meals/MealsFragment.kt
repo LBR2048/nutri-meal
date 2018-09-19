@@ -112,12 +112,12 @@ class MealsFragment : Fragment(),
     //endregion
 
     //region Presenter callbacks
-    override fun addItem(meal: Meal) {
-        adapter.addData(meal)
+    override fun addItem(item: Meal) {
+        adapter.addData(item)
     }
 
-    override fun updateItem(meal: Meal) {
-        adapter.updateData(meal)
+    override fun updateItem(item: Meal) {
+        adapter.updateData(item)
     }
 
     override fun showEmptyItems() {

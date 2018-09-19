@@ -51,7 +51,9 @@ class EditMealFragment : Fragment(),
     override fun onStart() {
         super.onStart()
 
-        presenter.subscribe(key)
+        key?.let{
+            presenter.subscribe(it)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

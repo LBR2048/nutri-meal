@@ -88,7 +88,7 @@ class MealAdapter(private val mMeals: MutableList<Meal>,
     }
 
     interface OnMealAdapterInteractionListener {
-        fun onMealClicked(item: Meal)
+        fun onMealClicked(meal: Meal)
     }
 
     companion object {

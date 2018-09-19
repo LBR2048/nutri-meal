@@ -4,7 +4,7 @@ internal interface AccountContract {
 
     interface Presenter {
 
-        fun setView(view: View)
+        fun setView(view: View?)
 
         fun createAccount(name: String,
                           email: String,

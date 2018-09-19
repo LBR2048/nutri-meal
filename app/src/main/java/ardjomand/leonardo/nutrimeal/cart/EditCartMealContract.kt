@@ -6,12 +6,12 @@ internal interface EditCartMealContract {
 
     interface View {
 
-        fun updateCartMeal(meal: CartMeal)
+        fun updateCartMeal(cartMeal: CartMeal)
     }
 
     interface Presenter {
 
-        fun setView(view: View)
+        fun setView(view: View?)
 
         fun subscribe(key: String)
 

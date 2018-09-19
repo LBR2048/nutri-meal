@@ -4,7 +4,7 @@ internal interface LoginContract {
 
     interface Presenter {
 
-        fun setView(view: View)
+        fun setView(view: View?)
 
         fun logIn(email: String, password: String)
 
