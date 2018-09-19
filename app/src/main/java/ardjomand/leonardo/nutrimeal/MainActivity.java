@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container, MealsFragment.newInstance(1))
+                    .add(R.id.fragment_container, MealsFragment.Companion.newInstance(1))
                     .commit();
         }
     }
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onEditMealClicked(String key) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, EditMealFragment.newInstance(key), EDIT_MEAL_FRAGMENT_TAG)
+                .replace(R.id.fragment_container, EditMealFragment.Companion.newInstance(key), EDIT_MEAL_FRAGMENT_TAG)
                 .addToBackStack(null)
                 .commit();
     }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onEditCartMealQuantity(String key) {
         // TODO this is not following the MVP pattern
         if (Utils.isNetworkAvailable(this)) {
-            EditCartMealDialogFragment.showDialog(this, key, "tag1");
+            EditCartMealDialogFragment.Companion.showDialog(this, key, "tag1");
         } else {
             Toast.makeText(this, R.string.error_internet_connection, Toast.LENGTH_SHORT).show();
         }
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onGoToCartClicked() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, CartFragment.newInstance(1))
+                .replace(R.id.fragment_container, CartFragment.Companion.newInstance(1))
                 .addToBackStack(null)
                 .commit();
     }
@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity implements
         if (BuildConfig.FLAVOR.equals("company")) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, CompanyOrdersFragment.newInstance(1))
+                    .replace(R.id.fragment_container, CompanyOrdersFragment.Companion.newInstance(1))
                     .addToBackStack(null)
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, CustomerOrdersFragment.newInstance(1))
+                    .replace(R.id.fragment_container, CustomerOrdersFragment.Companion.newInstance(1))
                     .addToBackStack(null)
                     .commit();
         }
@@ -110,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onOrderedMealClicked(CartMeal cartMeal) {
-        EditCartMealDialogFragment.showDialog(this, cartMeal.getKey(), "tag2");
+        EditCartMealDialogFragment.Companion.showDialog(this, cartMeal.getKey(), "tag2");
     }
 
     @Override
     public void onPlaceOrderClicked() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, CustomerOrdersFragment.newInstance(1))
+                .replace(R.id.fragment_container, CustomerOrdersFragment.Companion.newInstance(1))
                 .addToBackStack(null)
                 .commit();
     }

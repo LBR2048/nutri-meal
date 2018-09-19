@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/signup_name_edit_text"
+                    android:id="@+id/signupNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -56,13 +56,13 @@
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/signup_email_edit_text"
+                    android:id="@+id/signupEmailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:hint="@string/login_account_auth_email_hint"
                     android:inputType="textEmailAddress"
-                    android:nextFocusDown="@id/signup_password_edit_text" />
+                    android:nextFocusDown="@id/signupPasswordEditText" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -70,12 +70,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/signup_password_edit_text"
+                    android:id="@+id/signupPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/login_account_password_hint"
                     android:inputType="textPassword"
-                    android:nextFocusDown="@id/signup_password2_edit_text" />
+                    android:nextFocusDown="@id/signupPassword2EditText" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/signup_password2_edit_text"
+                    android:id="@+id/signupPassword2EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/account_repeat_password_hint"
@@ -91,7 +91,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/signup_button"
+                android:id="@+id/signupButton"
                 style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

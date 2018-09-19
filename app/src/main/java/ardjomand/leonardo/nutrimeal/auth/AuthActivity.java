@@ -21,7 +21,7 @@ public class AuthActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.auth_container_frame, LoginFragment.newInstance())
+                    .add(R.id.auth_container_frame, LoginFragment.Companion.newInstance())
                     .commit();
         }
     }
@@ -40,7 +40,7 @@ public class AuthActivity extends AppCompatActivity implements
     public void onCreateAccountClicked() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.auth_container_frame, AccountFragment.newInstance())
+                .replace(R.id.auth_container_frame, AccountFragment.Companion.newInstance())
                 .addToBackStack(null)
                 .commit();
     }
