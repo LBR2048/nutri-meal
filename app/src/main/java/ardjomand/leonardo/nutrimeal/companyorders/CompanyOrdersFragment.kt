@@ -55,7 +55,7 @@ class CompanyOrdersFragment : Fragment(),
         }
 
         // Set adapter
-        adapter = CompanyOrdersAdapter(ArrayList(), this, getContext())
+        adapter = CompanyOrdersAdapter(ArrayList(), this, context)
         list.adapter = adapter
 
         // Set decoration
@@ -114,7 +114,7 @@ class CompanyOrdersFragment : Fragment(),
         }
     }
 
-    override fun onOrderClicked(companyOrder: CompanyOrder) {
+    override fun onOrderClicked(item: CompanyOrder) {
         // TODO Add possibility to change order status
     }
 

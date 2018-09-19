@@ -56,7 +56,7 @@ class CartFragment : Fragment(),
         }
 
         // Set the adapter
-        adapter = CartMealAdapter(ArrayList(), listener, getContext())
+        adapter = CartMealAdapter(ArrayList(), listener, context)
         list.adapter = adapter
 
         val itemDecoration = DividerItemDecoration(list.context, DividerItemDecoration.VERTICAL)

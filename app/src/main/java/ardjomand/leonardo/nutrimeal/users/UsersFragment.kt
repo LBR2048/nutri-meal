@@ -57,7 +57,7 @@ class UsersFragment : Fragment(),
         }
 
         // Set adapter
-        adapter = UsersAdapter(ArrayList(), this, getContext())
+        adapter = UsersAdapter(ArrayList(), this, context)
         list.adapter = adapter
 
         // Set decoration

@@ -59,7 +59,7 @@ class MealsFragment : Fragment(),
         }
 
         // Set adapter
-        adapter = MealAdapter(ArrayList(), this, getContext())
+        adapter = MealAdapter(ArrayList(), this, context)
         list.adapter = adapter
 
         // Set decoration

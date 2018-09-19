@@ -60,7 +60,7 @@ class CustomerOrdersFragment : Fragment(), CustomerOrdersContract.View<CustomerO
         }
 
         // Set adapter
-        adapter = CustomerOrdersAdapter(ArrayList(), this, getContext())
+        adapter = CustomerOrdersAdapter(ArrayList(), this, context)
         list.adapter = adapter
 
         // Set decoration
